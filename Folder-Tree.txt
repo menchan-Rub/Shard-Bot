@@ -1,0 +1,177 @@
+bot/
+├── src/
+│   ├── commands/
+│   │   ├── moderation/
+│   │   │   ├── ban.py
+│   │   │   ├── kick.py
+│   │   │   ├── mute.py
+│   │   │   ├── warn.py
+│   │   │   ├── purge.py
+│   │   │   ├── regex_filter.py
+│   │   │   ├── account_age_check.py
+│   │   │   ├── multiple_account_check.py
+│   │   │   ├── file_scan.py
+│   │   │   ├── ... (その他の荒らし対策コマンド)
+│   │   ├── utility/
+│   │   │   ├── translate.py
+│   │   │   ├── timer.py
+│   │   │   ├── reminder.py
+│   │   │   ├── vote.py
+│   │   │   ├── calculate.py
+│   │   │   ├── role_create.py
+│   │   │   ├── role_delete.py
+│   │   │   ├── role_assign.py
+│   │   │   ├── role_remove.py
+│   │   │   ├── channel_create.py
+│   │   │   ├── channel_delete.py
+│   │   │   ├── message_delete.py
+│   │   │   ├── message_edit.py
+│   │   │   ├── message_pin.py
+│   │   │   ├── server_stats.py
+│   │   │   ├── announce.py
+│   │   │   ├── prefix.py
+│   │   │   ├── language.py
+│   │   │   ├── theme.py
+│   │   │   ├── invite_manage.py
+│   │   │   ├── audit_log.py
+│   │   │   ├── bulk_message_operation.py
+│   │   │   ├── ... (その他のユーティリティコマンド)
+│   ├── events/
+│   │   ├── message.py
+│   │   ├── member_join.py
+│   │   ├── member_remove.py
+│   │   ├── ready.py
+│   │   ├── guild_join.py
+│   │   ├── guild_remove.py
+│   │   ├── ... (その他のDiscordイベント処理)
+│   ├── modules/
+│   │   ├── moderation/
+│   │   │   ├── spam_detection.py
+│   │   │   ├── raid_detection.py
+│   │   │   ├── user_management.py
+│   │   │   ├── log_management.py
+│   │   │   ├── settings_management.py
+│   │   │   ├── ... (その他の荒らし対策モジュール)
+│   │   ├── utility/
+│   │   │   ├── translation_service.py
+│   │   │   ├── timer_service.py
+│   │   │   ├── reminder_service.py
+│   │   │   ├── vote_service.py
+│   │   │   ├── calculation_service.py
+│   │   │   ├── role_service.py
+│   │   │   ├── channel_service.py
+│   │   │   ├── message_service.py
+│   │   │   ├── stats_service.py
+│   │   │   ├── announcement_service.py
+│   │   │   ├── customization_service.py
+│   │   │   ├── invite_service.py
+│   │   │   ├── audit_service.py
+│   │   │   ├── bulk_message_service.py
+│   │   │   ├── ... (その他のユーティリティモジュール)
+│   ├── database/
+│   │   ├── models.py
+│   │   ├── migrations/
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── 0002_add_user_tables.py
+│   │   │   ├── 0003_add_log_tables.py
+│   │   │   ├── ... (その他のマイグレーションファイル)
+│   │   ├── database_connection.py
+│   │   ├── database_operations.py
+│   │   ├── database_backup.py
+│   │   ├── database_restore.py
+│   │   ├── ... (その他のデータベース関連ファイル)
+│   ├── utils/
+│   │   ├── regex_utils.py
+│   │   ├── url_utils.py
+│   │   ├── string_utils.py
+│   │   ├── time_utils.py
+│   │   ├── discord_utils.py
+│   │   ├── config_utils.py
+│   │   ├── data_analysis.py
+│   │   ├── ... (その他のユーティリティ関数)
+│   ├── config.py
+│   ├── main.py
+│   └── requirements.txt
+├── web/
+│   ├── client/
+│   │   ├── public/
+│   │   │   ├── index.html
+│   │   │   ├── favicon.ico
+│   │   │   ├── manifest.json
+│   │   │   ├── robots.txt
+│   │   │   ├── ... (その他の静的ファイル)
+│   │   ├── src/
+│   │   │   ├── components/
+│   │   │   │   ├── Dashboard.js
+│   │   │   │   ├── Settings.js
+│   │   │   │   ├── Logs.js
+│   │   │   │   ├── Users.js
+│   │   │   │   ├── Roles.js
+│   │   │   │   ├── Channels.js
+│   │   │   │   ├── Analytics.js
+│   │   │   │   ├── ... (その他のReactコンポーネント)
+│   │   │   ├── services/
+│   │   │   │   ├── api.js
+│   │   │   │   ├── auth.js
+│   │   │   │   ├── ... (その他のAPIサービス)
+│   │   │   ├── App.js
+│   │   │   ├── index.js
+│   │   │   ├── setupProxy.js
+│   │   │   ├── ... (その他のReactソースファイル)
+│   │   ├── package.json
+│   │   ├── yarn.lock
+│   │   └── ... (その他のフロントエンド関連ファイル)
+│   ├── server/
+│   │   ├── routes/
+│   │   │   ├── auth.js
+│   │   │   ├── settings.js
+│   │   │   ├── logs.js
+│   │   │   ├── users.js
+│   │   │   ├── roles.js
+│   │   │   ├── channels.js
+│   │   │   ├── analytics.js
+│   │   │   ├── ... (その他のAPIルート)
+│   │   ├── controllers/
+│   │   │   ├── auth_controller.js
+│   │   │   ├── settings_controller.js
+│   │   │   ├── logs_controller.js
+│   │   │   ├── users_controller.js
+│   │   │   ├── roles_controller.js
+│   │   │   ├── channels_controller.js
+│   │   │   ├── analytics_controller.js
+│   │   │   ├── ... (その他のAPIコントローラー)
+│   │   ├── models/
+│   │   │   ├── user.js
+│   │   │   ├── settings.js
+│   │   │   ├── log.js
+│   │   │   ├── ... (その他のデータベースモデル)
+│   │   ├── database/
+│   │   │   ├── database_connection.js
+│   │   │   ├── database_operations.js
+│   │   │   ├── ... (その他のデータベース関連ファイル)
+│   │   ├── middleware/
+│   │   │   ├── auth_middleware.js
+│   │   │   ├── error_handler.js
+│   │   │   ├── ... (その他のミドルウェア)
+│   │   ├── app.js
+│   │   ├── package.json
+│   │   ├── yarn.lock
+│   │   └── ... (その他のバックエンド関連ファイル)
+│   ├── database/ # bot/src/databaseと共通でもいい
+│   │   ├── models.py
+│   │   ├── migrations/
+│   │   │   ├── 0001_initial.py
+│   │   │   ├── 0002_add_user_tables.py
+│   │   │   ├── 0003_add_log_tables.py
+│   │   │   ├── ... (その他のマイグレーションファイル)
+│   │   ├── database_connection.py
+│   │   ├── database_operations.py
+│   │   ├── database_backup.py
+│   │   ├── database_restore.py
+│   │   ├── ... (その他のデータベース関連ファイル)
+│   ├── .env
+│   ├── dockerfile
+│   └── ... (その他のバックエンド関連ファイル)
+├── docker-compose.yml
+├── README.md
+└── LICENSE

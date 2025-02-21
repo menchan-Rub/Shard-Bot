@@ -1,0 +1,115 @@
+categories:
+  information: # ━━━━━━━━━━[ 📢 情報カテゴリ ]━━━━━━━━━━
+    name: "┃📢┃情報"
+    channels:
+      - announcements:
+          name: "┃📣┃お知らせ"
+          description: "【公式】サーバー全体へのお知らせ"
+          permissions:
+            - send_messages: pr_manager
+            - view_channel: verified_user
+      - updates:
+          name: "🔄｜更新情報"
+          description: "【更新】アプリ・サーバーの更新情報"
+          permissions:
+            - send_messages: pr_manager
+            - view_channel: verified_user
+      - events:
+          name: "🎉｜イベント情報"
+          description: "【イベント】開催情報・キャンペーン"
+          permissions:
+            - send_messages: event_manager
+            - view_channel: verified_user
+      - faq:
+          name: "❓｜よくある質問"
+          description: "【FAQ】質問と回答まとめ"
+          permissions:
+            - send_messages: support_team
+            - view_channel: verified_user
+  communication: # ━━━━━━━━━━[ 💭 交流カテゴリ ]━━━━━━━━━━
+    name: "┃💭┃交流"
+    channels:
+      - general:
+          name: "┃🗣️┃雑談"
+          description: "【フリートーク】自由な会話スペース"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - self_introduction:
+          name: "👋｜自己紹介"
+          description: "【初めまして】新メンバー自己紹介"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - questions:
+          name: "💡｜質問"
+          description: "【Q&A】質問・相談スペース"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - games:
+          name: "🎮｜ゲーム"
+          description: "【ゲーム】ゲーム関連の話題"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - voice_chat:
+          name: "🎤｜ボイスチャット"
+          type: voice
+          description: "【VC】ボイスチャット用"
+          permissions:
+            - connect: verified_user
+            - speak: verified_user
+  support: # ━━━━━━━━━━[ 🆘 サポートカテゴリ ]━━━━━━━━━━
+    name: "┃🆘┃サポート"
+    channels:
+      - support:
+          name: "┃💁┃サポート窓口"
+          description: "【窓口】質問・問い合わせ受付"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - bug_reports:
+          name: "🐛｜バグ報告"
+          description: "【報告】バグ・不具合の報告"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - feature_requests:
+          name: "📝｜要望"
+          description: "【提案】機能追加・改善の要望"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+  management: # ━━━━━━━━━━[ ⚙️ 管理カテゴリ ]━━━━━━━━━━
+    name: "┃⚙️┃管理"
+    channels:
+      - admins:
+          name: "┃👑┃管理者専用"
+          description: "【管理者限定】管理者専用チャンネル"
+          permissions:
+            - view_channel: administrator
+      - moderators:
+          name: "🛡️｜モデレーター専用"
+          description: "【モデレーター限定】運営用チャンネル"
+          permissions:
+            - view_channel: moderator
+      - event_planning:
+          name: "📅｜イベント企画"
+          description: "【イベント】企画・運営用チャンネル"
+          permissions:
+            - view_channel: event_manager
+            - send_messages: event_manager
+      - pr_team:
+          name: "📢｜広報チーム"
+          description: "【広報】広報チーム専用チャンネル"
+          permissions:
+            - view_channel: pr_manager
+            - send_messages: pr_manager
+      - support_team_channel:
+          name: "💁｜サポートチーム"
+          description: "【サポート】サポートチーム専用"
+          permissions:
+            - view_channel: support_team
+            - send_messages: support_team
+    # ... (提供された残りのカテゴリとチャンネル設定) 

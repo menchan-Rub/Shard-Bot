@@ -1,0 +1,120 @@
+roles:
+  management: # ▸ 管理職ロール
+    owner:
+      name: "👑 >> Owner"
+      permissions: all
+      color: "#FF0000"
+      description: "【最高権限】サーバーの全権限を持つ最高責任者"
+    administrator:
+      name: "⚡ >> Administrator"
+      permissions:
+        - manage_roles
+        - manage_channels
+        - manage_messages
+        - kick_members
+        - ban_members
+        - administrator
+      color: "#FFA500"
+      description: "【管理権限】サーバーの管理全般を行う"
+    moderator:
+      name: "🛡️ >> Moderator"
+      permissions:
+        - manage_messages
+        - mute_members
+        - deafen_members
+        - move_members
+        - kick_members
+      color: "#FFFF00"
+      description: "【監視権限】サーバーの秩序を維持する"
+    event_manager:
+      name: "🎮 >> Event Manager"
+      permissions:
+        - manage_channels
+        - manage_events
+        - mute_members
+      color: "#00FFFF"
+      description: "【イベント権限】サーバー内イベントの企画・運営"
+    pr_manager:
+      name: "📢 >> PR Manager"
+      permissions:
+        - send_messages
+        - embed_links
+        - attach_files
+        - mention_everyone
+      color: "#FF00FF"
+      description: "【広報権限】サーバー全体の広報活動"
+    support_team:
+      name: "💁 >> Support Team"
+      permissions:
+        - send_messages
+        - embed_links
+        - attach_files
+        - read_message_history
+      color: "#00FF00"
+      description: "【サポート権限】ユーザーサポート対応"
+  members: # ▸ メンバーロール
+    verified_user:
+      name: "✅ >> Verified User"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+        - connect
+        - speak
+        - use_external_emojis
+      color: "#FFFFFF"
+      description: "【基本権限】認証済みの一般メンバー"
+    active_user:
+      name: "⭐ >> Active User"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+        - connect
+        - speak
+        - use_external_emojis
+      color: "#808080"
+      description: "【活動メンバー】活発に交流している方"
+    casual_user:
+      name: "🌱 >> Casual User"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+      color: "#C0C0C0"
+      description: "【一般権限】気軽に参加されている方"
+  special: # ▸ 特別ロール
+    contributor:
+      name: "🎁 >> Contributor"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+      color: "#800080"
+      description: "【特別権限】サーバーに貢献された方"
+    partner:
+      name: "🤝 >> Partner"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+      color: "#000080"
+      description: "【提携】提携チーム・個人の方"
+    booster:
+      name: "💎 >> Server Booster"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+        - use_external_emojis
+        - use_external_stickers
+      color: "#EE82EE"
+      description: "【ブースト特典】サーバーブースト実施者"
+    early_supporter:
+      name: "🌟 >> Early Supporter"
+      permissions:
+        - view_channel
+        - send_messages
+        - read_message_history
+      color: "#FFD700"
+      description: "【創設期】サーバー初期からの支援者"

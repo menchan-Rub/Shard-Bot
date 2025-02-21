@@ -1,0 +1,4 @@
+2025-02-21 18:43:51,632 - discord.client - INFO - logging in using static token
+2025-02-21 18:43:53,146 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 4c282bd184779a223bf92ced2799c8db).
+2025-02-21 18:43:55,155 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-21 18:43:55,155 - ShardBot - INFO - ------
