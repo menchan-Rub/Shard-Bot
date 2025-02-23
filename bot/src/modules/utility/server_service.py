@@ -1,10 +1,10 @@
 import discord
 from discord.ext import commands
-from typing import List, Optional, Dict, Union, Tuple
+from typing import List, Optional, Dict, Union, Tuple, Any
 import logging
 from datetime import datetime, timedelta
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.server')
 

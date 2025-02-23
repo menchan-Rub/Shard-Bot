@@ -4,8 +4,8 @@ from typing import List, Optional, Dict, Union, Tuple
 import logging
 import re
 from datetime import datetime, timedelta
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.automod')
 

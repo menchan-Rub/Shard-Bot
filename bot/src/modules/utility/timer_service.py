@@ -2,8 +2,8 @@ import asyncio
 from datetime import datetime
 import logging
 from discord.ext import commands
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.timer_service')
 

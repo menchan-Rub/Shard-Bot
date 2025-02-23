@@ -2,8 +2,8 @@ from discord.ext import commands
 from discord import app_commands
 import discord
 from typing import Optional, List
-from ....database.database_connection import get_db
-from ....database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 import logging
 
 logger = logging.getLogger('moderation.warn')

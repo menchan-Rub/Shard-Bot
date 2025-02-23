@@ -1052,3 +1052,1341 @@ Traceback (most recent call last):
   File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
     sys.exit(0)
 SystemExit: 0
+2025-02-23 19:37:14,629 - discord.client - INFO - logging in using static token
+2025-02-23 19:37:15,777 - ShardBot - ERROR - Failed to load extension commands.moderation.mute: Extension 'commands.moderation.mute' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,778 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/moderation/mute.py", line 7, in <module>
+    from database.database_connection import get_db
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/database/database_connection.py", line 7, in <module>
+    from ..config import DATABASE_CONFIG
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.moderation.mute' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,780 - ShardBot - ERROR - Failed to load extension commands.moderation.warn: Extension 'commands.moderation.warn' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,780 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/moderation/warn.py", line 5, in <module>
+    from database.database_connection import get_db
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/database/database_connection.py", line 7, in <module>
+    from ..config import DATABASE_CONFIG
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.moderation.warn' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,782 - ShardBot - ERROR - Failed to load extension commands.moderation.kick: Extension 'commands.moderation.kick' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,782 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/moderation/kick.py", line 5, in <module>
+    from ...database.database_connection import get_db
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.moderation.kick' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,783 - ShardBot - ERROR - Failed to load extension commands.moderation.ban: Extension 'commands.moderation.ban' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,784 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/moderation/ban.py", line 5, in <module>
+    from ...database.database_connection import get_db
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.moderation.ban' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,789 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:37:15,793 - ShardBot - ERROR - Failed to load extension commands.utility.automod: Extension 'commands.utility.automod' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,793 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/automod.py", line 6, in <module>
+    from ...modules.utility.automod_service import AutoModService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.automod' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,795 - ShardBot - ERROR - Failed to load extension commands.utility.calculator: Extension 'commands.utility.calculator' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,796 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/calculator.py", line 7, in <module>
+    from ...modules.utility.calculator_service import CalculatorService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.calculator' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,798 - ShardBot - ERROR - Failed to load extension commands.utility.role: Extension 'commands.utility.role' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,798 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/role.py", line 6, in <module>
+    from ...modules.utility.role_service import RoleService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.role' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,800 - ShardBot - ERROR - Failed to load extension commands.utility.translate: Extension 'commands.utility.translate' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,800 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 6, in <module>
+    from ...modules.utility.translation_service import TranslationService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.translate' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,802 - ShardBot - ERROR - Failed to load extension commands.utility.poll: Extension 'commands.utility.poll' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,802 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/poll.py", line 8, in <module>
+    from ...modules.utility.poll_service import PollService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.poll' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,803 - ShardBot - ERROR - Failed to load extension commands.utility.support: Extension 'commands.utility.support' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,804 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/support.py", line 6, in <module>
+    from ...database.database_connection import get_db
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.support' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,808 - ShardBot - ERROR - Failed to load extension commands.utility.member: Extension 'commands.utility.member' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,808 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/member.py", line 6, in <module>
+    from ...modules.utility.member_service import MemberService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.member' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,811 - ShardBot - ERROR - Failed to load extension commands.utility.server: Extension 'commands.utility.server' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,811 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/server.py", line 7, in <module>
+    from ...modules.utility.server_service import ServerService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.server' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,814 - ShardBot - ERROR - Failed to load extension commands.utility.message: Extension 'commands.utility.message' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,815 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/message.py", line 7, in <module>
+    from ...modules.utility.message_service import MessageService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.message' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,818 - ShardBot - ERROR - Failed to load extension commands.utility.channel: Extension 'commands.utility.channel' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,818 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/channel.py", line 6, in <module>
+    from ...modules.utility.channel_service import ChannelService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.channel' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,820 - ShardBot - ERROR - Failed to load extension commands.utility.timer: Extension 'commands.utility.timer' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,821 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/timer.py", line 7, in <module>
+    from ...modules.utility.timer_service import TimerService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.timer' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,823 - ShardBot - ERROR - Failed to load extension events.message_handler: Extension 'events.message_handler' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,823 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message_handler.py", line 4, in <module>
+    from ..modules.utility.automod_service import AutoModService
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message_handler' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,825 - ShardBot - ERROR - Failed to load extension events.member_join: Extension 'events.member_join' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,825 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/member_join.py", line 4, in <module>
+    from ..modules.moderation.raid_detection import RaidDetector
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.member_join' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,827 - ShardBot - ERROR - Failed to load extension events.message: Extension 'events.message' raised an error: ImportError: attempted relative import beyond top-level package
+2025-02-23 19:37:15,828 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 10, in <module>
+    from ..modules.moderation.spam_detection import SpamDetector
+ImportError: attempted relative import beyond top-level package
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message' raised an error: ImportError: attempted relative import beyond top-level package
+
+2025-02-23 19:37:15,828 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:37:16,166 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:37:16,715 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: aa3a2be3a02fe397438294d647369991).
+2025-02-23 19:37:18,761 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:37:19,082 - ShardBot - INFO - Registered slash commands: 1
+2025-02-23 19:37:19,083 - ShardBot - INFO - - setup
+2025-02-23 19:37:19,084 - ShardBot - INFO - ------
+2025-02-23 19:37:25,402 - ShardBot - INFO - Received signal 2
+2025-02-23 19:37:25,431 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:190> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    sys.exit(0)
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 204, in main
+    await bot.start(os.getenv('DISCORD_TOKEN'))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 787, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/gateway.py", line 621, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/.local/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 221, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
+    sys.exit(0)
+SystemExit: 0
+2025-02-23 19:50:26,613 - discord.client - INFO - logging in using static token
+2025-02-23 19:50:27,886 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-23 19:50:27,889 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-23 19:50:27,891 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-23 19:50:27,893 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-23 19:50:27,897 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:50:27,902 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-23 19:50:29,065 - matplotlib.font_manager - INFO - Failed to extract font properties from /usr/share/fonts/truetype/noto/NotoColorEmoji.ttf: Can not load face (unknown file format; error code 0x2)
+2025-02-23 19:50:29,436 - matplotlib.font_manager - INFO - generated new fontManager
+2025-02-23 19:50:29,633 - ShardBot - ERROR - Failed to load extension commands.utility.calculator: Extension 'commands.utility.calculator' raised an error: TypeError: invalid default parameter type given (<class 'int'>), expected (<class 'float'>, <class 'NoneType'>)
+2025-02-23 19:50:29,634 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/calculator.py", line 11, in <module>
+    class Calculator(commands.Cog):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/calculator.py", line 190, in Calculator
+    async def plot(
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/commands.py", line 2060, in decorator
+    return Command(
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/commands.py", line 687, in __init__
+    self._params: Dict[str, CommandParameter] = _extract_parameters_from_callback(callback, callback.__globals__)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/commands.py", line 383, in _extract_parameters_from_callback
+    param = annotation_to_parameter(resolved, parameter)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/transformers.py", line 845, in annotation_to_parameter
+    raise TypeError(f'invalid default parameter type given ({default.__class__}), expected {valid_types}')
+TypeError: invalid default parameter type given (<class 'int'>), expected (<class 'float'>, <class 'NoneType'>)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.calculator' raised an error: TypeError: invalid default parameter type given (<class 'int'>), expected (<class 'float'>, <class 'NoneType'>)
+
+2025-02-23 19:50:29,638 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-23 19:50:33,053 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: timed out
+2025-02-23 19:50:37,148 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: timed out
+2025-02-23 19:50:42,014 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: timed out
+2025-02-23 19:50:42,016 - google.auth._default - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2025-02-23 19:50:42,016 - utility.translation - ERROR - Failed to initialize translation service: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:50:42,016 - ShardBot - ERROR - Failed to load extension commands.utility.translate: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:50:42,020 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 207, in setup
+    await bot.add_cog(Translate(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 13, in __init__
+    self.translation_service = TranslationService()
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/translation_service.py", line 17, in __init__
+    self.client = translate.Client()
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/translate_v2/client.py", line 79, in __init__
+    super(Client, self).__init__(credentials=credentials, _http=_http)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/client/__init__.py", line 196, in __init__
+    credentials, _ = google.auth.default(scopes=scopes)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/auth/_default.py", line 719, in default
+    raise exceptions.DefaultCredentialsError(_CLOUD_SDK_MISSING_CREDENTIALS)
+google.auth.exceptions.DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+2025-02-23 19:50:42,025 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-23 19:50:42,028 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-23 19:50:42,037 - ShardBot - ERROR - Failed to load extension commands.utility.member: Extension 'commands.utility.member' raised an error: CommandAlreadyRegistered: Command 'kick' already registered.
+2025-02-23 19:50:42,038 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/member.py", line 643, in setup
+    await bot.add_cog(Member(bot))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 799, in add_cog
+    cog = await cog._inject(self, override=override, guild=guild, guilds=guilds)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/cog.py", line 745, in _inject
+    bot.tree.add_command(command, override=override, guild=guild, guilds=guilds)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/tree.py", line 407, in add_command
+    raise CommandAlreadyRegistered(name, None)
+discord.app_commands.errors.CommandAlreadyRegistered: Command 'kick' already registered.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.member' raised an error: CommandAlreadyRegistered: Command 'kick' already registered.
+
+2025-02-23 19:50:42,045 - ShardBot - ERROR - Failed to load extension commands.utility.server: Extension 'commands.utility.server' raised an error: NameError: name 'Any' is not defined
+2025-02-23 19:50:42,046 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/server.py", line 7, in <module>
+    from modules.utility.server_service import ServerService
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/server_service.py", line 11, in <module>
+    class ServerService:
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/server_service.py", line 73, in ServerService
+    settings: Dict[str, Any],
+NameError: name 'Any' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.server' raised an error: NameError: name 'Any' is not defined
+
+2025-02-23 19:50:42,050 - ShardBot - ERROR - Failed to load extension commands.utility.message: Extension 'commands.utility.message' raised an error: NameError: name 'Tuple' is not defined
+2025-02-23 19:50:42,051 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/message.py", line 7, in <module>
+    from modules.utility.message_service import MessageService
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/message_service.py", line 11, in <module>
+    class MessageService:
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/message_service.py", line 24, in MessageService
+    ) -> Tuple[int, str]:
+NameError: name 'Tuple' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.message' raised an error: NameError: name 'Tuple' is not defined
+
+2025-02-23 19:50:42,059 - ShardBot - ERROR - Failed to load extension commands.utility.channel: Extension 'commands.utility.channel' raised an error: NameError: name 'Union' is not defined
+2025-02-23 19:50:42,060 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/channel.py", line 10, in <module>
+    class Channel(commands.Cog):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/channel.py", line 109, in Channel
+    channel: Union[discord.TextChannel, discord.VoiceChannel],
+NameError: name 'Union' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.channel' raised an error: NameError: name 'Union' is not defined
+
+2025-02-23 19:50:42,068 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-23 19:50:42,070 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-23 19:50:42,076 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-23 19:50:42,088 - ShardBot - ERROR - Failed to load extension events.message: Extension 'events.message' raised an error: KeyError: 'message_rate_count'
+2025-02-23 19:50:42,089 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 236, in setup
+    await bot.add_cog(MessageEvents(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 21, in __init__
+    self.spam_detector = SpamDetector(bot)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/moderation/spam_detection.py", line 31, in __init__
+    'count': SPAM_PROTECTION['message_rate_count'],
+KeyError: 'message_rate_count'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message' raised an error: KeyError: 'message_rate_count'
+
+2025-02-23 19:50:42,089 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:50:42,090 - utility.timer_service - INFO - Timer service started
+2025-02-23 19:50:42,161 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:50:43,153 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:50:43,709 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: fb932f2683320cac023206484024a043).
+2025-02-23 19:50:45,713 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:50:46,060 - ShardBot - INFO - Registered slash commands: 24
+2025-02-23 19:50:46,061 - ShardBot - INFO - - setup
+2025-02-23 19:50:46,061 - ShardBot - INFO - - mute
+2025-02-23 19:50:46,061 - ShardBot - INFO - - unmute
+2025-02-23 19:50:46,061 - ShardBot - INFO - - warn
+2025-02-23 19:50:46,061 - ShardBot - INFO - - warnings
+2025-02-23 19:50:46,061 - ShardBot - INFO - - clearwarnings
+2025-02-23 19:50:46,061 - ShardBot - INFO - - kick
+2025-02-23 19:50:46,062 - ShardBot - INFO - - ban
+2025-02-23 19:50:46,062 - ShardBot - INFO - - automod
+2025-02-23 19:50:46,062 - ShardBot - INFO - - automod_set
+2025-02-23 19:50:46,062 - ShardBot - INFO - - wordfilter
+2025-02-23 19:50:46,063 - ShardBot - INFO - - createrole
+2025-02-23 19:50:46,063 - ShardBot - INFO - - deleterole
+2025-02-23 19:50:46,063 - ShardBot - INFO - - addrole
+2025-02-23 19:50:46,063 - ShardBot - INFO - - removerole
+2025-02-23 19:50:46,063 - ShardBot - INFO - - modifyrole
+2025-02-23 19:50:46,063 - ShardBot - INFO - - roles
+2025-02-23 19:50:46,063 - ShardBot - INFO - - roleinfo
+2025-02-23 19:50:46,063 - ShardBot - INFO - - poll
+2025-02-23 19:50:46,064 - ShardBot - INFO - - endpoll
+2025-02-23 19:50:46,064 - ShardBot - INFO - - support
+2025-02-23 19:50:46,064 - ShardBot - INFO - - timer
+2025-02-23 19:50:46,064 - ShardBot - INFO - - timers
+2025-02-23 19:50:46,065 - ShardBot - INFO - - canceltimer
+2025-02-23 19:50:46,065 - ShardBot - INFO - ------
+2025-02-23 19:51:42,231 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:51:46,624 - ShardBot - INFO - Received signal 2
+2025-02-23 19:51:46,635 - utility.timer_service - INFO - Timer service stopped
+2025-02-23 19:51:46,730 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:190> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    sys.exit(0)
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 204, in main
+    await bot.start(os.getenv('DISCORD_TOKEN'))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 787, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/gateway.py", line 621, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/.local/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 221, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
+    sys.exit(0)
+SystemExit: 0
+2025-02-23 19:52:27,657 - discord.client - INFO - logging in using static token
+2025-02-23 19:52:28,728 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-23 19:52:28,729 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-23 19:52:28,730 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-23 19:52:28,731 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-23 19:52:28,731 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:52:28,733 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-23 19:52:29,127 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-23 19:52:29,129 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-23 19:52:32,400 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: timed out
+2025-02-23 19:52:36,487 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: timed out
+2025-02-23 19:52:41,642 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: timed out
+2025-02-23 19:52:41,643 - google.auth._default - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2025-02-23 19:52:41,643 - utility.translation - ERROR - Failed to initialize translation service: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:52:41,643 - ShardBot - ERROR - Failed to load extension commands.utility.translate: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:52:41,644 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 207, in setup
+    await bot.add_cog(Translate(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 13, in __init__
+    self.translation_service = TranslationService()
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/translation_service.py", line 17, in __init__
+    self.client = translate.Client()
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/translate_v2/client.py", line 79, in __init__
+    super(Client, self).__init__(credentials=credentials, _http=_http)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/client/__init__.py", line 196, in __init__
+    credentials, _ = google.auth.default(scopes=scopes)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/auth/_default.py", line 719, in default
+    raise exceptions.DefaultCredentialsError(_CLOUD_SDK_MISSING_CREDENTIALS)
+google.auth.exceptions.DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+2025-02-23 19:52:41,646 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-23 19:52:41,647 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-23 19:52:41,653 - ShardBot - ERROR - Failed to load extension commands.utility.member: Extension 'commands.utility.member' raised an error: CommandAlreadyRegistered: Command 'kick' already registered.
+2025-02-23 19:52:41,654 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/member.py", line 643, in setup
+    await bot.add_cog(Member(bot))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 799, in add_cog
+    cog = await cog._inject(self, override=override, guild=guild, guilds=guilds)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/cog.py", line 745, in _inject
+    bot.tree.add_command(command, override=override, guild=guild, guilds=guilds)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/app_commands/tree.py", line 407, in add_command
+    raise CommandAlreadyRegistered(name, None)
+discord.app_commands.errors.CommandAlreadyRegistered: Command 'kick' already registered.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.member' raised an error: CommandAlreadyRegistered: Command 'kick' already registered.
+
+2025-02-23 19:52:41,663 - ShardBot - ERROR - Failed to load extension commands.utility.server: Extension 'commands.utility.server' raised an error: NameError: name 'Any' is not defined
+2025-02-23 19:52:41,664 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/server.py", line 7, in <module>
+    from modules.utility.server_service import ServerService
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/server_service.py", line 11, in <module>
+    class ServerService:
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/server_service.py", line 73, in ServerService
+    settings: Dict[str, Any],
+NameError: name 'Any' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.server' raised an error: NameError: name 'Any' is not defined
+
+2025-02-23 19:52:41,669 - ShardBot - ERROR - Failed to load extension commands.utility.message: Extension 'commands.utility.message' raised an error: NameError: name 'Tuple' is not defined
+2025-02-23 19:52:41,671 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/message.py", line 7, in <module>
+    from modules.utility.message_service import MessageService
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/message_service.py", line 11, in <module>
+    class MessageService:
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/message_service.py", line 24, in MessageService
+    ) -> Tuple[int, str]:
+NameError: name 'Tuple' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.message' raised an error: NameError: name 'Tuple' is not defined
+
+2025-02-23 19:52:41,676 - ShardBot - ERROR - Failed to load extension commands.utility.channel: Extension 'commands.utility.channel' raised an error: NameError: name 'Literal' is not defined
+2025-02-23 19:52:41,680 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 951, in _load_from_module_spec
+    spec.loader.exec_module(lib)  # type: ignore
+  File "<frozen importlib._bootstrap_external>", line 883, in exec_module
+  File "<frozen importlib._bootstrap>", line 241, in _call_with_frames_removed
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/channel.py", line 10, in <module>
+    class Channel(commands.Cog):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/channel.py", line 30, in Channel
+    type: Literal["テキスト", "ボイス"],
+NameError: name 'Literal' is not defined
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 954, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.channel' raised an error: NameError: name 'Literal' is not defined
+
+2025-02-23 19:52:41,682 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-23 19:52:41,684 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-23 19:52:41,685 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-23 19:52:41,687 - ShardBot - ERROR - Failed to load extension events.message: Extension 'events.message' raised an error: KeyError: 'message_rate_seconds'
+2025-02-23 19:52:41,687 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 236, in setup
+    await bot.add_cog(MessageEvents(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 21, in __init__
+    self.spam_detector = SpamDetector(bot)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/moderation/spam_detection.py", line 32, in __init__
+    'seconds': SPAM_PROTECTION['message_rate_seconds']
+KeyError: 'message_rate_seconds'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message' raised an error: KeyError: 'message_rate_seconds'
+
+2025-02-23 19:52:41,688 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:52:41,691 - utility.timer_service - INFO - Timer service started
+2025-02-23 19:52:41,756 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:52:42,089 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:52:42,630 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: e49d189712c3723cb2d0c7a8d523e514).
+2025-02-23 19:52:44,634 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:52:44,967 - ShardBot - INFO - Registered slash commands: 29
+2025-02-23 19:52:44,967 - ShardBot - INFO - - setup
+2025-02-23 19:52:44,967 - ShardBot - INFO - - mute
+2025-02-23 19:52:44,967 - ShardBot - INFO - - unmute
+2025-02-23 19:52:44,967 - ShardBot - INFO - - warn
+2025-02-23 19:52:44,967 - ShardBot - INFO - - warnings
+2025-02-23 19:52:44,967 - ShardBot - INFO - - clearwarnings
+2025-02-23 19:52:44,967 - ShardBot - INFO - - kick
+2025-02-23 19:52:44,967 - ShardBot - INFO - - ban
+2025-02-23 19:52:44,967 - ShardBot - INFO - - automod
+2025-02-23 19:52:44,967 - ShardBot - INFO - - automod_set
+2025-02-23 19:52:44,967 - ShardBot - INFO - - wordfilter
+2025-02-23 19:52:44,967 - ShardBot - INFO - - createrole
+2025-02-23 19:52:44,967 - ShardBot - INFO - - deleterole
+2025-02-23 19:52:44,967 - ShardBot - INFO - - addrole
+2025-02-23 19:52:44,967 - ShardBot - INFO - - removerole
+2025-02-23 19:52:44,967 - ShardBot - INFO - - modifyrole
+2025-02-23 19:52:44,967 - ShardBot - INFO - - roles
+2025-02-23 19:52:44,967 - ShardBot - INFO - - roleinfo
+2025-02-23 19:52:44,967 - ShardBot - INFO - - poll
+2025-02-23 19:52:44,967 - ShardBot - INFO - - endpoll
+2025-02-23 19:52:44,967 - ShardBot - INFO - - support
+2025-02-23 19:52:44,968 - ShardBot - INFO - - timer
+2025-02-23 19:52:44,968 - ShardBot - INFO - - timers
+2025-02-23 19:52:44,968 - ShardBot - INFO - - canceltimer
+2025-02-23 19:52:44,968 - ShardBot - INFO - - calc
+2025-02-23 19:52:44,968 - ShardBot - INFO - - convert
+2025-02-23 19:52:44,968 - ShardBot - INFO - - stats
+2025-02-23 19:52:44,968 - ShardBot - INFO - - plot
+2025-02-23 19:52:44,968 - ShardBot - INFO - - units
+2025-02-23 19:52:44,968 - ShardBot - INFO - ------
+2025-02-23 19:53:00,011 - ShardBot - INFO - Received signal 2
+2025-02-23 19:53:00,016 - utility.timer_service - INFO - Timer service stopped
+2025-02-23 19:53:00,127 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:190> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    sys.exit(0)
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 204, in main
+    await bot.start(os.getenv('DISCORD_TOKEN'))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 787, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/gateway.py", line 621, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/.local/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 221, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
+    sys.exit(0)
+SystemExit: 0
+2025-02-23 19:54:46,065 - discord.client - INFO - logging in using static token
+2025-02-23 19:54:47,131 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-23 19:54:47,133 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-23 19:54:47,133 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-23 19:54:47,134 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-23 19:54:47,135 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:54:47,136 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-23 19:54:47,532 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-23 19:54:47,534 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-23 19:54:50,813 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 1 of 3. Reason: timed out
+2025-02-23 19:54:54,910 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 2 of 3. Reason: timed out
+2025-02-23 19:54:59,910 - google.auth.compute_engine._metadata - WARNING - Compute Engine Metadata server unavailable on attempt 3 of 3. Reason: timed out
+2025-02-23 19:54:59,911 - google.auth._default - WARNING - Authentication failed using Compute Engine authentication due to unavailable metadata server.
+2025-02-23 19:54:59,911 - utility.translation - ERROR - Failed to initialize translation service: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:54:59,913 - ShardBot - ERROR - Failed to load extension commands.utility.translate: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+2025-02-23 19:54:59,917 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 207, in setup
+    await bot.add_cog(Translate(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/translate.py", line 13, in __init__
+    self.translation_service = TranslationService()
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/utility/translation_service.py", line 17, in __init__
+    self.client = translate.Client()
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/translate_v2/client.py", line 79, in __init__
+    super(Client, self).__init__(credentials=credentials, _http=_http)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/cloud/client/__init__.py", line 196, in __init__
+    credentials, _ = google.auth.default(scopes=scopes)
+  File "/home/menchan/.local/lib/python3.10/site-packages/google/auth/_default.py", line 719, in default
+    raise exceptions.DefaultCredentialsError(_CLOUD_SDK_MISSING_CREDENTIALS)
+google.auth.exceptions.DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'commands.utility.translate' raised an error: DefaultCredentialsError: Your default credentials were not found. To set up Application Default Credentials, see https://cloud.google.com/docs/authentication/external/set-up-adc for more information.
+
+2025-02-23 19:54:59,921 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-23 19:54:59,924 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-23 19:54:59,930 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-23 19:54:59,937 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-23 19:54:59,943 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-23 19:54:59,954 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-23 19:54:59,957 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-23 19:54:59,958 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-23 19:54:59,961 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-23 19:54:59,964 - ShardBot - ERROR - Failed to load extension events.message: Extension 'events.message' raised an error: KeyError: 'duplicate_threshold'
+2025-02-23 19:54:59,965 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 236, in setup
+    await bot.add_cog(MessageEvents(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 21, in __init__
+    self.spam_detector = SpamDetector(bot)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/moderation/spam_detection.py", line 34, in __init__
+    'duplicate_threshold': SPAM_PROTECTION['duplicate_threshold'],
+KeyError: 'duplicate_threshold'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 114, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message' raised an error: KeyError: 'duplicate_threshold'
+
+2025-02-23 19:54:59,965 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:54:59,967 - utility.timer_service - INFO - Timer service started
+2025-02-23 19:55:00,017 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:55:00,695 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:55:01,248 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 513a5decb72b204e9ce661c56913c24e).
+2025-02-23 19:55:03,316 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:55:03,667 - ShardBot - INFO - Registered slash commands: 48
+2025-02-23 19:55:03,670 - ShardBot - INFO - - setup
+2025-02-23 19:55:03,670 - ShardBot - INFO - - mute
+2025-02-23 19:55:03,671 - ShardBot - INFO - - unmute
+2025-02-23 19:55:03,671 - ShardBot - INFO - - warn
+2025-02-23 19:55:03,671 - ShardBot - INFO - - warnings
+2025-02-23 19:55:03,671 - ShardBot - INFO - - clearwarnings
+2025-02-23 19:55:03,672 - ShardBot - INFO - - kick
+2025-02-23 19:55:03,672 - ShardBot - INFO - - ban
+2025-02-23 19:55:03,672 - ShardBot - INFO - - automod
+2025-02-23 19:55:03,672 - ShardBot - INFO - - automod_set
+2025-02-23 19:55:03,673 - ShardBot - INFO - - wordfilter
+2025-02-23 19:55:03,674 - ShardBot - INFO - - createrole
+2025-02-23 19:55:03,674 - ShardBot - INFO - - deleterole
+2025-02-23 19:55:03,674 - ShardBot - INFO - - addrole
+2025-02-23 19:55:03,674 - ShardBot - INFO - - removerole
+2025-02-23 19:55:03,674 - ShardBot - INFO - - modifyrole
+2025-02-23 19:55:03,674 - ShardBot - INFO - - roles
+2025-02-23 19:55:03,675 - ShardBot - INFO - - roleinfo
+2025-02-23 19:55:03,675 - ShardBot - INFO - - poll
+2025-02-23 19:55:03,677 - ShardBot - INFO - - endpoll
+2025-02-23 19:55:03,677 - ShardBot - INFO - - support
+2025-02-23 19:55:03,677 - ShardBot - INFO - - timer
+2025-02-23 19:55:03,677 - ShardBot - INFO - - timers
+2025-02-23 19:55:03,677 - ShardBot - INFO - - canceltimer
+2025-02-23 19:55:03,677 - ShardBot - INFO - - calc
+2025-02-23 19:55:03,681 - ShardBot - INFO - - convert
+2025-02-23 19:55:03,681 - ShardBot - INFO - - stats
+2025-02-23 19:55:03,682 - ShardBot - INFO - - plot
+2025-02-23 19:55:03,682 - ShardBot - INFO - - units
+2025-02-23 19:55:03,682 - ShardBot - INFO - - memberinfo
+2025-02-23 19:55:03,682 - ShardBot - INFO - - serverinfo
+2025-02-23 19:55:03,682 - ShardBot - INFO - - settings
+2025-02-23 19:55:03,682 - ShardBot - INFO - - createinvite
+2025-02-23 19:55:03,682 - ShardBot - INFO - - invites
+2025-02-23 19:55:03,682 - ShardBot - INFO - - deleteinvite
+2025-02-23 19:55:03,682 - ShardBot - INFO - - auditlog
+2025-02-23 19:55:03,682 - ShardBot - INFO - - purge
+2025-02-23 19:55:03,683 - ShardBot - INFO - - pin
+2025-02-23 19:55:03,683 - ShardBot - INFO - - unpin
+2025-02-23 19:55:03,683 - ShardBot - INFO - - move
+2025-02-23 19:55:03,683 - ShardBot - INFO - - search
+2025-02-23 19:55:03,683 - ShardBot - INFO - - history
+2025-02-23 19:55:03,683 - ShardBot - INFO - - createchannel
+2025-02-23 19:55:03,683 - ShardBot - INFO - - deletechannel
+2025-02-23 19:55:03,683 - ShardBot - INFO - - modifychannel
+2025-02-23 19:55:03,683 - ShardBot - INFO - - channels
+2025-02-23 19:55:03,684 - ShardBot - INFO - - channelinfo
+2025-02-23 19:55:03,684 - ShardBot - INFO - - setpermissions
+2025-02-23 19:55:03,685 - ShardBot - INFO - ------
+2025-02-23 19:55:19,898 - ShardBot - INFO - Received signal 2
+2025-02-23 19:55:19,904 - utility.timer_service - INFO - Timer service stopped
+2025-02-23 19:55:19,984 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:190> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    sys.exit(0)
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 204, in main
+    await bot.start(os.getenv('DISCORD_TOKEN'))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 787, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/gateway.py", line 621, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/.local/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 221, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
+    sys.exit(0)
+SystemExit: 0
+2025-02-23 19:56:13,477 - discord.client - INFO - logging in using static token
+2025-02-23 19:56:14,606 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-23 19:56:14,608 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-23 19:56:14,608 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-23 19:56:14,609 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-23 19:56:14,610 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:56:14,612 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-23 19:56:15,059 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-23 19:56:15,061 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-23 19:56:15,062 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-23 19:56:15,063 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-23 19:56:15,065 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-23 19:56:15,068 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-23 19:56:15,072 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-23 19:56:15,074 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-23 19:56:15,076 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-23 19:56:15,077 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-23 19:56:15,078 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-23 19:56:15,080 - ShardBot - ERROR - Failed to load extension events.message: Extension 'events.message' raised an error: KeyError: 'caps_percentage'
+2025-02-23 19:56:15,081 - ShardBot - ERROR - Error details: Traceback (most recent call last):
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 963, in _load_from_module_spec
+    await setup(self)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 236, in setup
+    await bot.add_cog(MessageEvents(bot))
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/events/message.py", line 21, in __init__
+    self.spam_detector = SpamDetector(bot)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/modules/moderation/spam_detection.py", line 35, in __init__
+    'caps_percentage': SPAM_PROTECTION['caps_percentage'],
+KeyError: 'caps_percentage'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 117, in load_extensions
+    await self.load_extension(extension)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 1029, in load_extension
+    await self._load_from_module_spec(spec, name)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/ext/commands/bot.py", line 968, in _load_from_module_spec
+    raise errors.ExtensionFailed(key, e) from e
+discord.ext.commands.errors.ExtensionFailed: Extension 'events.message' raised an error: KeyError: 'caps_percentage'
+
+2025-02-23 19:56:15,081 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:56:15,083 - utility.timer_service - INFO - Timer service started
+2025-02-23 19:56:15,139 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:56:15,501 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:56:16,124 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 0bcb5bc58ecc9194f6d7cea590f0d9a8).
+2025-02-23 19:56:18,129 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:56:18,479 - ShardBot - INFO - Registered slash commands: 48
+2025-02-23 19:56:18,480 - ShardBot - INFO - - setup
+2025-02-23 19:56:18,480 - ShardBot - INFO - - mute
+2025-02-23 19:56:18,481 - ShardBot - INFO - - unmute
+2025-02-23 19:56:18,481 - ShardBot - INFO - - warn
+2025-02-23 19:56:18,482 - ShardBot - INFO - - warnings
+2025-02-23 19:56:18,482 - ShardBot - INFO - - clearwarnings
+2025-02-23 19:56:18,482 - ShardBot - INFO - - kick
+2025-02-23 19:56:18,483 - ShardBot - INFO - - ban
+2025-02-23 19:56:18,483 - ShardBot - INFO - - automod
+2025-02-23 19:56:18,483 - ShardBot - INFO - - automod_set
+2025-02-23 19:56:18,484 - ShardBot - INFO - - wordfilter
+2025-02-23 19:56:18,484 - ShardBot - INFO - - createrole
+2025-02-23 19:56:18,484 - ShardBot - INFO - - deleterole
+2025-02-23 19:56:18,485 - ShardBot - INFO - - addrole
+2025-02-23 19:56:18,485 - ShardBot - INFO - - removerole
+2025-02-23 19:56:18,485 - ShardBot - INFO - - modifyrole
+2025-02-23 19:56:18,486 - ShardBot - INFO - - roles
+2025-02-23 19:56:18,486 - ShardBot - INFO - - roleinfo
+2025-02-23 19:56:18,486 - ShardBot - INFO - - poll
+2025-02-23 19:56:18,486 - ShardBot - INFO - - endpoll
+2025-02-23 19:56:18,487 - ShardBot - INFO - - support
+2025-02-23 19:56:18,487 - ShardBot - INFO - - timer
+2025-02-23 19:56:18,487 - ShardBot - INFO - - timers
+2025-02-23 19:56:18,487 - ShardBot - INFO - - canceltimer
+2025-02-23 19:56:18,487 - ShardBot - INFO - - calc
+2025-02-23 19:56:18,488 - ShardBot - INFO - - convert
+2025-02-23 19:56:18,488 - ShardBot - INFO - - stats
+2025-02-23 19:56:18,489 - ShardBot - INFO - - plot
+2025-02-23 19:56:18,489 - ShardBot - INFO - - units
+2025-02-23 19:56:18,489 - ShardBot - INFO - - memberinfo
+2025-02-23 19:56:18,491 - ShardBot - INFO - - serverinfo
+2025-02-23 19:56:18,492 - ShardBot - INFO - - settings
+2025-02-23 19:56:18,492 - ShardBot - INFO - - createinvite
+2025-02-23 19:56:18,493 - ShardBot - INFO - - invites
+2025-02-23 19:56:18,493 - ShardBot - INFO - - deleteinvite
+2025-02-23 19:56:18,493 - ShardBot - INFO - - auditlog
+2025-02-23 19:56:18,493 - ShardBot - INFO - - purge
+2025-02-23 19:56:18,494 - ShardBot - INFO - - pin
+2025-02-23 19:56:18,495 - ShardBot - INFO - - unpin
+2025-02-23 19:56:18,495 - ShardBot - INFO - - move
+2025-02-23 19:56:18,495 - ShardBot - INFO - - search
+2025-02-23 19:56:18,496 - ShardBot - INFO - - history
+2025-02-23 19:56:18,496 - ShardBot - INFO - - createchannel
+2025-02-23 19:56:18,497 - ShardBot - INFO - - deletechannel
+2025-02-23 19:56:18,497 - ShardBot - INFO - - modifychannel
+2025-02-23 19:56:18,497 - ShardBot - INFO - - channels
+2025-02-23 19:56:18,498 - ShardBot - INFO - - channelinfo
+2025-02-23 19:56:18,498 - ShardBot - INFO - - setpermissions
+2025-02-23 19:56:18,499 - ShardBot - INFO - ------
+2025-02-23 19:56:32,876 - ShardBot - INFO - Received signal 2
+2025-02-23 19:56:32,881 - utility.timer_service - INFO - Timer service stopped
+2025-02-23 19:56:32,937 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:193> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    sys.exit(0)
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 207, in main
+    await bot.start(os.getenv('DISCORD_TOKEN'))
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 787, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/client.py", line 667, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/.local/lib/python3.10/site-packages/discord/gateway.py", line 621, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/.local/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 224, in <module>
+    asyncio.run(main())
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 220, in main
+    sys.exit(0)
+SystemExit: 0

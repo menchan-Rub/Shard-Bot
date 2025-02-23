@@ -4,8 +4,8 @@ import io
 from typing import Dict, List, Optional, Tuple, Union
 import re
 import logging
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.calculator')
 

@@ -1,7 +1,7 @@
 from discord.ext import commands
 import discord
 import logging
-from ..modules.utility.automod_service import AutoModService
+from modules.utility.automod_service import AutoModService
 
 logger = logging.getLogger('events.message')
 

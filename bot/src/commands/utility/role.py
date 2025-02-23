@@ -3,7 +3,7 @@ from discord import app_commands
 import discord
 from typing import Optional
 import logging
-from ...modules.utility.role_service import RoleService
+from modules.utility.role_service import RoleService
 
 logger = logging.getLogger('utility.role')
 

@@ -2,8 +2,8 @@ import discord
 from discord.ext import commands
 from typing import Dict, List, Optional, Tuple
 import logging
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.role')
 

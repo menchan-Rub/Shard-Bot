@@ -1,10 +1,10 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
-from typing import Optional, Union
+from typing import Optional, List, Tuple
 import logging
 from datetime import datetime, timedelta
-from ...modules.utility.message_service import MessageService
+from modules.utility.message_service import MessageService
 
 logger = logging.getLogger('utility.message')
 

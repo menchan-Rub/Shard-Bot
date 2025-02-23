@@ -9,5 +9,6 @@ setup(
         "python-dotenv",
         "PyYAML",
         "Pillow",
+        "aiohttp",
     ],
 ) 

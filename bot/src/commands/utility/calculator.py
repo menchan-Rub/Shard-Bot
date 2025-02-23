@@ -4,7 +4,7 @@ import discord
 from typing import Optional, List
 import re
 import logging
-from ...modules.utility.calculator_service import CalculatorService
+from modules.utility.calculator_service import CalculatorService
 
 logger = logging.getLogger('utility.calculator')
 
@@ -191,8 +191,8 @@ class Calculator(commands.Cog):
         self,
         interaction: discord.Interaction,
         function: str,
-        x_min: float = -10,
-        x_max: float = 10,
+        x_min: float = -10.0,
+        x_max: float = 10.0,
         title: Optional[str] = None
     ):
         """

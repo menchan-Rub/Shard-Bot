@@ -25,9 +25,13 @@ BOT_CONFIG = {
 SPAM_PROTECTION = {
     'message_rate_limit': 5,  # X秒間にY個以上のメッセージ
     'message_rate_time': 5,
+    'message_rate_count': 5,  # X秒間に許可されるメッセージ数
+    'message_rate_seconds': 5,  # メッセージレート制限の時間（秒）
     'mention_limit': 5,  # 1メッセージ内のメンション数制限
     'emoji_limit': 20,  # 1メッセージ内の絵文字数制限
     'attachment_limit': 5,  # 1メッセージ内の添付ファイル数制限
+    'duplicate_threshold': 3,  # 同一メッセージの連続投稿制限
+    'caps_percentage': 70,  # 大文字の割合制限（%）
     'url_whitelist': [
         'discord.com',
         'discordapp.com',

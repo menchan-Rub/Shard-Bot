@@ -8,9 +8,9 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 import asyncio
 
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
-from ...config import SPAM_PROTECTION
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
+from config import SPAM_PROTECTION
 
 logger = logging.getLogger('modules.moderation.auto_mod')
 

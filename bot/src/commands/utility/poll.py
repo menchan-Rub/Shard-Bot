@@ -5,7 +5,7 @@ from typing import Optional, List
 import re
 from datetime import timedelta
 import logging
-from ...modules.utility.poll_service import PollService
+from modules.utility.poll_service import PollService
 
 logger = logging.getLogger('utility.poll')
 

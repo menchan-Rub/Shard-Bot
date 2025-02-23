@@ -1,9 +1,9 @@
-from google.cloud import translate_v2 as translate
-from typing import Optional, Dict, List
+import aiohttp
 import logging
+from typing import Optional, Dict, List
 import os
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.translation')
 
@@ -11,31 +11,85 @@ class TranslationService:
     def __init__(self):
         """
         翻訳サービスを初期化します。
-        Google Cloud Translate APIのクライアントを作成します。
+        MyMemory Translation APIを使用します。
         """
-        try:
-            self.client = translate.Client()
-            self.supported_languages = self._get_supported_languages()
-            logger.info("Translation service initialized successfully")
-        except Exception as e:
-            logger.error(f"Failed to initialize translation service: {e}")
-            raise
+        self.base_url = "https://api.mymemory.translated.net/get"
+        self.supported_languages = {
+            'ja': '日本語',
+            'en': '英語',
+            'zh': '中国語',
+            'ko': '韓国語',
+            'es': 'スペイン語',
+            'fr': 'フランス語',
+            'de': 'ドイツ語',
+            'it': 'イタリア語',
+            'ru': 'ロシア語',
+            'vi': 'ベトナム語'
+        }
+        logger.info("Translation service initialized successfully")
 
-    def _get_supported_languages(self) -> Dict[str, str]:
+    async def translate(
+        self,
+        text: str,
+        target_lang: str,
+        source_lang: Optional[str] = None
+    ) -> str:
         """
-        サポートされている言語のリストを取得します。
-        
+        テキストを翻訳します。
+
+        Parameters
+        ----------
+        text : str
+            翻訳するテキスト
+        target_lang : str
+            翻訳先の言語コード
+        source_lang : str, optional
+            翻訳元の言語コード
+
         Returns
         -------
-        Dict[str, str]
-            言語コードと言語名の辞書
+        str
+            翻訳されたテキスト
         """
         try:
-            languages = self.client.get_languages()
-            return {lang['language']: lang['name'] for lang in languages}
+            # 言語コードを検証
+            if target_lang not in self.supported_languages:
+                raise ValueError(f"サポートされていない言語コードです: {target_lang}")
+
+            if source_lang and source_lang not in self.supported_languages:
+                raise ValueError(f"サポートされていない言語コードです: {source_lang}")
+
+            # 翻訳リクエストを送信
+            params = {
+                'q': text,
+                'langpair': f"{source_lang or 'auto'}|{target_lang}"
+            }
+
+            async with aiohttp.ClientSession() as session:
+                async with session.get(self.base_url, params=params) as response:
+                    if response.status != 200:
+                        raise Exception(f"翻訳APIエラー: {response.status}")
+
+                    data = await response.json()
+                    if data['responseStatus'] != 200:
+                        raise Exception(f"翻訳APIエラー: {data['responseStatus']}")
+
+                    return data['responseData']['translatedText']
+
         except Exception as e:
-            logger.error(f"Failed to get supported languages: {e}")
-            return {}
+            logger.error(f"Translation failed: {e}")
+            raise
+
+    def get_supported_languages(self) -> dict:
+        """
+        サポートされている言語の一覧を取得します。
+
+        Returns
+        -------
+        dict
+            言語コードと言語名の辞書
+        """
+        return self.supported_languages.copy()
 
     async def translate_text(
         self,
@@ -62,15 +116,15 @@ class TranslationService:
         """
         try:
             # 翻訳を実行
-            result = self.client.translate(
+            translated_text = await self.translate(
                 text,
-                target_language=target_language,
-                source_language=source_language
+                target_lang=target_language,
+                source_lang=source_language
             )
 
             return {
-                'translated_text': result['translatedText'],
-                'detected_source_language': result['detectedSourceLanguage'],
+                'translated_text': translated_text,
+                'detected_source_language': source_language or 'auto',
                 'source_text': text
             }
 
@@ -125,10 +179,15 @@ class TranslationService:
             検出結果を含む辞書
         """
         try:
-            detection = self.client.detect_language(text)
+            # 自動検出のために空の言語コードを使用
+            detected_language = await self.translate(
+                text,
+                target_lang='',
+                source_lang='auto'
+            )
             return {
-                'language': detection['language'],
-                'confidence': detection['confidence']
+                'language': detected_language,
+                'confidence': 1.0
             }
         except Exception as e:
             logger.error(f"Language detection failed: {e}")

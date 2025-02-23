@@ -7,11 +7,11 @@ from collections import defaultdict
 from typing import Dict, List, Tuple, Optional, Set
 import re
 
-from ..modules.moderation.spam_detection import SpamDetector
-from ..modules.moderation.auto_mod import AutoModerator
-from ..modules.logging.message_logger import MessageLogger
-from ..database.database_connection import get_db
-from ..database.database_operations import DatabaseOperations
+from modules.moderation.spam_detection import SpamDetector
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
+from modules.logging.message_logger import MessageLogger
+from modules.moderation.auto_mod import AutoModerator
 
 logger = logging.getLogger('events.message')
 

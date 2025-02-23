@@ -3,8 +3,8 @@ from discord.ext import commands
 from discord import app_commands
 from typing import Optional, Dict, Any
 import os
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 import aiohttp
 import io
 

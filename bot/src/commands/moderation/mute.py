@@ -4,8 +4,8 @@ import discord
 from typing import Optional
 from datetime import datetime, timedelta
 import re
-from ....database.database_connection import get_db
-from ....database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 import logging
 
 logger = logging.getLogger('moderation.mute')

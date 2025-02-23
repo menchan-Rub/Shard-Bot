@@ -1,9 +1,9 @@
 from discord.ext import commands
 from discord import app_commands
 import discord
-from typing import Optional, Literal
+from typing import Optional, Union, List, Literal
 import logging
-from ...modules.utility.channel_service import ChannelService
+from modules.utility.channel_service import ChannelService
 
 logger = logging.getLogger('utility.channel')
 

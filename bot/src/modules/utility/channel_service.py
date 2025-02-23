@@ -2,8 +2,8 @@ from typing import Dict, List, Optional, Union, Tuple
 import discord
 from discord.ext import commands
 import logging
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.channel')
 

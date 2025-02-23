@@ -3,7 +3,7 @@ from discord import app_commands
 import discord
 from typing import Optional, List
 import logging
-from ...modules.utility.translation_service import TranslationService
+from modules.utility.translation_service import TranslationService
 
 logger = logging.getLogger('utility.translate')
 

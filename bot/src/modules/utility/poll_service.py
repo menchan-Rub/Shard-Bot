@@ -3,8 +3,8 @@ import discord
 from datetime import datetime, timedelta
 import asyncio
 import logging
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('utility.poll')
 

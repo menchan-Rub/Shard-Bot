@@ -6,9 +6,9 @@ from collections import defaultdict, deque
 from datetime import datetime, timedelta
 import logging
 import re
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
-from ...config import RAID_PROTECTION
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
+from config import RAID_PROTECTION
 
 logger = logging.getLogger('moderation.raid_detection')
 

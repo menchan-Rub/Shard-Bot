@@ -1,9 +1,9 @@
 from discord.ext import commands
 import discord
 import logging
-from ..modules.moderation.raid_detection import RaidDetector
-from ..database.database_connection import get_db
-from ..database.database_operations import DatabaseOperations
+from modules.moderation.raid_detection import RaidDetector
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('events.member')
 

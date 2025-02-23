@@ -4,7 +4,7 @@ import discord
 from typing import Optional
 from datetime import datetime, timedelta
 import re
-from ...modules.utility.timer_service import TimerService
+from modules.utility.timer_service import TimerService
 import logging
 
 logger = logging.getLogger('utility.timer')

@@ -5,8 +5,8 @@ import io
 from typing import List, Dict, Any, Optional
 from datetime import datetime
 
-from ...database.database_connection import get_db
-from ...database.database_operations import DatabaseOperations
+from database.database_connection import get_db
+from database.database_operations import DatabaseOperations
 
 logger = logging.getLogger('modules.logging.message_logger')
 

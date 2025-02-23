@@ -3,7 +3,7 @@ from discord import app_commands
 import discord
 from typing import Optional, List, Literal
 import logging
-from ...modules.utility.automod_service import AutoModService
+from modules.utility.automod_service import AutoModService
 
 logger = logging.getLogger('utility.automod')
 
