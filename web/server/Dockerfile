@@ -1,6 +1,6 @@
 FROM python:3.11-slim
 
-WORKDIR /app
+WORKDIR /app/web/server
 
 # 必要なパッケージをインストール（ビルド時のみ必要なパッケージは別レイヤーで）
 RUN apt-get update && \
@@ -15,10 +15,10 @@ RUN pip install --no-cache-dir -r requirements.txt \
     && rm -rf ~/.cache/pip/*
 
 # ソースコードをコピー
-COPY . .
+COPY . /app/web/server/
 
 # 環境変数を設定
-ENV PYTHONPATH=/app \
+ENV PYTHONPATH=/app/web/server \
     PYTHONUNBUFFERED=1 \
     PYTHONDONTWRITEBYTECODE=1
 

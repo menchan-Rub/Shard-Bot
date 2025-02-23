@@ -1,0 +1,17 @@
+[Unit]
+Description=ShardBot Discord Bot
+After=network.target postgresql.service
+
+[Service]
+Type=simple
+User=menchan
+WorkingDirectory=/home/menchan/Programming/Discord/Shard-Bot/bot/src
+Environment=PYTHONPATH=/home/menchan/Programming/Discord/Shard-Bot/bot/src
+ExecStart=/home/menchan/Programming/Discord/Shard-Bot/bot/venv/bin/python main.py
+Restart=always
+RestartSec=10
+StandardOutput=append:/var/log/shardbot/bot.log
+StandardError=append:/var/log/shardbot/error.log
+
+[Install]
+WantedBy=multi-user.target 

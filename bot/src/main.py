@@ -90,6 +90,8 @@ class ShardBot(commands.Bot):
         """シグナルハンドラ"""
         self.logger.info(f"Received signal {signum}")
         self._exit.set()
+        # 強制終了を追加
+        sys.exit(0)
         
     async def load_extensions(self):
         """全ての拡張機能を読み込みます"""
@@ -193,6 +195,11 @@ async def main():
         
         # ボットの起動
         bot = ShardBot()
+        
+        # シグナルハンドラの設定
+        for sig in (signal.SIGTERM, signal.SIGINT):
+            signal.signal(sig, bot._handle_signal)
+            
         async with bot:
             await bot.start(os.getenv('DISCORD_TOKEN'))
             
@@ -206,6 +213,12 @@ async def main():
     finally:
         # スレッドプールのクリーンアップ
         thread_pool.shutdown(wait=True)
+        # 強制終了を追加
+        sys.exit(0)
 
 if __name__ == '__main__':
-    asyncio.run(main()) 
+    try:
+        asyncio.run(main())
+    except KeyboardInterrupt:
+        logger.info("Received KeyboardInterrupt")
+        sys.exit(0) 

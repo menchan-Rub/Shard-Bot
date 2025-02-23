@@ -1,14 +1,19 @@
-from fastapi import FastAPI, HTTPException, Depends
+from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.security import OAuth2PasswordBearer
-from sqlalchemy.orm import Session
-from typing import List, Optional
 import uvicorn
 import os
 
-from .database import get_db
-from .routes import auth, settings, logs, users, roles, channels, analytics
-from .middleware import error_handler, auth_middleware
+from database import get_db
+from routes import (
+    auth_router,
+    settings_router,
+    logs_router,
+    users_router,
+    roles_router,
+    channels_router,
+    analytics_router
+)
+from middleware import handle_errors
 
 app = FastAPI(
     title="ShardBot Dashboard API",
@@ -19,23 +24,23 @@ app = FastAPI(
 # CORSミドルウェアの設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=["http://localhost:8080"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
 # エラーハンドラーの設定
-app.middleware("http")(error_handler.handle_errors)
+app.middleware("http")(handle_errors)
 
 # ルーターの登録
-app.include_router(auth.router, prefix="/api/auth", tags=["認証"])
-app.include_router(settings.router, prefix="/api/settings", tags=["設定"])
-app.include_router(logs.router, prefix="/api/logs", tags=["ログ"])
-app.include_router(users.router, prefix="/api/users", tags=["ユーザー"])
-app.include_router(roles.router, prefix="/api/roles", tags=["ロール"])
-app.include_router(channels.router, prefix="/api/channels", tags=["チャンネル"])
-app.include_router(analytics.router, prefix="/api/analytics", tags=["分析"])
+app.include_router(auth_router, prefix="/api/auth", tags=["認証"])
+app.include_router(settings_router, prefix="/api/settings", tags=["設定"])
+app.include_router(logs_router, prefix="/api/logs", tags=["ログ"])
+app.include_router(users_router, prefix="/api/users", tags=["ユーザー"])
+app.include_router(roles_router, prefix="/api/roles", tags=["ロール"])
+app.include_router(channels_router, prefix="/api/channels", tags=["チャンネル"])
+app.include_router(analytics_router, prefix="/api/analytics", tags=["分析"])
 
 @app.get("/")
 async def root():
@@ -54,7 +59,7 @@ if __name__ == "__main__":
     
     # サーバーを起動
     uvicorn.run(
-        "app:app",
+        "main:app",
         host=host,
         port=port,
         reload=True,
