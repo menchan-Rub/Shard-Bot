@@ -24,10 +24,12 @@ app = FastAPI(
 # CORSミドルウェアの設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=["http://localhost:8080", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
+    expose_headers=["*"],
+    max_age=3600,
 )
 
 # エラーハンドラーの設定
@@ -64,4 +66,4 @@ if __name__ == "__main__":
         port=port,
         reload=True,
         workers=4
-    ) 
+    )

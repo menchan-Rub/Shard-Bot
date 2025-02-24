@@ -2390,3 +2390,332 @@ Traceback (most recent call last):
   File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 220, in main
     sys.exit(0)
 SystemExit: 0
+2025-02-23 19:59:40,754 - discord.client - INFO - logging in using static token
+2025-02-23 19:59:41,841 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-23 19:59:41,842 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-23 19:59:41,843 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-23 19:59:41,844 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-23 19:59:41,844 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-23 19:59:41,846 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-23 19:59:42,161 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-23 19:59:42,163 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-23 19:59:42,165 - utility.translation - INFO - Translation service initialized successfully
+2025-02-23 19:59:42,165 - ShardBot - INFO - Loaded extension: commands.utility.translate
+2025-02-23 19:59:42,166 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-23 19:59:42,166 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-23 19:59:42,167 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-23 19:59:42,169 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-23 19:59:42,170 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-23 19:59:42,172 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-23 19:59:42,173 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-23 19:59:42,174 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-23 19:59:42,174 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-23 19:59:42,176 - ShardBot - INFO - Loaded extension: events.message
+2025-02-23 19:59:42,176 - ShardBot - INFO - Syncing slash commands...
+2025-02-23 19:59:42,177 - utility.timer_service - INFO - Timer service started
+2025-02-23 19:59:42,231 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-23 19:59:42,624 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-23 19:59:43,257 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: a64b22ae9645fe45fc1ba991df04c34c).
+2025-02-23 19:59:45,261 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-23 19:59:45,615 - ShardBot - INFO - Registered slash commands: 50
+2025-02-23 19:59:45,616 - ShardBot - INFO - - setup
+2025-02-23 19:59:45,616 - ShardBot - INFO - - mute
+2025-02-23 19:59:45,616 - ShardBot - INFO - - unmute
+2025-02-23 19:59:45,616 - ShardBot - INFO - - warn
+2025-02-23 19:59:45,616 - ShardBot - INFO - - warnings
+2025-02-23 19:59:45,616 - ShardBot - INFO - - clearwarnings
+2025-02-23 19:59:45,617 - ShardBot - INFO - - kick
+2025-02-23 19:59:45,617 - ShardBot - INFO - - ban
+2025-02-23 19:59:45,617 - ShardBot - INFO - - automod
+2025-02-23 19:59:45,618 - ShardBot - INFO - - automod_set
+2025-02-23 19:59:45,618 - ShardBot - INFO - - wordfilter
+2025-02-23 19:59:45,618 - ShardBot - INFO - - createrole
+2025-02-23 19:59:45,619 - ShardBot - INFO - - deleterole
+2025-02-23 19:59:45,619 - ShardBot - INFO - - addrole
+2025-02-23 19:59:45,619 - ShardBot - INFO - - removerole
+2025-02-23 19:59:45,619 - ShardBot - INFO - - modifyrole
+2025-02-23 19:59:45,620 - ShardBot - INFO - - roles
+2025-02-23 19:59:45,620 - ShardBot - INFO - - roleinfo
+2025-02-23 19:59:45,620 - ShardBot - INFO - - poll
+2025-02-23 19:59:45,620 - ShardBot - INFO - - endpoll
+2025-02-23 19:59:45,622 - ShardBot - INFO - - support
+2025-02-23 19:59:45,622 - ShardBot - INFO - - timer
+2025-02-23 19:59:45,622 - ShardBot - INFO - - timers
+2025-02-23 19:59:45,623 - ShardBot - INFO - - canceltimer
+2025-02-23 19:59:45,623 - ShardBot - INFO - - calc
+2025-02-23 19:59:45,623 - ShardBot - INFO - - convert
+2025-02-23 19:59:45,623 - ShardBot - INFO - - stats
+2025-02-23 19:59:45,623 - ShardBot - INFO - - plot
+2025-02-23 19:59:45,623 - ShardBot - INFO - - units
+2025-02-23 19:59:45,623 - ShardBot - INFO - - memberinfo
+2025-02-23 19:59:45,623 - ShardBot - INFO - - serverinfo
+2025-02-23 19:59:45,623 - ShardBot - INFO - - settings
+2025-02-23 19:59:45,623 - ShardBot - INFO - - createinvite
+2025-02-23 19:59:45,624 - ShardBot - INFO - - invites
+2025-02-23 19:59:45,624 - ShardBot - INFO - - deleteinvite
+2025-02-23 19:59:45,624 - ShardBot - INFO - - auditlog
+2025-02-23 19:59:45,624 - ShardBot - INFO - - purge
+2025-02-23 19:59:45,624 - ShardBot - INFO - - pin
+2025-02-23 19:59:45,625 - ShardBot - INFO - - unpin
+2025-02-23 19:59:45,625 - ShardBot - INFO - - move
+2025-02-23 19:59:45,625 - ShardBot - INFO - - search
+2025-02-23 19:59:45,626 - ShardBot - INFO - - history
+2025-02-23 19:59:45,626 - ShardBot - INFO - - createchannel
+2025-02-23 19:59:45,626 - ShardBot - INFO - - deletechannel
+2025-02-23 19:59:45,626 - ShardBot - INFO - - modifychannel
+2025-02-23 19:59:45,626 - ShardBot - INFO - - channels
+2025-02-23 19:59:45,626 - ShardBot - INFO - - channelinfo
+2025-02-23 19:59:45,627 - ShardBot - INFO - - setpermissions
+2025-02-23 19:59:45,627 - ShardBot - INFO - - translate
+2025-02-23 19:59:45,627 - ShardBot - INFO - - languages
+2025-02-23 19:59:45,627 - ShardBot - INFO - ------
+                                                                                                                                  2025-02-24 09:21:02,188 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2025-02-24 09:21:02,190 - discord.client - INFO - logging in using static token
+2025-02-24 09:21:03,368 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-24 09:21:03,371 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-24 09:21:03,373 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-24 09:21:03,374 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-24 09:21:03,375 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-24 09:21:03,378 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-24 09:21:03,816 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-24 09:21:03,825 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-24 09:21:03,832 - utility.translation - INFO - Translation service initialized successfully
+2025-02-24 09:21:03,832 - ShardBot - INFO - Loaded extension: commands.utility.translate
+2025-02-24 09:21:03,835 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-24 09:21:03,837 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-24 09:21:03,838 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-24 09:21:03,841 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-24 09:21:03,843 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-24 09:21:03,846 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-24 09:21:03,847 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-24 09:21:03,848 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-24 09:21:03,849 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-24 09:21:03,852 - ShardBot - INFO - Loaded extension: events.message
+2025-02-24 09:21:03,852 - ShardBot - INFO - Syncing slash commands...
+2025-02-24 09:21:03,853 - utility.timer_service - INFO - Timer service started
+2025-02-24 09:21:03,915 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:21:04,483 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-24 09:21:05,020 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: b02045c000c4cfda8d775069d034a32c).
+2025-02-24 09:21:07,045 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-24 09:21:07,420 - ShardBot - INFO - Registered slash commands: 50
+2025-02-24 09:21:07,421 - ShardBot - INFO - - setup
+2025-02-24 09:21:07,421 - ShardBot - INFO - - mute
+2025-02-24 09:21:07,421 - ShardBot - INFO - - unmute
+2025-02-24 09:21:07,421 - ShardBot - INFO - - warn
+2025-02-24 09:21:07,421 - ShardBot - INFO - - warnings
+2025-02-24 09:21:07,421 - ShardBot - INFO - - clearwarnings
+2025-02-24 09:21:07,421 - ShardBot - INFO - - kick
+2025-02-24 09:21:07,421 - ShardBot - INFO - - ban
+2025-02-24 09:21:07,421 - ShardBot - INFO - - automod
+2025-02-24 09:21:07,421 - ShardBot - INFO - - automod_set
+2025-02-24 09:21:07,421 - ShardBot - INFO - - wordfilter
+2025-02-24 09:21:07,421 - ShardBot - INFO - - createrole
+2025-02-24 09:21:07,421 - ShardBot - INFO - - deleterole
+2025-02-24 09:21:07,421 - ShardBot - INFO - - addrole
+2025-02-24 09:21:07,421 - ShardBot - INFO - - removerole
+2025-02-24 09:21:07,421 - ShardBot - INFO - - modifyrole
+2025-02-24 09:21:07,421 - ShardBot - INFO - - roles
+2025-02-24 09:21:07,421 - ShardBot - INFO - - roleinfo
+2025-02-24 09:21:07,421 - ShardBot - INFO - - poll
+2025-02-24 09:21:07,421 - ShardBot - INFO - - endpoll
+2025-02-24 09:21:07,421 - ShardBot - INFO - - support
+2025-02-24 09:21:07,422 - ShardBot - INFO - - timer
+2025-02-24 09:21:07,422 - ShardBot - INFO - - timers
+2025-02-24 09:21:07,422 - ShardBot - INFO - - canceltimer
+2025-02-24 09:21:07,422 - ShardBot - INFO - - calc
+2025-02-24 09:21:07,422 - ShardBot - INFO - - convert
+2025-02-24 09:21:07,422 - ShardBot - INFO - - stats
+2025-02-24 09:21:07,422 - ShardBot - INFO - - plot
+2025-02-24 09:21:07,422 - ShardBot - INFO - - units
+2025-02-24 09:21:07,422 - ShardBot - INFO - - memberinfo
+2025-02-24 09:21:07,422 - ShardBot - INFO - - serverinfo
+2025-02-24 09:21:07,422 - ShardBot - INFO - - settings
+2025-02-24 09:21:07,422 - ShardBot - INFO - - createinvite
+2025-02-24 09:21:07,422 - ShardBot - INFO - - invites
+2025-02-24 09:21:07,422 - ShardBot - INFO - - deleteinvite
+2025-02-24 09:21:07,422 - ShardBot - INFO - - auditlog
+2025-02-24 09:21:07,422 - ShardBot - INFO - - purge
+2025-02-24 09:21:07,422 - ShardBot - INFO - - pin
+2025-02-24 09:21:07,422 - ShardBot - INFO - - unpin
+2025-02-24 09:21:07,422 - ShardBot - INFO - - move
+2025-02-24 09:21:07,422 - ShardBot - INFO - - search
+2025-02-24 09:21:07,422 - ShardBot - INFO - - history
+2025-02-24 09:21:07,422 - ShardBot - INFO - - createchannel
+2025-02-24 09:21:07,422 - ShardBot - INFO - - deletechannel
+2025-02-24 09:21:07,422 - ShardBot - INFO - - modifychannel
+2025-02-24 09:21:07,422 - ShardBot - INFO - - channels
+2025-02-24 09:21:07,422 - ShardBot - INFO - - channelinfo
+2025-02-24 09:21:07,422 - ShardBot - INFO - - setpermissions
+2025-02-24 09:21:07,422 - ShardBot - INFO - - translate
+2025-02-24 09:21:07,422 - ShardBot - INFO - - languages
+2025-02-24 09:21:07,423 - ShardBot - INFO - ------
+2025-02-24 09:22:03,975 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:23:04,057 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:24:04,128 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:25:04,170 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:25:15,811 - commands.admin.setup - ERROR - Setup error: 'ShardBot' object has no attribute 'load_config'
+2025-02-24 09:26:03,865 - events.message - INFO - Cleaned up message history
+2025-02-24 09:26:04,231 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:27:04,347 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:28:04,415 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:29:04,519 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:30:04,567 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:31:03,888 - events.message - INFO - Cleaned up message history
+2025-02-24 09:31:04,612 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:32:04,713 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:33:04,797 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:34:04,896 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:35:04,967 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:36:03,891 - events.message - INFO - Cleaned up message history
+2025-02-24 09:36:05,014 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:37:05,085 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:38:05,171 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:39:05,236 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:40:05,313 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:41:03,894 - events.message - INFO - Cleaned up message history
+2025-02-24 09:41:05,390 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:42:05,503 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:43:05,545 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:44:05,648 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:45:05,703 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:46:03,910 - events.message - INFO - Cleaned up message history
+2025-02-24 09:46:05,755 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 09:46:31,537 - discord.gateway - INFO - Shard ID None session has been invalidated.
+2025-02-24 09:46:37,284 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 411cd97aa74998fcf83c257814a231cd).
+2025-02-24 09:46:39,300 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-24 09:46:39,753 - ShardBot - INFO - Registered slash commands: 50
+2025-02-24 09:46:39,754 - ShardBot - INFO - - setup
+2025-02-24 09:46:39,754 - ShardBot - INFO - - mute
+2025-02-24 09:46:39,754 - ShardBot - INFO - - unmute
+2025-02-24 09:46:39,754 - ShardBot - INFO - - warn
+2025-02-24 09:46:39,754 - ShardBot - INFO - - warnings
+2025-02-24 09:46:39,754 - ShardBot - INFO - - clearwarnings
+2025-02-24 09:46:39,754 - ShardBot - INFO - - kick
+2025-02-24 09:46:39,754 - ShardBot - INFO - - ban
+2025-02-24 09:46:39,754 - ShardBot - INFO - - automod
+2025-02-24 09:46:39,754 - ShardBot - INFO - - automod_set
+2025-02-24 09:46:39,754 - ShardBot - INFO - - wordfilter
+2025-02-24 09:46:39,754 - ShardBot - INFO - - createrole
+2025-02-24 09:46:39,755 - ShardBot - INFO - - deleterole
+2025-02-24 09:46:39,755 - ShardBot - INFO - - addrole
+2025-02-24 09:46:39,755 - ShardBot - INFO - - removerole
+2025-02-24 09:46:39,755 - ShardBot - INFO - - modifyrole
+2025-02-24 09:46:39,755 - ShardBot - INFO - - roles
+2025-02-24 09:46:39,755 - ShardBot - INFO - - roleinfo
+2025-02-24 09:46:39,755 - ShardBot - INFO - - poll
+2025-02-24 09:46:39,755 - ShardBot - INFO - - endpoll
+2025-02-24 09:46:39,755 - ShardBot - INFO - - support
+2025-02-24 09:46:39,755 - ShardBot - INFO - - timer
+2025-02-24 09:46:39,755 - ShardBot - INFO - - timers
+2025-02-24 09:46:39,755 - ShardBot - INFO - - canceltimer
+2025-02-24 09:46:39,755 - ShardBot - INFO - - calc
+2025-02-24 09:46:39,755 - ShardBot - INFO - - convert
+2025-02-24 09:46:39,755 - ShardBot - INFO - - stats
+2025-02-24 09:46:39,755 - ShardBot - INFO - - plot
+2025-02-24 09:46:39,755 - ShardBot - INFO - - units
+2025-02-24 09:46:39,755 - ShardBot - INFO - - memberinfo
+2025-02-24 09:46:39,755 - ShardBot - INFO - - serverinfo
+2025-02-24 09:46:39,755 - ShardBot - INFO - - settings
+2025-02-24 09:46:39,755 - ShardBot - INFO - - createinvite
+2025-02-24 09:46:39,755 - ShardBot - INFO - - invites
+2025-02-24 09:46:39,755 - ShardBot - INFO - - deleteinvite
+2025-02-24 09:46:39,755 - ShardBot - INFO - - auditlog
+2025-02-24 09:46:39,755 - ShardBot - INFO - - purge
+2025-02-24 09:46:39,755 - ShardBot - INFO - - pin
+2025-02-24 09:46:39,755 - ShardBot - INFO - - unpin
+2025-02-24 09:46:39,755 - ShardBot - INFO - - move
+2025-02-24 09:46:39,755 - ShardBot - INFO - - search
+2025-02-24 09:46:39,755 - ShardBot - INFO - - history
+2025-02-24 09:46:39,755 - ShardBot - INFO - - createchannel
+2025-02-24 09:46:39,755 - ShardBot - INFO - - deletechannel
+2025-02-24 09:46:39,755 - ShardBot - INFO - - modifychannel
+2025-02-24 09:46:39,755 - ShardBot - INFO - - channels
+2025-02-24 09:46:39,755 - ShardBot - INFO - - channelinfo
+2025-02-24 09:46:39,755 - ShardBot - INFO - - setpermissions
+2025-02-24 09:46:39,755 - ShardBot - INFO - - translate
+2025-02-24 09:46:39,755 - ShardBot - INFO - - languages
+2025-02-24 09:46:39,756 - ShardBot - INFO - ------
+2025-02-24 10:58:39,879 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2025-02-24 10:58:39,880 - discord.client - INFO - logging in using static token
+2025-02-24 10:58:41,183 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-24 10:58:41,184 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-24 10:58:41,185 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-24 10:58:41,186 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-24 10:58:41,187 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-24 10:58:41,189 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-24 10:58:41,668 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-24 10:58:41,670 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-24 10:58:41,672 - utility.translation - INFO - Translation service initialized successfully
+2025-02-24 10:58:41,672 - ShardBot - INFO - Loaded extension: commands.utility.translate
+2025-02-24 10:58:41,674 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-24 10:58:41,675 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-24 10:58:41,677 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-24 10:58:41,679 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-24 10:58:41,681 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-24 10:58:41,684 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-24 10:58:41,685 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-24 10:58:41,686 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-24 10:58:41,688 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-24 10:58:41,693 - ShardBot - INFO - Loaded extension: events.message
+2025-02-24 10:58:41,693 - ShardBot - INFO - Syncing slash commands...
+2025-02-24 10:58:41,694 - utility.timer_service - INFO - Timer service started
+2025-02-24 10:58:41,758 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 10:58:42,164 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-24 10:58:42,693 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: d831d41bd9d379ce681a3227ab02b500).
+2025-02-24 10:58:44,723 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-24 10:58:45,128 - ShardBot - INFO - Registered slash commands: 50
+2025-02-24 10:58:45,128 - ShardBot - INFO - - setup
+2025-02-24 10:58:45,128 - ShardBot - INFO - - mute
+2025-02-24 10:58:45,128 - ShardBot - INFO - - unmute
+2025-02-24 10:58:45,128 - ShardBot - INFO - - warn
+2025-02-24 10:58:45,128 - ShardBot - INFO - - warnings
+2025-02-24 10:58:45,128 - ShardBot - INFO - - clearwarnings
+2025-02-24 10:58:45,128 - ShardBot - INFO - - kick
+2025-02-24 10:58:45,128 - ShardBot - INFO - - ban
+2025-02-24 10:58:45,128 - ShardBot - INFO - - automod
+2025-02-24 10:58:45,128 - ShardBot - INFO - - automod_set
+2025-02-24 10:58:45,128 - ShardBot - INFO - - wordfilter
+2025-02-24 10:58:45,128 - ShardBot - INFO - - createrole
+2025-02-24 10:58:45,128 - ShardBot - INFO - - deleterole
+2025-02-24 10:58:45,128 - ShardBot - INFO - - addrole
+2025-02-24 10:58:45,128 - ShardBot - INFO - - removerole
+2025-02-24 10:58:45,128 - ShardBot - INFO - - modifyrole
+2025-02-24 10:58:45,128 - ShardBot - INFO - - roles
+2025-02-24 10:58:45,128 - ShardBot - INFO - - roleinfo
+2025-02-24 10:58:45,128 - ShardBot - INFO - - poll
+2025-02-24 10:58:45,128 - ShardBot - INFO - - endpoll
+2025-02-24 10:58:45,129 - ShardBot - INFO - - support
+2025-02-24 10:58:45,129 - ShardBot - INFO - - timer
+2025-02-24 10:58:45,129 - ShardBot - INFO - - timers
+2025-02-24 10:58:45,129 - ShardBot - INFO - - canceltimer
+2025-02-24 10:58:45,129 - ShardBot - INFO - - calc
+2025-02-24 10:58:45,129 - ShardBot - INFO - - convert
+2025-02-24 10:58:45,129 - ShardBot - INFO - - stats
+2025-02-24 10:58:45,129 - ShardBot - INFO - - plot
+2025-02-24 10:58:45,129 - ShardBot - INFO - - units
+2025-02-24 10:58:45,129 - ShardBot - INFO - - memberinfo
+2025-02-24 10:58:45,129 - ShardBot - INFO - - serverinfo
+2025-02-24 10:58:45,129 - ShardBot - INFO - - settings
+2025-02-24 10:58:45,129 - ShardBot - INFO - - createinvite
+2025-02-24 10:58:45,129 - ShardBot - INFO - - invites
+2025-02-24 10:58:45,129 - ShardBot - INFO - - deleteinvite
+2025-02-24 10:58:45,129 - ShardBot - INFO - - auditlog
+2025-02-24 10:58:45,129 - ShardBot - INFO - - purge
+2025-02-24 10:58:45,129 - ShardBot - INFO - - pin
+2025-02-24 10:58:45,129 - ShardBot - INFO - - unpin
+2025-02-24 10:58:45,129 - ShardBot - INFO - - move
+2025-02-24 10:58:45,129 - ShardBot - INFO - - search
+2025-02-24 10:58:45,129 - ShardBot - INFO - - history
+2025-02-24 10:58:45,129 - ShardBot - INFO - - createchannel
+2025-02-24 10:58:45,129 - ShardBot - INFO - - deletechannel
+2025-02-24 10:58:45,129 - ShardBot - INFO - - modifychannel
+2025-02-24 10:58:45,129 - ShardBot - INFO - - channels
+2025-02-24 10:58:45,129 - ShardBot - INFO - - channelinfo
+2025-02-24 10:58:45,129 - ShardBot - INFO - - setpermissions
+2025-02-24 10:58:45,129 - ShardBot - INFO - - translate
+2025-02-24 10:58:45,129 - ShardBot - INFO - - languages
+2025-02-24 10:58:45,131 - ShardBot - INFO - ------
+2025-02-24 10:58:50,363 - utility.automod - ERROR - Failed to get automod settings: 'DatabaseOperations' object has no attribute 'get_automod_settings'
+2025-02-24 10:59:03,710 - utility.role - ERROR - Failed to add role: password authentication failed for user "postgres"
+2025-02-24 10:59:29,486 - utility.server - ERROR - Failed to create invite: password authentication failed for user "postgres"
+2025-02-24 10:59:41,821 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"

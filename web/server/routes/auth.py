@@ -8,9 +8,10 @@ import os
 import httpx
 from jose import JWTError
 
-from ..database import get_db
-from ..models import User
-from ..schemas import Token, TokenData, UserCreate, UserResponse
+from web.server.database import get_db
+from web.server.models.user import User
+from web.server.middleware import verify_token, get_current_user
+from web.server.schemas import Token, TokenData, UserCreate, UserResponse
 
 router = APIRouter()
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
