@@ -11,11 +11,11 @@ from web.server.routes.channels import router as channels_router
 from web.server.routes.analytics import router as analytics_router
 
 __all__ = [
-    'auth_router',
-    'settings_router',
-    'logs_router',
-    'users_router',
-    'roles_router',
-    'channels_router',
-    'analytics_router'
+    "auth_router",
+    "settings_router",
+    "logs_router",
+    "users_router",
+    "roles_router",
+    "channels_router",
+    "analytics_router",
 ] 

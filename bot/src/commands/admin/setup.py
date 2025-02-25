@@ -123,6 +123,7 @@ class AuthPanel(discord.ui.View):
 class Setup(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
+        self.setup_in_progress = {}  # サーバーごとのセットアップ状態を追跡
 
     @app_commands.command(name="setup", description="サーバーのセットアップを開始します")
     @app_commands.describe(
@@ -145,13 +146,28 @@ class Setup(commands.Cog):
             await interaction.response.send_message("このコマンドは管理者のみ使用できます。", ephemeral=True)
             return
 
+        # 既に実行中かチェック
+        if interaction.guild_id in self.setup_in_progress:
+            await interaction.response.send_message("セットアップは既に実行中です。完了までお待ちください。", ephemeral=True)
+            return
+
         # パスワード確認
         if password != os.getenv('SETUP_PASSWORD'):
             await interaction.response.send_message("パスワードが正しくありません。", ephemeral=True)
             return
 
         try:
+            # セットアップ開始を記録
+            self.setup_in_progress[interaction.guild_id] = True
+            
+            # 開始メッセージを送信
             await interaction.response.defer()
+            start_embed = discord.Embed(
+                title="🚀 セットアップ開始",
+                description="サーバーのセットアップを開始します...",
+                color=0x00ff00
+            )
+            await interaction.followup.send(embed=start_embed)
             
             # ロールセットアップ開始
             total_steps = 1 + (10 if permissions else 0) + 1 + (4 if category else 0) + (1 if create_bot_role else 0)
@@ -177,6 +193,13 @@ class Setup(commands.Cog):
             current_step += 1
             logs.append("既存のロールを削除しました。")
             
+            # 進捗更新
+            progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+            try:
+                await progress_message.edit(embed=progress_embed)
+            except discord.NotFound:
+                progress_message = await interaction.followup.send(embed=progress_embed)
+
             # 権限ロールの作成
             if permissions:
                 permission_roles = [
@@ -204,7 +227,10 @@ class Setup(commands.Cog):
                         logs.append(f"【作成失敗】ロール '{role_name}' の作成に失敗しました。")
                     current_step += 1
                     progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-                    await progress_message.edit(embed=progress_embed)
+                    try:
+                        await progress_message.edit(embed=progress_embed)
+                    except discord.NotFound:
+                        progress_message = await interaction.followup.send(embed=progress_embed)
 
             # everyoneロールの権限更新
             try:
@@ -223,7 +249,10 @@ class Setup(commands.Cog):
                 logs.append("【更新失敗】everyoneロールの権限更新に失敗しました。")
             current_step += 1
             progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-            await progress_message.edit(embed=progress_embed)
+            try:
+                await progress_message.edit(embed=progress_embed)
+            except discord.NotFound:
+                progress_message = await interaction.followup.send(embed=progress_embed)
 
             # カテゴリロールの作成
             if category:
@@ -246,83 +275,57 @@ class Setup(commands.Cog):
                         logs.append(f"【作成失敗】カテゴリロール '{cat_role}' の作成に失敗しました。")
                     current_step += 1
                     progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-                    await progress_message.edit(embed=progress_embed)
+                    try:
+                        await progress_message.edit(embed=progress_embed)
+                    except discord.NotFound:
+                        progress_message = await interaction.followup.send(embed=progress_embed)
 
             # BOTロールの作成
             if create_bot_role:
                 try:
                     await interaction.guild.create_role(
-                        name="🤖>>Server Bot",
+                        name="BOT",
                         permissions=discord.Permissions.none(),
                         color=discord.Colour.default(),
-                        reason="Setup command: 🤖>>Server Bot role creation"
+                        reason="Setup command: BOT role creation"
                     )
-                    logs.append("ロール '🤖>>Server Bot' を作成しました。")
+                    logs.append("BOTロールを作成しました。")
                 except Exception as e:
-                    logs.append("【作成失敗】ロール '🤖>>Server Bot' の作成に失敗しました。")
+                    logs.append("【作成失敗】BOTロールの作成に失敗しました。")
                 current_step += 1
                 progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-                await progress_message.edit(embed=progress_embed)
+                try:
+                    await progress_message.edit(embed=progress_embed)
+                except discord.NotFound:
+                    progress_message = await interaction.followup.send(embed=progress_embed)
 
-            # ロールセットアップ完了ログ表示
-            final_role_embed = discord.Embed(
-                title="ロールセットアップ完了",
-                color=0x00ff00
-            )
-            final_role_embed.add_field(
-                name="ロール作成ログ",
-                value="\n".join(logs),
-                inline=False
-            )
-            await progress_message.edit(embed=final_role_embed)
-
-            # チャンネル作成開始
-            channels_embed = discord.Embed(
-                title="⚙️ チャンネル作成中",
-                description="チャンネルを作成しています...",
-                color=0x00ff00
-            )
-            await interaction.followup.send(embed=channels_embed)
-
-            # チャンネル作成
-            categories_config = self.bot.load_config('categories.yml')
-            await self.create_channels(
-                interaction.guild,
-                categories_config['categories'],
-                skip_channel_id=interaction.channel.id
-            )
-
-            # セットアップ完了メッセージ
+            # 完了メッセージ
             complete_embed = discord.Embed(
-                title="🎉 セットアップ完了",
-                description="✅ ロールセットアップ\n✅ チャンネル作成",
+                title="✅ セットアップ完了",
+                description="\n".join(logs),
                 color=0x00ff00
             )
-            await interaction.followup.send(embed=complete_embed)
-
-            # role.yml のロール作成
-            roles_config = self.bot.load_config('roles.yml')
-            await self.create_roles(interaction.guild, roles_config['roles'])
-
-            # 認証パネルの設置
-            auth_panel_embed = discord.Embed(
-                title="🔒 認証パネル",
-                description="下の【認証開始】ボタンを押して認証を行ってください。",
-                color=0x00ff00
-            )
-            await interaction.followup.send(
-                embed=auth_panel_embed,
-                view=AuthPanel(self.bot)
-            )
+            try:
+                await interaction.followup.send(embed=complete_embed)
+            except Exception as e:
+                self.bot.logger.error(f"Failed to send completion message: {e}")
 
         except Exception as e:
             error_embed = discord.Embed(
                 title="⚠️ エラー発生",
-                description=f"セットアップ中にエラーが発生しました:\n{str(e)}",
+                description=f"セットアップ中にエラーが発生しました:\n```py\n{str(e)}\n```",
                 color=0xff0000
             )
-            await interaction.followup.send(embed=error_embed)
-            logger.error(f"Setup error: {e}")
+            try:
+                await interaction.followup.send(embed=error_embed)
+            except Exception:
+                pass
+            self.bot.logger.error(f"Setup error: {e}", exc_info=True)
+            
+        finally:
+            # セットアップ完了を記録
+            if interaction.guild_id in self.setup_in_progress:
+                del self.setup_in_progress[interaction.guild_id]
 
     async def create_channels(
         self,

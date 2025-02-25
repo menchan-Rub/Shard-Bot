@@ -14,6 +14,7 @@ from dotenv import load_dotenv
 import signal
 import traceback
 from concurrent.futures import ThreadPoolExecutor
+from discord import app_commands
 
 # ロギングの設定
 logging.basicConfig(
@@ -65,10 +66,17 @@ class ShardBot(commands.Bot):
         )
         self.logger = logger
         self._exit = asyncio.Event()
+        self.error_channel_id = int(os.getenv('ERROR_LOG_CHANNEL_ID', 0))
+        self._cleanup_tasks = set()  # クリーンアップタスクの追跡用
+        self._presence_task = None  # Rich Presence更新タスク用
         
     async def setup_hook(self) -> None:
         """ボットの初期設定を行います"""
         try:
+            # エラーロガーの初期化
+            from modules.logging.error_logger import ErrorLogger
+            self.error_logger = ErrorLogger(self)
+            
             # コマンドの読み込み
             await self.load_extensions()
             
@@ -80,18 +88,86 @@ class ShardBot(commands.Bot):
             # シグナルハンドラの設定
             for sig in (signal.SIGTERM, signal.SIGINT):
                 signal.signal(sig, self._handle_signal)
+
+            # Rich Presence更新タスクを開始
+            self._presence_task = self.loop.create_task(self._update_presence())
                 
         except Exception as e:
             self.logger.error(f"Setup hook failed: {e}")
             traceback.print_exc()
             await self.close()
             
+    async def _update_presence(self):
+        """Rich Presenceを定期的に更新します"""
+        try:
+            while not self.is_closed():
+                activities = [
+                    discord.Activity(
+                        type=discord.ActivityType.watching,
+                        name=f"{len(self.guilds)}サーバー"
+                    ),
+                    discord.Activity(
+                        type=discord.ActivityType.playing,
+                        name="Shardプログラミングチーム"
+                    ),
+                    discord.Activity(
+                        type=discord.ActivityType.watching,
+                        name="プログラミング学習"
+                    ),
+                    discord.Activity(
+                        type=discord.ActivityType.listening,
+                        name="コードレビュー"
+                    )
+                ]
+                
+                for activity in activities:
+                    await self.change_presence(activity=activity)
+                    await asyncio.sleep(30)  # 30秒ごとに切り替え
+        except Exception as e:
+            self.logger.error(f"Presence update error: {e}")
+        finally:
+            if self._presence_task:
+                self._presence_task.cancel()
+
+    async def close(self):
+        """ボットのクリーンアップと終了処理"""
+        self.logger.info("Shutting down bot...")
+        
+        # 実行中のタスクをキャンセル
+        for task in self._cleanup_tasks:
+            if not task.done():
+                task.cancel()
+                try:
+                    await task
+                except asyncio.CancelledError:
+                    pass
+        
+        # スレッドプールのシャットダウン
+        thread_pool.shutdown(wait=False)
+        
+        # 親クラスのclose処理を実行
+        await super().close()
+        
+        self.logger.info("Bot shutdown complete.")
+
     def _handle_signal(self, signum, frame):
         """シグナルハンドラ"""
         self.logger.info(f"Received signal {signum}")
+        
+        # asyncio.run()を使用してclose()を実行
+        async def cleanup():
+            await self.close()
+            
+        try:
+            asyncio.run(cleanup())
+        except RuntimeError:
+            # イベントループが既に実行中の場合
+            loop = asyncio.get_event_loop()
+            if loop.is_running():
+                loop.create_task(self.close())
+        
+        # 終了フラグを設定
         self._exit.set()
-        # 強制終了を追加
-        sys.exit(0)
         
     async def load_extensions(self):
         """全ての拡張機能を読み込みます"""
@@ -140,10 +216,102 @@ class ShardBot(commands.Bot):
         )
         self.logger.info('------')
 
+    async def send_error_log(self, error: Exception, **context):
+        """エラーログをDiscordチャンネルに送信"""
+        if not self.error_channel_id:
+            return
+
+        channel = self.get_channel(self.error_channel_id)
+        if not channel:
+            self.logger.error(f"Error log channel (ID: {self.error_channel_id}) not found")
+            return
+
+        embed = discord.Embed(
+            title="⚠️ エラー発生",
+            description=f"```py\n{str(error)}\n```",
+            color=0xFF0000,
+            timestamp=discord.utils.utcnow()
+        )
+
+        # コンテキスト情報を追加
+        for key, value in context.items():
+            if value:
+                embed.add_field(name=key, value=str(value), inline=False)
+
+        # スタックトレースを追加
+        stack_trace = ''.join(traceback.format_exception(type(error), error, error.__traceback__))
+        if len(stack_trace) > 1000:
+            stack_trace = stack_trace[:997] + "..."
+        embed.add_field(name="スタックトレース", value=f"```py\n{stack_trace}\n```", inline=False)
+
+        try:
+            await channel.send(embed=embed)
+        except Exception as e:
+            self.logger.error(f"Failed to send error log: {e}")
+
     async def on_error(self, event_method: str, *args, **kwargs):
-        """エラーハンドラ"""
-        self.logger.error(f'Error in {event_method}:')
-        self.logger.error(traceback.format_exc())
+        """グローバルエラーハンドラー"""
+        error = sys.exc_info()[1]
+        await self.send_error_log(
+            error,
+            event=event_method,
+            guild=kwargs.get('guild'),
+            user=kwargs.get('user')
+        )
+        self.logger.error(f"Error in {event_method}: {error}", exc_info=True)
+
+    async def on_interaction_error(self, interaction: discord.Interaction, error: Exception):
+        """インタラクションエラーハンドラー"""
+        if isinstance(error, app_commands.CommandOnCooldown):
+            await interaction.response.send_message(
+                f"コマンドのクールダウン中です。{error.retry_after:.1f}秒後に再試行してください。",
+                ephemeral=True
+            )
+            return
+
+        if isinstance(error, app_commands.MissingPermissions):
+            await interaction.response.send_message(
+                "このコマンドを実行する権限がありません。",
+                ephemeral=True
+            )
+            return
+
+        # Unknown Interactionエラーの特別処理
+        if isinstance(error, discord.NotFound) and error.code == 10062:
+            self.logger.warning(f"Interaction expired: {interaction.command}")
+            return
+
+        # その他のエラー
+        await self.send_error_log(
+            error,
+            command=interaction.command.name if interaction.command else "Unknown",
+            guild=interaction.guild,
+            user=interaction.user,
+            channel=interaction.channel
+        )
+
+        try:
+            if not interaction.response.is_done():
+                await interaction.response.send_message(
+                    "コマンドの実行中にエラーが発生しました。",
+                    ephemeral=True
+                )
+        except Exception:
+            pass
+
+    async def on_command_error(self, ctx: commands.Context, error: Exception):
+        """コマンドエラーハンドラー"""
+        if isinstance(error, commands.CommandNotFound):
+            return
+
+        await self.send_error_log(
+            error,
+            command=ctx.command.qualified_name if ctx.command else None,
+            guild=ctx.guild,
+            user=ctx.author,
+            channel=ctx.channel
+        )
+        self.logger.error(f"Command error in {ctx.command}: {error}", exc_info=True)
 
     async def generate_captcha(self, length: int = 4) -> Tuple[str, io.BytesIO]:
         """キャプチャ生成（スレッドプールで実行）"""
@@ -198,27 +366,27 @@ async def main():
         
         # シグナルハンドラの設定
         for sig in (signal.SIGTERM, signal.SIGINT):
-            signal.signal(sig, bot._handle_signal)
-            
+            signal.signal(sig, lambda s, f: bot._handle_signal(s, f))
+        
         async with bot:
             await bot.start(os.getenv('DISCORD_TOKEN'))
-            
-            # シグナル待機
-            await bot._exit.wait()
             
     except Exception as e:
         logger.critical(f"Fatal error: {e}")
         traceback.print_exc()
-        sys.exit(1)
     finally:
+        # クリーンアップ処理
+        await bot.close()
         # スレッドプールのクリーンアップ
         thread_pool.shutdown(wait=True)
-        # 強制終了を追加
-        sys.exit(0)
 
 if __name__ == '__main__':
     try:
         asyncio.run(main())
     except KeyboardInterrupt:
         logger.info("Received KeyboardInterrupt")
+    finally:
+        # 残っているタスクをキャンセル
+        for task in asyncio.all_tasks():
+            task.cancel()
         sys.exit(0) 

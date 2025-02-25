@@ -1,20 +1,32 @@
-from fastapi import APIRouter, Depends, HTTPException, status
-from fastapi.security import OAuth2PasswordBearer
+from jose import JWTError
+from fastapi import APIRouter, Depends, HTTPException, status, Form
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from sqlalchemy.orm import Session
 from typing import Optional
 import jwt
 from datetime import datetime, timedelta
 import os
 import httpx
-from jose import JWTError
+from passlib.context import CryptContext
 
-from web.server.database import get_db
-from web.server.models.user import User
-from web.server.middleware import verify_token, get_current_user
-from web.server.schemas import Token, TokenData, UserCreate, UserResponse
+from web.server.database.database import get_db
+from web.server.database.models.user import User
+from web.server.config import settings
+from web.server.middleware.auth_middleware import (
+    oauth,
+    get_current_user,
+    create_access_token,
+    verify_access_token,
+)
+from web.server.schemas.auth import Token, TokenData, UserCreate, UserResponse
 
-router = APIRouter()
+router = APIRouter(
+    prefix="/auth",
+    tags=["auth"],
+)
+
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 # JWTの設定
 SECRET_KEY = os.getenv("JWT_SECRET_KEY")
@@ -81,6 +93,52 @@ async def discord_callback(code: str, db: Session = Depends(get_db)):
         raise HTTPException(
             status_code=status.HTTP_400_BAD_REQUEST,
             detail="認証に失敗しました"
+        )
+
+@router.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
+    """ユーザー名とパスワードでログイン"""
+    try:
+        # デフォルトの管理者ユーザーを確認
+        user = db.query(User).filter(User.username == form_data.username).first()
+        if not user:
+            # 初回ログイン時は管理者ユーザーを作成
+            if form_data.username == "admin" and form_data.password == "admin":
+                hashed_password = pwd_context.hash(form_data.password)
+                user = User(
+                    username=form_data.username,
+                    hashed_password=hashed_password,
+                    email="admin@example.com",
+                    is_superuser=True,
+                    is_active=True,
+                    discord_id="admin"  # ダミーのdiscord_id
+                )
+                db.add(user)
+                db.commit()
+                db.refresh(user)
+            else:
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="ユーザー名またはパスワードが間違っています",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
+        else:
+            # 既存ユーザーの場合はパスワードを検証
+            if not pwd_context.verify(form_data.password, user.hashed_password):
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="ユーザー名またはパスワードが間違っています",
+                    headers={"WWW-Authenticate": "Bearer"},
+                )
+
+        # JWTトークンを生成
+        access_token = create_access_token(data={"sub": user.username})
+        return {"access_token": access_token, "token_type": "bearer"}
+    except Exception as e:
+        print(f"Login error: {str(e)}")  # デバッグ用
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail=str(e)
         )
 
 def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):

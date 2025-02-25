@@ -2719,3 +2719,662 @@ SystemExit: 0
 2025-02-24 10:59:03,710 - utility.role - ERROR - Failed to add role: password authentication failed for user "postgres"
 2025-02-24 10:59:29,486 - utility.server - ERROR - Failed to create invite: password authentication failed for user "postgres"
 2025-02-24 10:59:41,821 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 11:00:41,952 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-24 11:01:42,044 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:05:30,251 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2025-02-25 18:05:30,252 - discord.client - INFO - logging in using static token
+2025-02-25 18:05:31,508 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-25 18:05:31,509 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-25 18:05:31,510 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-25 18:05:31,511 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-25 18:05:31,512 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-25 18:05:31,514 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-25 18:05:31,993 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-25 18:05:31,996 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-25 18:05:31,997 - utility.translation - INFO - Translation service initialized successfully
+2025-02-25 18:05:31,997 - ShardBot - INFO - Loaded extension: commands.utility.translate
+2025-02-25 18:05:31,998 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-25 18:05:31,999 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-25 18:05:32,000 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-25 18:05:32,002 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-25 18:05:32,003 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-25 18:05:32,006 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-25 18:05:32,007 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-25 18:05:32,008 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-25 18:05:32,010 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-25 18:05:32,012 - ShardBot - INFO - Loaded extension: events.message
+2025-02-25 18:05:32,013 - ShardBot - INFO - Syncing slash commands...
+2025-02-25 18:05:32,014 - utility.timer_service - INFO - Timer service started
+2025-02-25 18:05:32,068 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:05:32,617 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-25 18:05:33,154 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 42075b2f02a12d20ae914a175baddce2).
+2025-02-25 18:05:35,191 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-25 18:05:35,537 - ShardBot - INFO - Registered slash commands: 50
+2025-02-25 18:05:35,537 - ShardBot - INFO - - setup
+2025-02-25 18:05:35,537 - ShardBot - INFO - - mute
+2025-02-25 18:05:35,538 - ShardBot - INFO - - unmute
+2025-02-25 18:05:35,538 - ShardBot - INFO - - warn
+2025-02-25 18:05:35,538 - ShardBot - INFO - - warnings
+2025-02-25 18:05:35,538 - ShardBot - INFO - - clearwarnings
+2025-02-25 18:05:35,538 - ShardBot - INFO - - kick
+2025-02-25 18:05:35,538 - ShardBot - INFO - - ban
+2025-02-25 18:05:35,538 - ShardBot - INFO - - automod
+2025-02-25 18:05:35,538 - ShardBot - INFO - - automod_set
+2025-02-25 18:05:35,538 - ShardBot - INFO - - wordfilter
+2025-02-25 18:05:35,538 - ShardBot - INFO - - createrole
+2025-02-25 18:05:35,538 - ShardBot - INFO - - deleterole
+2025-02-25 18:05:35,538 - ShardBot - INFO - - addrole
+2025-02-25 18:05:35,538 - ShardBot - INFO - - removerole
+2025-02-25 18:05:35,538 - ShardBot - INFO - - modifyrole
+2025-02-25 18:05:35,539 - ShardBot - INFO - - roles
+2025-02-25 18:05:35,539 - ShardBot - INFO - - roleinfo
+2025-02-25 18:05:35,539 - ShardBot - INFO - - poll
+2025-02-25 18:05:35,539 - ShardBot - INFO - - endpoll
+2025-02-25 18:05:35,539 - ShardBot - INFO - - support
+2025-02-25 18:05:35,539 - ShardBot - INFO - - timer
+2025-02-25 18:05:35,539 - ShardBot - INFO - - timers
+2025-02-25 18:05:35,539 - ShardBot - INFO - - canceltimer
+2025-02-25 18:05:35,540 - ShardBot - INFO - - calc
+2025-02-25 18:05:35,540 - ShardBot - INFO - - convert
+2025-02-25 18:05:35,540 - ShardBot - INFO - - stats
+2025-02-25 18:05:35,540 - ShardBot - INFO - - plot
+2025-02-25 18:05:35,540 - ShardBot - INFO - - units
+2025-02-25 18:05:35,540 - ShardBot - INFO - - memberinfo
+2025-02-25 18:05:35,540 - ShardBot - INFO - - serverinfo
+2025-02-25 18:05:35,540 - ShardBot - INFO - - settings
+2025-02-25 18:05:35,540 - ShardBot - INFO - - createinvite
+2025-02-25 18:05:35,540 - ShardBot - INFO - - invites
+2025-02-25 18:05:35,540 - ShardBot - INFO - - deleteinvite
+2025-02-25 18:05:35,540 - ShardBot - INFO - - auditlog
+2025-02-25 18:05:35,540 - ShardBot - INFO - - purge
+2025-02-25 18:05:35,540 - ShardBot - INFO - - pin
+2025-02-25 18:05:35,540 - ShardBot - INFO - - unpin
+2025-02-25 18:05:35,540 - ShardBot - INFO - - move
+2025-02-25 18:05:35,540 - ShardBot - INFO - - search
+2025-02-25 18:05:35,540 - ShardBot - INFO - - history
+2025-02-25 18:05:35,540 - ShardBot - INFO - - createchannel
+2025-02-25 18:05:35,540 - ShardBot - INFO - - deletechannel
+2025-02-25 18:05:35,540 - ShardBot - INFO - - modifychannel
+2025-02-25 18:05:35,540 - ShardBot - INFO - - channels
+2025-02-25 18:05:35,540 - ShardBot - INFO - - channelinfo
+2025-02-25 18:05:35,540 - ShardBot - INFO - - setpermissions
+2025-02-25 18:05:35,540 - ShardBot - INFO - - translate
+2025-02-25 18:05:35,540 - ShardBot - INFO - - languages
+2025-02-25 18:05:35,540 - ShardBot - INFO - ------
+2025-02-25 18:06:15,123 - commands.admin.setup - ERROR - Setup error: 'ShardBot' object has no attribute 'load_config'
+2025-02-25 18:06:32,124 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:07:32,211 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:08:32,279 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:09:32,365 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:10:32,024 - events.message - INFO - Cleaned up message history
+2025-02-25 18:10:32,441 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:11:32,511 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:12:32,564 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:13:32,675 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:14:32,736 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:15:32,046 - events.message - INFO - Cleaned up message history
+2025-02-25 18:15:32,788 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:16:18,000 - ShardBot - INFO - Received signal 15
+2025-02-25 18:16:18,003 - utility.timer_service - INFO - Timer service stopped
+2025-02-25 18:16:18,039 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='Task-1' coro=<main() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py:190> exception=SystemExit(0)>
+Traceback (most recent call last):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 44, in run
+    return loop.run_until_complete(main)
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1871, in _run_once
+    event_list = self._selector.select(timeout)
+  File "/usr/lib/python3.10/selectors.py", line 469, in select
+    fd_event_list = self._selector.poll(timeout, max_ev)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 94, in _handle_signal
+    """シグナルハンドラ"""
+SystemExit: 0
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 204, in main
+    return "[" + "█" * filled + "░" * (bar_length - filled) + f"] {int(100 * current / total)}%"
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/client.py", line 824, in start
+    await self.connect(reconnect=reconnect)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/client.py", line 704, in connect
+    await self.ws.poll_event()
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/gateway.py", line 623, in poll_event
+    msg = await self.socket.receive(timeout=self._max_heartbeat_timeout)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/aiohttp/client_ws.py", line 332, in receive
+    msg = await self._reader.read()
+  File "aiohttp/_websocket/reader_c.py", line 112, in read
+  File "aiohttp/_websocket/reader_c.py", line 109, in aiohttp._websocket.reader_c.WebSocketDataQueue.read
+asyncio.exceptions.CancelledError
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 221, in <module>
+    for sig in (signal.SIGTERM, signal.SIGINT):
+  File "/usr/lib/python3.10/asyncio/runners.py", line 47, in run
+    _cancel_all_tasks(loop)
+  File "/usr/lib/python3.10/asyncio/runners.py", line 63, in _cancel_all_tasks
+    loop.run_until_complete(tasks.gather(*to_cancel, return_exceptions=True))
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 636, in run_until_complete
+    self.run_forever()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 603, in run_forever
+    self._run_once()
+  File "/usr/lib/python3.10/asyncio/base_events.py", line 1909, in _run_once
+    handle._run()
+  File "/usr/lib/python3.10/asyncio/events.py", line 80, in _run
+    self._context.run(self._callback, *self._args)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/main.py", line 217, in main
+    # ボットの起動
+SystemExit: 0
+2025-02-25 18:16:31,842 - discord.client - WARNING - PyNaCl is not installed, voice will NOT be supported
+2025-02-25 18:16:31,842 - discord.client - INFO - logging in using static token
+2025-02-25 18:16:34,064 - ShardBot - INFO - Loaded extension: commands.moderation.mute
+2025-02-25 18:16:34,065 - ShardBot - INFO - Loaded extension: commands.moderation.warn
+2025-02-25 18:16:34,066 - ShardBot - INFO - Loaded extension: commands.moderation.kick
+2025-02-25 18:16:34,067 - ShardBot - INFO - Loaded extension: commands.moderation.ban
+2025-02-25 18:16:34,068 - ShardBot - INFO - Loaded extension: commands.admin.setup
+2025-02-25 18:16:34,070 - ShardBot - INFO - Loaded extension: commands.utility.automod
+2025-02-25 18:16:34,538 - ShardBot - INFO - Loaded extension: commands.utility.calculator
+2025-02-25 18:16:34,541 - ShardBot - INFO - Loaded extension: commands.utility.role
+2025-02-25 18:16:34,542 - utility.translation - INFO - Translation service initialized successfully
+2025-02-25 18:16:34,542 - ShardBot - INFO - Loaded extension: commands.utility.translate
+2025-02-25 18:16:34,544 - ShardBot - INFO - Loaded extension: commands.utility.poll
+2025-02-25 18:16:34,545 - ShardBot - INFO - Loaded extension: commands.utility.support
+2025-02-25 18:16:34,546 - ShardBot - INFO - Loaded extension: commands.utility.member
+2025-02-25 18:16:34,549 - ShardBot - INFO - Loaded extension: commands.utility.server
+2025-02-25 18:16:34,552 - ShardBot - INFO - Loaded extension: commands.utility.message
+2025-02-25 18:16:34,556 - ShardBot - INFO - Loaded extension: commands.utility.channel
+2025-02-25 18:16:34,559 - ShardBot - INFO - Loaded extension: commands.utility.timer
+2025-02-25 18:16:34,559 - ShardBot - INFO - Loaded extension: events.message_handler
+2025-02-25 18:16:34,561 - ShardBot - INFO - Loaded extension: events.member_join
+2025-02-25 18:16:34,563 - ShardBot - INFO - Loaded extension: events.message
+2025-02-25 18:16:34,563 - ShardBot - INFO - Syncing slash commands...
+2025-02-25 18:16:34,565 - utility.timer_service - INFO - Timer service started
+2025-02-25 18:16:34,641 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:16:35,027 - ShardBot - INFO - Slash commands synced successfully!
+2025-02-25 18:16:35,697 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: bc0b7cac1a193b861e8b0526a320eb9c).
+2025-02-25 18:16:37,708 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-25 18:16:38,059 - ShardBot - INFO - Registered slash commands: 50
+2025-02-25 18:16:38,060 - ShardBot - INFO - - setup
+2025-02-25 18:16:38,060 - ShardBot - INFO - - mute
+2025-02-25 18:16:38,060 - ShardBot - INFO - - unmute
+2025-02-25 18:16:38,060 - ShardBot - INFO - - warn
+2025-02-25 18:16:38,060 - ShardBot - INFO - - warnings
+2025-02-25 18:16:38,060 - ShardBot - INFO - - clearwarnings
+2025-02-25 18:16:38,060 - ShardBot - INFO - - kick
+2025-02-25 18:16:38,060 - ShardBot - INFO - - ban
+2025-02-25 18:16:38,060 - ShardBot - INFO - - automod
+2025-02-25 18:16:38,060 - ShardBot - INFO - - automod_set
+2025-02-25 18:16:38,060 - ShardBot - INFO - - wordfilter
+2025-02-25 18:16:38,060 - ShardBot - INFO - - createrole
+2025-02-25 18:16:38,060 - ShardBot - INFO - - deleterole
+2025-02-25 18:16:38,060 - ShardBot - INFO - - addrole
+2025-02-25 18:16:38,060 - ShardBot - INFO - - removerole
+2025-02-25 18:16:38,060 - ShardBot - INFO - - modifyrole
+2025-02-25 18:16:38,060 - ShardBot - INFO - - roles
+2025-02-25 18:16:38,060 - ShardBot - INFO - - roleinfo
+2025-02-25 18:16:38,060 - ShardBot - INFO - - poll
+2025-02-25 18:16:38,060 - ShardBot - INFO - - endpoll
+2025-02-25 18:16:38,060 - ShardBot - INFO - - support
+2025-02-25 18:16:38,060 - ShardBot - INFO - - timer
+2025-02-25 18:16:38,061 - ShardBot - INFO - - timers
+2025-02-25 18:16:38,061 - ShardBot - INFO - - canceltimer
+2025-02-25 18:16:38,061 - ShardBot - INFO - - calc
+2025-02-25 18:16:38,061 - ShardBot - INFO - - convert
+2025-02-25 18:16:38,061 - ShardBot - INFO - - stats
+2025-02-25 18:16:38,061 - ShardBot - INFO - - plot
+2025-02-25 18:16:38,061 - ShardBot - INFO - - units
+2025-02-25 18:16:38,061 - ShardBot - INFO - - memberinfo
+2025-02-25 18:16:38,061 - ShardBot - INFO - - serverinfo
+2025-02-25 18:16:38,061 - ShardBot - INFO - - settings
+2025-02-25 18:16:38,061 - ShardBot - INFO - - createinvite
+2025-02-25 18:16:38,061 - ShardBot - INFO - - invites
+2025-02-25 18:16:38,061 - ShardBot - INFO - - deleteinvite
+2025-02-25 18:16:38,061 - ShardBot - INFO - - auditlog
+2025-02-25 18:16:38,061 - ShardBot - INFO - - purge
+2025-02-25 18:16:38,061 - ShardBot - INFO - - pin
+2025-02-25 18:16:38,061 - ShardBot - INFO - - unpin
+2025-02-25 18:16:38,061 - ShardBot - INFO - - move
+2025-02-25 18:16:38,061 - ShardBot - INFO - - search
+2025-02-25 18:16:38,061 - ShardBot - INFO - - history
+2025-02-25 18:16:38,061 - ShardBot - INFO - - createchannel
+2025-02-25 18:16:38,061 - ShardBot - INFO - - deletechannel
+2025-02-25 18:16:38,061 - ShardBot - INFO - - modifychannel
+2025-02-25 18:16:38,061 - ShardBot - INFO - - channels
+2025-02-25 18:16:38,061 - ShardBot - INFO - - channelinfo
+2025-02-25 18:16:38,061 - ShardBot - INFO - - setpermissions
+2025-02-25 18:16:38,061 - ShardBot - INFO - - translate
+2025-02-25 18:16:38,062 - ShardBot - INFO - - languages
+2025-02-25 18:16:38,063 - ShardBot - INFO - ------
+2025-02-25 18:17:34,709 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:18:04,741 - commands.admin.setup - ERROR - Setup error: 'ShardBot' object has no attribute 'load_config'
+2025-02-25 18:18:34,772 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:19:34,848 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:20:34,914 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:21:34,576 - events.message - INFO - Cleaned up message history
+2025-02-25 18:21:34,967 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:22:35,059 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:23:35,109 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:24:35,182 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:25:35,238 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:26:34,588 - events.message - INFO - Cleaned up message history
+2025-02-25 18:26:35,326 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:27:35,393 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:28:35,488 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:29:35,591 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:30:35,701 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:31:34,612 - events.message - INFO - Cleaned up message history
+2025-02-25 18:31:35,800 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:32:35,874 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:33:35,951 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:34:36,038 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:35:36,113 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:36:34,617 - events.message - INFO - Cleaned up message history
+2025-02-25 18:36:36,175 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:37:36,242 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:38:36,305 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:39:36,368 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:40:36,479 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:41:34,632 - events.message - INFO - Cleaned up message history
+2025-02-25 18:41:36,579 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:42:36,632 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:43:36,693 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:44:36,803 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:45:36,867 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:46:34,568 - modules.moderation.spam_detection - INFO - Cleaned up spam detection history
+2025-02-25 18:46:34,634 - events.message - INFO - Cleaned up message history
+2025-02-25 18:46:36,910 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:47:36,965 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:48:37,060 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:49:37,133 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:50:37,207 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:51:34,638 - events.message - INFO - Cleaned up message history
+2025-02-25 18:51:37,305 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:52:37,372 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:53:37,430 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:54:37,502 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:55:37,585 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:56:34,645 - events.message - INFO - Cleaned up message history
+2025-02-25 18:56:37,636 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:57:37,763 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:58:37,839 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 18:59:37,926 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:00:37,990 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:01:34,665 - events.message - INFO - Cleaned up message history
+2025-02-25 19:01:38,059 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:02:38,154 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:03:38,209 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:04:38,253 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:04:51,564 - commands.admin.setup - ERROR - Setup error: 'ShardBot' object has no attribute 'load_config'
+2025-02-25 19:05:38,324 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:06:34,695 - events.message - INFO - Cleaned up message history
+2025-02-25 19:06:38,381 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:07:38,431 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:08:38,538 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:08:59,678 - discord.gateway - INFO - Shard ID None has successfully RESUMED session bc0b7cac1a193b861e8b0526a320eb9c.
+2025-02-25 19:09:38,646 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:10:38,731 - utility.timer_service - ERROR - Error in timer loop: password authentication failed for user "postgres"
+2025-02-25 19:11:34,705 - events.message - INFO - Cleaned up message history
+2025-02-25 19:11:38,825 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 11, 38, 734072),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:12:29,910 - discord.webhook.async_ - WARNING - Webhook ID 1340998901255110756 is rate limited. Retrying in 0.30 seconds.
+2025-02-25 19:12:30,738 - commands.admin.setup - ERROR - Setup error: 404 Not Found (error code: 10062): Unknown interaction
+2025-02-25 19:12:38,828 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 12, 38, 826034),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:13:38,862 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 13, 38, 861102),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:14:38,875 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 14, 38, 872009),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:15:38,911 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 15, 38, 906576),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:16:34,567 - modules.moderation.auto_mod - INFO - Cleaned up violation counts
+2025-02-25 19:16:34,570 - modules.moderation.spam_detection - INFO - Cleaned up spam detection history
+2025-02-25 19:16:34,706 - events.message - INFO - Cleaned up message history
+2025-02-25 19:16:38,919 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 16, 38, 916943),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:17:38,926 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 17, 38, 920316),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:18:38,934 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 18, 38, 929814),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:19:38,943 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 19, 38, 940976),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:20:38,989 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 20, 38, 984140),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:21:34,720 - events.message - INFO - Cleaned up message history
+2025-02-25 19:21:39,000 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 21, 38, 995732),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:22:39,008 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 22, 39, 3420),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:22:43,515 - utility.automod - ERROR - Failed to get automod settings: 'DatabaseOperations' object has no attribute 'get_automod_settings'
+2025-02-25 19:22:45,185 - asyncio - ERROR - Task exception was never retrieved
+future: <Task finished name='CommandTree-invoker' coro=<CommandTree._from_interaction.<locals>.wrapper() done, defined at /home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/tree.py:1149> exception=HTTPException('400 Bad Request (error code: 40060): Interaction has already been acknowledged.')>
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/automod.py", line 100, in automod
+    await interaction.response.send_message(embed=embed)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/interactions.py", line 1004, in send_message
+    response = await adapter.create_interaction_response(
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/webhook/async_.py", line 224, in request
+    raise NotFound(response, data)
+discord.errors.NotFound: 404 Not Found (error code: 10062): Unknown interaction
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/commands.py", line 857, in _do_call
+    return await self._callback(self.binding, interaction, **params)  # type: ignore
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/automod.py", line 103, in automod
+    await interaction.response.send_message(
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/interactions.py", line 1004, in send_message
+    response = await adapter.create_interaction_response(
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/webhook/async_.py", line 226, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/tree.py", line 1310, in _call
+    await command._invoke_with_namespace(interaction, namespace)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/commands.py", line 883, in _invoke_with_namespace
+    return await self._do_call(interaction, transformed_values)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/commands.py", line 876, in _do_call
+    raise CommandInvokeError(self, e) from e
+discord.app_commands.errors.CommandInvokeError: Command 'automod' raised an exception: HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/tree.py", line 1151, in wrapper
+    await self._call(interaction)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/tree.py", line 1313, in _call
+    await command._invoke_error_handlers(interaction, e)
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/app_commands/commands.py", line 800, in _invoke_error_handlers
+    await self.on_error(self.binding, interaction, error)  # type: ignore
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/src/commands/utility/automod.py", line 343, in automod_error
+    await interaction.response.send_message(
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/interactions.py", line 1004, in send_message
+    response = await adapter.create_interaction_response(
+  File "/home/menchan/Programming/Discord/Shard-Bot/bot/venv/lib/python3.10/site-packages/discord/webhook/async_.py", line 226, in request
+    raise HTTPException(response, data)
+discord.errors.HTTPException: 400 Bad Request (error code: 40060): Interaction has already been acknowledged.
+2025-02-25 19:23:39,050 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 23, 39, 22748),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:24:39,088 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 24, 39, 80939),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:25:39,107 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 25, 39, 99077),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:26:34,735 - events.message - INFO - Cleaned up message history
+2025-02-25 19:26:39,119 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 26, 39, 113288),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:27:39,138 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 27, 39, 128615),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:28:39,167 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 28, 39, 165963),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:29:39,173 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 29, 39, 169464),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:30:39,210 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 30, 39, 196251),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:31:34,747 - events.message - INFO - Cleaned up message history
+2025-02-25 19:31:39,223 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 31, 39, 215138),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:32:21,888 - discord.gateway - INFO - Shard ID None has successfully RESUMED session bc0b7cac1a193b861e8b0526a320eb9c.
+2025-02-25 19:32:39,244 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 32, 39, 240987),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:33:07,214 - discord.webhook.async_ - WARNING - Webhook ID 1340998901255110756 is rate limited. Retrying in 0.30 seconds.
+2025-02-25 19:33:07,755 - discord.webhook.async_ - WARNING - Webhook ID 1340998901255110756 is rate limited. Retrying in 0.30 seconds.
+2025-02-25 19:33:08,345 - commands.admin.setup - ERROR - Setup error: 404 Not Found (error code: 10062): Unknown interaction
+2025-02-25 19:33:39,250 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 33, 39, 246100),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:34:39,259 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 34, 39, 252053),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:35:39,283 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 35, 39, 277340),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:36:34,755 - events.message - INFO - Cleaned up message history
+2025-02-25 19:36:39,291 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 36, 39, 288267),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:37:39,311 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 37, 39, 307164),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:38:39,352 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 38, 39, 313094),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:39:07,748 - discord.gateway - INFO - Shard ID None has successfully RESUMED session bc0b7cac1a193b861e8b0526a320eb9c.
+2025-02-25 19:39:39,365 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 39, 39, 357579),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:40:39,378 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 40, 39, 375846),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:41:34,771 - events.message - INFO - Cleaned up message history
+2025-02-25 19:41:39,390 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 41, 39, 385432),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:42:39,398 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 42, 39, 395933),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:43:39,432 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 43, 39, 423576),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:44:39,437 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 44, 39, 434142),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:45:39,460 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 45, 39, 459033),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:46:34,582 - modules.moderation.spam_detection - INFO - Cleaned up spam detection history
+2025-02-25 19:46:34,772 - events.message - INFO - Cleaned up message history
+2025-02-25 19:46:39,470 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 46, 39, 466073),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:47:39,546 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 47, 39, 490058),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:48:39,586 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 48, 39, 583828),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:49:39,607 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 49, 39, 600108),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:50:39,644 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 50, 39, 641238),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:51:34,779 - events.message - INFO - Cleaned up message history
+2025-02-25 19:51:39,651 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 51, 39, 647010),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:52:39,665 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 52, 39, 662331),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:53:39,756 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 53, 39, 672001),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:54:39,769 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 54, 39, 764318),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:55:39,774 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 55, 39, 772985),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:56:34,796 - events.message - INFO - Cleaned up message history
+2025-02-25 19:56:39,781 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 56, 39, 779948),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:57:39,810 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 57, 39, 807956),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:58:39,832 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 58, 39, 829949),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
