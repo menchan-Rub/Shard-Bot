@@ -38,22 +38,70 @@ show_header() {
     echo
 }
 
-# サービスの状態確認
+# プロセスの検出（改善版）
+find_process() {
+    local name=$1
+    local port=$2
+    
+    if [ -n "$port" ]; then
+        # ポート番号でプロセスを検索
+        pid=$(lsof -t -i:$port 2>/dev/null)
+        if [ -n "$pid" ]; then
+            echo "$pid"
+            return 0
+        fi
+    fi
+    
+    # プロセス名で検索
+    pids=$(pgrep -f "$name" 2>/dev/null)
+    if [ -n "$pids" ]; then
+        echo "$pids"
+        return 0
+    fi
+    
+    return 1
+}
+
+# プロセスの停止（改善版）
+kill_process() {
+    local name=$1
+    local pids=$2
+    
+    if [ -z "$pids" ]; then
+        return 0
+    fi
+    
+    echo -e "${BLUE}${name}を停止しています...${NC}"
+    
+    # まずSIGTERMで停止を試みる
+    kill $pids 2>/dev/null
+    
+    # プロセスの終了を待つ（最大10秒）
+    for i in {1..10}; do
+        if ! ps -p $pids >/dev/null 2>&1; then
+            return 0
+        fi
+        sleep 1
+    done
+    
+    # 強制終了
+    echo -e "${YELLOW}${name}が応答しないため、強制終了します...${NC}"
+    kill -9 $pids 2>/dev/null
+    
+    # 最終確認
+    if ps -p $pids >/dev/null 2>&1; then
+        echo -e "${RED}${name}の停止に失敗しました${NC}"
+        return 1
+    fi
+    
+    return 0
+}
+
+# サービスの状態確認（改善版）
 check_service() {
     local service=$1
     if systemctl is-active --quiet "$service"; then
         return 0  # 実行中
-    fi
-    return 1  # 停止中
-}
-
-check_process() {
-    local pid_file=$1
-    if [ -f "$pid_file" ]; then
-        PID=$(cat "$pid_file")
-        if ps -p "$PID" > /dev/null 2>&1; then
-            return 0  # 実行中
-        fi
     fi
     return 1  # 停止中
 }
@@ -110,25 +158,28 @@ manage_nginx() {
     esac
 }
 
-# Discord Botの管理
+# Discord Botの管理（改善版）
 manage_bot() {
     local action=$1
     case "$action" in
         start)
-            if check_process "$BOT_PID_FILE"; then
-                echo -e "${YELLOW}ShardBotは既に実行中です${NC}"
+            local bot_pid=$(find_process "python.*src/main.py")
+            if [ -n "$bot_pid" ]; then
+                echo -e "${YELLOW}ShardBotは既に実行中です (PID: $bot_pid)${NC}"
                 return
             fi
             echo -e "${BLUE}ShardBotを起動しています...${NC}"
-            cd "$BOT_DIR" && source venv/bin/activate && \
+            cd "$BOT_DIR" && \
+            source venv/bin/activate && \
             python src/main.py >> "$BOT_LOG" 2>&1 &
-            echo $! > "$BOT_PID_FILE"
+            bot_pid=$!
+            echo $bot_pid > "$BOT_PID_FILE"
             ;;
         stop)
-            if [ -f "$BOT_PID_FILE" ]; then
-                echo -e "${BLUE}ShardBotを停止しています...${NC}"
-                kill $(cat "$BOT_PID_FILE")
-                rm "$BOT_PID_FILE"
+            local bot_pid=$(find_process "python.*src/main.py")
+            if [ -n "$bot_pid" ]; then
+                kill_process "ShardBot" "$bot_pid"
+                rm -f "$BOT_PID_FILE"
             fi
             ;;
         restart)
@@ -138,8 +189,9 @@ manage_bot() {
             manage_bot start
             ;;
         status)
-            if check_process "$BOT_PID_FILE"; then
-                echo -e "${GREEN}ShardBot: 実行中 (PID: $(cat $BOT_PID_FILE))${NC}"
+            local bot_pid=$(find_process "python.*src/main.py")
+            if [ -n "$bot_pid" ]; then
+                echo -e "${GREEN}ShardBot: 実行中 (PID: $bot_pid)${NC}"
             else
                 echo -e "${RED}ShardBot: 停止中${NC}"
             fi
@@ -147,13 +199,14 @@ manage_bot() {
     esac
 }
 
-# APIサーバーの管理
+# APIサーバーの管理（改善版）
 manage_api() {
     local action=$1
     case "$action" in
         start)
-            if check_process "$API_PID_FILE"; then
-                echo -e "${YELLOW}API Serverは既に実行中です${NC}"
+            local api_pid=$(find_process "uvicorn.*main:app" "8000")
+            if [ -n "$api_pid" ]; then
+                echo -e "${YELLOW}API Serverは既に実行中です (PID: $api_pid)${NC}"
                 return
             fi
             echo -e "${BLUE}API Serverを起動しています...${NC}"
@@ -162,13 +215,14 @@ manage_api() {
             source venv/bin/activate && \
             pip install -r requirements.txt && \
             uvicorn main:app --host 0.0.0.0 --port 8000 >> "$API_LOG" 2>&1 &
-            echo $! > "$API_PID_FILE"
+            api_pid=$!
+            echo $api_pid > "$API_PID_FILE"
             ;;
         stop)
-            if [ -f "$API_PID_FILE" ]; then
-                echo -e "${BLUE}API Serverを停止しています...${NC}"
-                kill $(cat "$API_PID_FILE")
-                rm "$API_PID_FILE"
+            local api_pid=$(find_process "uvicorn.*main:app" "8000")
+            if [ -n "$api_pid" ]; then
+                kill_process "API Server" "$api_pid"
+                rm -f "$API_PID_FILE"
             fi
             ;;
         restart)
@@ -178,8 +232,9 @@ manage_api() {
             manage_api start
             ;;
         status)
-            if check_process "$API_PID_FILE"; then
-                echo -e "${GREEN}API Server: 実行中 (PID: $(cat $API_PID_FILE))${NC}"
+            local api_pid=$(find_process "uvicorn.*main:app" "8000")
+            if [ -n "$api_pid" ]; then
+                echo -e "${GREEN}API Server: 実行中 (PID: $api_pid)${NC}"
             else
                 echo -e "${RED}API Server: 停止中${NC}"
             fi
@@ -187,24 +242,26 @@ manage_api() {
     esac
 }
 
-# フロントエンドの管理
+# フロントエンドの管理（改善版）
 manage_client() {
     local action=$1
     case "$action" in
         start)
-            if check_process "$CLIENT_PID_FILE"; then
-                echo -e "${YELLOW}Frontend Serverは既に実行中です${NC}"
+            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            if [ -n "$client_pid" ]; then
+                echo -e "${YELLOW}Frontend Serverは既に実行中です (PID: $client_pid)${NC}"
                 return
             fi
             echo -e "${BLUE}Frontend Serverを起動しています...${NC}"
             cd "$CLIENT_DIR" && npm run dev >> "$CLIENT_LOG" 2>&1 &
-            echo $! > "$CLIENT_PID_FILE"
+            client_pid=$!
+            echo $client_pid > "$CLIENT_PID_FILE"
             ;;
         stop)
-            if [ -f "$CLIENT_PID_FILE" ]; then
-                echo -e "${BLUE}Frontend Serverを停止しています...${NC}"
-                kill $(cat "$CLIENT_PID_FILE")
-                rm "$CLIENT_PID_FILE"
+            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            if [ -n "$client_pid" ]; then
+                kill_process "Frontend Server" "$client_pid"
+                rm -f "$CLIENT_PID_FILE"
             fi
             ;;
         restart)
@@ -214,8 +271,9 @@ manage_client() {
             manage_client start
             ;;
         status)
-            if check_process "$CLIENT_PID_FILE"; then
-                echo -e "${GREEN}Frontend Server: 実行中 (PID: $(cat $CLIENT_PID_FILE))${NC}"
+            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            if [ -n "$client_pid" ]; then
+                echo -e "${GREEN}Frontend Server: 実行中 (PID: $client_pid)${NC}"
             else
                 echo -e "${RED}Frontend Server: 停止中${NC}"
             fi
@@ -253,10 +311,8 @@ manage_all() {
             ;;
         restart)
             echo -e "${YELLOW}全サービスを再起動しています...${NC}"
-            # まず全てのサービスを停止
             manage_all stop
             sleep 2
-            # 次に全てのサービスを起動
             manage_all start
             ;;
         status)
@@ -272,22 +328,25 @@ manage_all() {
             fi
             
             # Bot状態確認
-            if check_process "$BOT_PID_FILE"; then
-                echo -e "  ${BOLD}ShardBot${NC}    │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $(cat $BOT_PID_FILE))${NC}"
+            local bot_pid=$(find_process "python.*src/main.py")
+            if [ -n "$bot_pid" ]; then
+                echo -e "  ${BOLD}ShardBot${NC}    │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $bot_pid)${NC}"
             else
                 echo -e "  ${BOLD}ShardBot${NC}    │ ${RED}●${NC} 停止中"
             fi
             
             # API状態確認
-            if check_process "$API_PID_FILE"; then
-                echo -e "  ${BOLD}API Server${NC}  │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $(cat $API_PID_FILE))${NC}"
+            local api_pid=$(find_process "uvicorn.*main:app" "8000")
+            if [ -n "$api_pid" ]; then
+                echo -e "  ${BOLD}API Server${NC}  │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $api_pid)${NC}"
             else
                 echo -e "  ${BOLD}API Server${NC}  │ ${RED}●${NC} 停止中"
             fi
             
             # Frontend状態確認
-            if check_process "$CLIENT_PID_FILE"; then
-                echo -e "  ${BOLD}Frontend${NC}    │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $(cat $CLIENT_PID_FILE))${NC}"
+            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            if [ -n "$client_pid" ]; then
+                echo -e "  ${BOLD}Frontend${NC}    │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $client_pid)${NC}"
             else
                 echo -e "  ${BOLD}Frontend${NC}    │ ${RED}●${NC} 停止中"
             fi
@@ -426,4 +485,4 @@ case "$1" in
         show_help
         exit 1
         ;;
-esac 
+esac

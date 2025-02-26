@@ -99,6 +99,7 @@ class ShardBot(commands.Bot):
             
     async def _update_presence(self):
         """Rich Presenceを定期的に更新します"""
+        await self.wait_until_ready()  # ボットの準備が完了するまで待機
         try:
             while not self.is_closed():
                 activities = [
@@ -108,25 +109,24 @@ class ShardBot(commands.Bot):
                     ),
                     discord.Activity(
                         type=discord.ActivityType.playing,
-                        name="Shardプログラミングチーム"
+                        name="Shard-Team"
                     ),
                     discord.Activity(
                         type=discord.ActivityType.watching,
-                        name="プログラミング学習"
+                        name="メンバー募集中！"
                     ),
                     discord.Activity(
                         type=discord.ActivityType.listening,
-                        name="コードレビュー"
+                        name="気軽に参加してください！"
                     )
                 ]
-                
                 for activity in activities:
                     await self.change_presence(activity=activity)
                     await asyncio.sleep(30)  # 30秒ごとに切り替え
         except Exception as e:
             self.logger.error(f"Presence update error: {e}")
         finally:
-            if self._presence_task:
+            if self._presence_task and not self._presence_task.done():
                 self._presence_task.cancel()
 
     async def close(self):

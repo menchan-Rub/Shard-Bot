@@ -3378,3 +3378,86 @@ FROM timers
 WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
 [parameters: (datetime.datetime(2025, 2, 25, 10, 58, 39, 829949),)]
 (Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 19:59:39,852 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 10, 59, 39, 833707),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 20:00:39,869 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 11, 0, 39, 865988),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 20:01:34,826 - events.message - INFO - Cleaned up message history
+2025-02-25 20:01:39,878 - utility.timer_service - ERROR - Error in timer loop: (sqlalchemy.dialects.postgresql.asyncpg.ProgrammingError) <class 'asyncpg.exceptions.UndefinedTableError'>: relation "timers" does not exist
+[SQL: SELECT timers.id, timers.guild_id, timers.channel_id, timers.user_id, timers.expires_at, timers.message, timers.is_recurring, timers.interval, timers.created_at 
+FROM timers 
+WHERE timers.expires_at <= $1::TIMESTAMP WITHOUT TIME ZONE]
+[parameters: (datetime.datetime(2025, 2, 25, 11, 1, 39, 876479),)]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+2025-02-25 20:06:34,852 - events.message - INFO - Cleaned up message history
+2025-02-25 20:11:34,861 - events.message - INFO - Cleaned up message history
+2025-02-25 20:16:34,589 - modules.moderation.auto_mod - INFO - Cleaned up violation counts
+2025-02-25 20:16:34,590 - modules.moderation.spam_detection - INFO - Cleaned up spam detection history
+2025-02-25 20:16:34,874 - events.message - INFO - Cleaned up message history
+2025-02-25 21:19:19,328 - discord.gateway - WARNING - Shard ID None has stopped responding to the gateway. Closing and restarting.
+2025-02-25 21:19:19,426 - events.message - INFO - Cleaned up message history
+2025-02-25 21:19:19,445 - modules.moderation.spam_detection - INFO - Cleaned up spam detection history
+2025-02-25 21:19:19,445 - modules.moderation.auto_mod - INFO - Cleaned up violation counts
+2025-02-25 21:19:20,809 - discord.gateway - INFO - Shard ID None session has been invalidated.
+2025-02-25 21:19:27,169 - discord.gateway - INFO - Shard ID None has connected to Gateway (Session ID: 904687ffbad047653d16c71b3522caed).
+2025-02-25 21:19:29,176 - ShardBot - INFO - Logged in as Official-Shard-Bot#7592 (ID: 1340998901255110756)
+2025-02-25 21:19:29,580 - ShardBot - INFO - Registered slash commands: 50
+2025-02-25 21:19:29,580 - ShardBot - INFO - - setup
+2025-02-25 21:19:29,580 - ShardBot - INFO - - mute
+2025-02-25 21:19:29,580 - ShardBot - INFO - - unmute
+2025-02-25 21:19:29,580 - ShardBot - INFO - - warn
+2025-02-25 21:19:29,581 - ShardBot - INFO - - warnings
+2025-02-25 21:19:29,581 - ShardBot - INFO - - clearwarnings
+2025-02-25 21:19:29,581 - ShardBot - INFO - - kick
+2025-02-25 21:19:29,581 - ShardBot - INFO - - ban
+2025-02-25 21:19:29,581 - ShardBot - INFO - - automod
+2025-02-25 21:19:29,581 - ShardBot - INFO - - automod_set
+2025-02-25 21:19:29,581 - ShardBot - INFO - - wordfilter
+2025-02-25 21:19:29,581 - ShardBot - INFO - - createrole
+2025-02-25 21:19:29,581 - ShardBot - INFO - - deleterole
+2025-02-25 21:19:29,581 - ShardBot - INFO - - addrole
+2025-02-25 21:19:29,581 - ShardBot - INFO - - removerole
+2025-02-25 21:19:29,581 - ShardBot - INFO - - modifyrole
+2025-02-25 21:19:29,581 - ShardBot - INFO - - roles
+2025-02-25 21:19:29,581 - ShardBot - INFO - - roleinfo
+2025-02-25 21:19:29,581 - ShardBot - INFO - - poll
+2025-02-25 21:19:29,581 - ShardBot - INFO - - endpoll
+2025-02-25 21:19:29,581 - ShardBot - INFO - - support
+2025-02-25 21:19:29,581 - ShardBot - INFO - - timer
+2025-02-25 21:19:29,581 - ShardBot - INFO - - timers
+2025-02-25 21:19:29,581 - ShardBot - INFO - - canceltimer
+2025-02-25 21:19:29,581 - ShardBot - INFO - - calc
+2025-02-25 21:19:29,581 - ShardBot - INFO - - convert
+2025-02-25 21:19:29,582 - ShardBot - INFO - - stats
+2025-02-25 21:19:29,582 - ShardBot - INFO - - plot
+2025-02-25 21:19:29,582 - ShardBot - INFO - - units
+2025-02-25 21:19:29,582 - ShardBot - INFO - - memberinfo
+2025-02-25 21:19:29,582 - ShardBot - INFO - - serverinfo
+2025-02-25 21:19:29,582 - ShardBot - INFO - - settings
+2025-02-25 21:19:29,582 - ShardBot - INFO - - createinvite
+2025-02-25 21:19:29,582 - ShardBot - INFO - - invites
+2025-02-25 21:19:29,582 - ShardBot - INFO - - deleteinvite
+2025-02-25 21:19:29,582 - ShardBot - INFO - - auditlog
+2025-02-25 21:19:29,582 - ShardBot - INFO - - purge
+2025-02-25 21:19:29,582 - ShardBot - INFO - - pin
+2025-02-25 21:19:29,582 - ShardBot - INFO - - unpin
+2025-02-25 21:19:29,582 - ShardBot - INFO - - move
+2025-02-25 21:19:29,582 - ShardBot - INFO - - search
+2025-02-25 21:19:29,582 - ShardBot - INFO - - history
+2025-02-25 21:19:29,582 - ShardBot - INFO - - createchannel
+2025-02-25 21:19:29,582 - ShardBot - INFO - - deletechannel
+2025-02-25 21:19:29,582 - ShardBot - INFO - - modifychannel
+2025-02-25 21:19:29,582 - ShardBot - INFO - - channels
+2025-02-25 21:19:29,582 - ShardBot - INFO - - channelinfo
+2025-02-25 21:19:29,582 - ShardBot - INFO - - setpermissions
+2025-02-25 21:19:29,582 - ShardBot - INFO - - translate
+2025-02-25 21:19:29,582 - ShardBot - INFO - - languages
+2025-02-25 21:19:29,582 - ShardBot - INFO - ------
