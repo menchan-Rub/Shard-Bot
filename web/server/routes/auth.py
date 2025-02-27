@@ -10,7 +10,7 @@ import httpx
 from passlib.context import CryptContext
 
 from web.server.database.database import get_db
-from web.server.database.models.user import User
+from web.server.models.user import User
 from web.server.config import settings
 from web.server.middleware.auth_middleware import (
     oauth,
@@ -102,16 +102,20 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
         # デフォルトの管理者ユーザーを確認
         user = db.query(User).filter(User.username == form_data.username).first()
         if not user:
-            # 初回ログイン時は管理者ユーザーを作成
-            if form_data.username == "admin" and form_data.password == "admin":
+            # 初回ログイン時は管理者ユーザーを作成（環境変数から設定を取得）
+            admin_username = os.getenv("ADMIN_USERNAME", "admin")
+            admin_password = os.getenv("ADMIN_PASSWORD", "changeme")
+            admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+            
+            if form_data.username == admin_username and form_data.password == admin_password:
                 hashed_password = pwd_context.hash(form_data.password)
                 user = User(
-                    username=form_data.username,
+                    username=admin_username,
                     hashed_password=hashed_password,
-                    email="admin@example.com",
+                    email=admin_email,
                     is_superuser=True,
                     is_active=True,
-                    discord_id="admin"  # ダミーのdiscord_id
+                    discord_id=f"admin_{admin_username}"
                 )
                 db.add(user)
                 db.commit()
@@ -133,7 +137,20 @@ async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = 
 
         # JWTトークンを生成
         access_token = create_access_token(data={"sub": user.username})
-        return {"access_token": access_token, "token_type": "bearer"}
+        return {
+            "status": "success",
+            "data": {
+                "access_token": access_token,
+                "token_type": "bearer",
+                "user": {
+                    "id": user.id,
+                    "username": user.username,
+                    "email": user.email,
+                    "is_superuser": user.is_superuser,
+                    "is_active": user.is_active
+                }
+            }
+        }
     except Exception as e:
         print(f"Login error: {str(e)}")  # デバッグ用
         raise HTTPException(

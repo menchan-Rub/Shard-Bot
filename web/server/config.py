@@ -2,30 +2,34 @@ from pydantic_settings import BaseSettings
 from typing import Optional
 
 class Settings(BaseSettings):
-    # アプリケーション設定
-    APP_NAME: str = "ShardBot API"
-    DEBUG: bool = True
-    API_V1_PREFIX: str = "/api/v1"
+    # Application Settings
+    APP_NAME: str = "Shard Bot API"
+    DEBUG: bool = False
+    API_PREFIX: str = "/api"
+    VERSION: str = "0.1.0"
     
-    # データベース設定
+    # Security
+    SECRET_KEY: str = "your-secret-key-here"
+    ALGORITHM: str = "HS256"
+    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
+    
+    # Discord OAuth2
+    DISCORD_CLIENT_ID: Optional[str] = None
+    DISCORD_CLIENT_SECRET: Optional[str] = None
+    DISCORD_REDIRECT_URI: Optional[str] = None
+    
+    # Database
     POSTGRES_USER: str = "postgres"
     POSTGRES_PASSWORD: str = "postgres"
     POSTGRES_HOST: str = "localhost"
     POSTGRES_PORT: int = 5432
     POSTGRES_DB: str = "shardbot"
-    
-    # JWT設定
-    JWT_SECRET_KEY: str = "your-secret-key"  # 本番環境では必ず変更してください
-    JWT_ALGORITHM: str = "HS256"
-    ACCESS_TOKEN_EXPIRE_MINUTES: int = 30
-    
-    # Discord設定
-    DISCORD_CLIENT_ID: Optional[str] = None
-    DISCORD_CLIENT_SECRET: Optional[str] = None
-    DISCORD_REDIRECT_URI: str = "http://localhost:3000/auth/callback"
+
+    @property
+    def DATABASE_URL(self) -> str:
+        return f"postgresql://{self.POSTGRES_USER}:{self.POSTGRES_PASSWORD}@{self.POSTGRES_HOST}:{self.POSTGRES_PORT}/{self.POSTGRES_DB}"
     
     class Config:
         env_file = ".env"
-        case_sensitive = True
 
 settings = Settings() 

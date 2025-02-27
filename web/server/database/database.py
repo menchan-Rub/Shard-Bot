@@ -1,13 +1,24 @@
-from sqlalchemy import create_engine
-from sqlalchemy.orm import declarative_base, sessionmaker
-import os
+from sqlalchemy import create_engine, MetaData
+from sqlalchemy.ext.declarative import declarative_base
+from sqlalchemy.orm import sessionmaker
+from sqlalchemy.schema import CreateTable
 
-DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:postgres@db:5432/shardbot")
+from web.server.config import settings
 
-engine = create_engine(DATABASE_URL)
+# メタデータインスタンスの作成（テーブルの再定義を許可）
+metadata = MetaData()
+
+# データベースエンジンの作成
+engine = create_engine(settings.DATABASE_URL)
+
+# セッションファクトリの作成
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-Base = declarative_base()
 
+# モデルのベースクラス（テーブルの再定義を許可）
+Base = declarative_base(metadata=metadata)
+Base.metadata.reflect(bind=engine)
+
+# データベースセッションの取得
 def get_db():
     db = SessionLocal()
     try:
@@ -16,4 +27,7 @@ def get_db():
         db.close()
 
 def init_db():
+    # 既存のテーブルを削除
+    Base.metadata.drop_all(bind=engine)
+    # テーブルを作成
     Base.metadata.create_all(bind=engine) 

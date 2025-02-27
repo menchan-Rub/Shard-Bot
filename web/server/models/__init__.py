@@ -10,6 +10,8 @@ from .guild import Guild
 from .warning import Warning
 from .role import Role
 from .channel import Channel
+from .command import Command
+from .message import Message
 
 __all__ = [
     'User',
@@ -19,5 +21,7 @@ __all__ = [
     'Guild',
     'Warning',
     'Role',
-    'Channel'
+    'Channel',
+    'Command',
+    'Message',
 ] 

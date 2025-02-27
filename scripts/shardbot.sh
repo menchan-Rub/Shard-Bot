@@ -247,7 +247,7 @@ manage_client() {
     local action=$1
     case "$action" in
         start)
-            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            local client_pid=$(find_process "node.*react-scripts.*start" "8080")
             if [ -n "$client_pid" ]; then
                 echo -e "${YELLOW}Frontend Serverは既に実行中です (PID: $client_pid)${NC}"
                 return
@@ -258,7 +258,7 @@ manage_client() {
             echo $client_pid > "$CLIENT_PID_FILE"
             ;;
         stop)
-            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            local client_pid=$(find_process "node.*react-scripts.*start" "8080")
             if [ -n "$client_pid" ]; then
                 kill_process "Frontend Server" "$client_pid"
                 rm -f "$CLIENT_PID_FILE"
@@ -271,7 +271,7 @@ manage_client() {
             manage_client start
             ;;
         status)
-            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            local client_pid=$(find_process "node.*react-scripts.*start" "8080")
             if [ -n "$client_pid" ]; then
                 echo -e "${GREEN}Frontend Server: 実行中 (PID: $client_pid)${NC}"
             else
@@ -344,7 +344,7 @@ manage_all() {
             fi
             
             # Frontend状態確認
-            local client_pid=$(find_process "node.*react-scripts.*start" "3000")
+            local client_pid=$(find_process "node.*react-scripts.*start" "8080")
             if [ -n "$client_pid" ]; then
                 echo -e "  ${BOLD}Frontend${NC}    │ ${GREEN}●${NC} 実行中 ${DIM}(PID: $client_pid)${NC}"
             else

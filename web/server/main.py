@@ -19,17 +19,17 @@ from web.server.routes.roles import router as roles_router
 from web.server.routes.channels import router as channels_router
 from web.server.routes.analytics import router as analytics_router
 from web.server.middleware.error_handler import handle_errors
+from web.server.config import settings
 
 app = FastAPI(
-    title="ShardBot Dashboard API",
-    description="ShardBot管理用ダッシュボードのバックエンドAPI",
-    version="1.0.0"
+    title=settings.APP_NAME,
+    version=settings.VERSION,
 )
 
-# CORSミドルウェアの設定
+# CORS設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=["http://localhost:3000"],  # フロントエンドのURL
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -40,17 +40,20 @@ app.middleware("http")(handle_errors)
 
 # ルーターの登録
 app.include_router(auth_router, prefix="/api/auth", tags=["認証"])
-app.include_router(settings_router, prefix="/api/settings", tags=["設定"])
-app.include_router(logs_router, prefix="/api/logs", tags=["ログ"])
-app.include_router(users_router, prefix="/api/users", tags=["ユーザー"])
-app.include_router(roles_router, prefix="/api/roles", tags=["ロール"])
-app.include_router(channels_router, prefix="/api/channels", tags=["チャンネル"])
+app.include_router(settings_router, prefix=settings.API_PREFIX)
+app.include_router(logs_router, prefix=settings.API_PREFIX)
+app.include_router(users_router, prefix=settings.API_PREFIX)
+app.include_router(roles_router, prefix=settings.API_PREFIX)
+app.include_router(channels_router, prefix=settings.API_PREFIX)
 app.include_router(analytics_router, prefix="/api/analytics", tags=["分析"])
 
 @app.get("/")
 async def root():
-    """ルートエンドポイント"""
-    return {"message": "Welcome to ShardBot API"}
+    return {
+        "status": "success",
+        "message": "Welcome to Shard Bot API",
+        "version": settings.VERSION
+    }
 
 @app.get("/health")
 async def health_check():

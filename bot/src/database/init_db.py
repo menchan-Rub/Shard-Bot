@@ -1,11 +1,29 @@
+import os
+import sys
+from pathlib import Path
+
+# プロジェクトルートディレクトリをPythonパスに追加
+project_root = Path(__file__).parent.parent.parent.parent
+sys.path.append(str(project_root))
+
 from sqlalchemy import create_engine
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
-from models import Base
-import os
-from dotenv import load_dotenv
+from web.server.database.database import Base
 import asyncio
 import logging
+from dotenv import load_dotenv
+
+from web.server.models import (
+    User,
+    Settings,
+    AuditLog,
+    SpamLog,
+    Guild,
+    Warning,
+    Role,
+    Channel,
+)
 
 # ロギングの設定
 logging.basicConfig(level=logging.INFO)
@@ -38,5 +56,18 @@ async def main():
     """メイン関数"""
     await init_db()
 
+def init_database():
+    # データベースエンジンの作成
+    engine = create_engine(DATABASE_URL)
+    
+    # テーブルの作成
+    Base.metadata.create_all(bind=engine)
+    
+    # セッションファクトリの作成
+    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+    
+    print("データベースの初期化が完了しました。")
+
 if __name__ == "__main__":
-    asyncio.run(main()) 
+    asyncio.run(main())
+    init_database() 
