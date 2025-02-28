@@ -29,23 +29,38 @@ app = FastAPI(
 # CORS設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],  # フロントエンドのURL
+    allow_origins=["http://localhost:8080", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# デバッグ用のミドルウェア
+@app.middleware("http")
+async def debug_middleware(request, call_next):
+    print(f"\n--- Incoming request ---")
+    print(f"Method: {request.method}")
+    print(f"URL: {request.url}")
+    print(f"Headers: {request.headers}")
+    
+    response = await call_next(request)
+    
+    print(f"\n--- Outgoing response ---")
+    print(f"Status: {response.status_code}")
+    print(f"Headers: {response.headers}")
+    return response
 
 # エラーハンドラーの設定
 app.middleware("http")(handle_errors)
 
 # ルーターの登録
 app.include_router(auth_router, prefix="/api/auth", tags=["認証"])
-app.include_router(settings_router, prefix=settings.API_PREFIX)
-app.include_router(logs_router, prefix=settings.API_PREFIX)
-app.include_router(users_router, prefix=settings.API_PREFIX)
-app.include_router(roles_router, prefix=settings.API_PREFIX)
-app.include_router(channels_router, prefix=settings.API_PREFIX)
-app.include_router(analytics_router, prefix="/api/analytics", tags=["分析"])
+app.include_router(settings_router, prefix="/api", tags=["設定"])
+app.include_router(logs_router, prefix="/api", tags=["ログ"])
+app.include_router(users_router, prefix="/api", tags=["ユーザー"])
+app.include_router(roles_router, prefix="/api", tags=["ロール"])
+app.include_router(channels_router, prefix="/api", tags=["チャンネル"])
+app.include_router(analytics_router, prefix="/api", tags=["分析"])
 
 @app.get("/")
 async def root():

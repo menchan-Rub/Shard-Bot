@@ -26,42 +26,41 @@ export default function Login() {
     setIsLoading(true)
 
     try {
-      console.log('Attempting login to:', 'http://localhost:8080/api/auth/login')
+      console.log('Attempting login...')
       
-      const response = await fetch('http://localhost:8080/api/auth/login', {
+      const formData = new FormData()
+      formData.append('username', username)
+      formData.append('password', password)
+      formData.append('grant_type', 'password')
+      
+      const response = await fetch('/api/auth/login', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/x-www-form-urlencoded',
-          'Accept': 'application/json',
-        },
-        body: new URLSearchParams({
-          username,
-          password,
-        }),
+        body: formData,
       })
 
       console.log('Response status:', response.status)
-      const contentType = response.headers.get('content-type')
-      console.log('Content type:', contentType)
-
+      
       if (!response.ok) {
         const errorText = await response.text()
         console.error('Error response:', errorText)
-        throw new Error(`Login failed: ${response.status} ${response.statusText}`)
+        throw new Error(errorText)
       }
 
       const data = await response.json()
-      console.log('Login successful:', data)
-      
-      // ログイン成功時の処理
-      localStorage.setItem('token', data.data.access_token)
-      toast({
-        title: 'ログイン成功',
-        status: 'success',
-        duration: 3000,
-        isClosable: true,
-      })
-      router.push('/dashboard')
+      console.log('Login response:', data)
+
+      if (data.status === 'success' && data.data.access_token) {
+        localStorage.setItem('token', data.data.access_token)
+        toast({
+          title: 'ログイン成功',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        })
+        router.push('/dashboard')
+      } else {
+        throw new Error('無効なレスポンス形式です')
+      }
     } catch (error) {
       console.error('Login error:', error)
       toast({

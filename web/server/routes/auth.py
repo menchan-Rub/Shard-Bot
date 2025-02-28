@@ -99,60 +99,58 @@ async def discord_callback(code: str, db: Session = Depends(get_db)):
 async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
     """ユーザー名とパスワードでログイン"""
     try:
-        # デフォルトの管理者ユーザーを確認
-        user = db.query(User).filter(User.username == form_data.username).first()
-        if not user:
-            # 初回ログイン時は管理者ユーザーを作成（環境変数から設定を取得）
-            admin_username = os.getenv("ADMIN_USERNAME", "admin")
-            admin_password = os.getenv("ADMIN_PASSWORD", "changeme")
-            admin_email = os.getenv("ADMIN_EMAIL", "admin@example.com")
+        print(f"Login attempt for username: {form_data.username}")
+        
+        # デバッグ用の出力
+        print("Request received:", {
+            "username": form_data.username,
+            "password": "***"
+        })
+        
+        # 管理者アカウントのチェック
+        if form_data.username == "admin" and form_data.password == "admin":
+            user = db.query(User).filter(User.username == "admin").first()
             
-            if form_data.username == admin_username and form_data.password == admin_password:
-                hashed_password = pwd_context.hash(form_data.password)
+            if not user:
                 user = User(
-                    username=admin_username,
-                    hashed_password=hashed_password,
-                    email=admin_email,
-                    is_superuser=True,
-                    is_active=True,
-                    discord_id=f"admin_{admin_username}"
+                    username="admin",
+                    discord_id="admin",
+                    is_admin=True
                 )
                 db.add(user)
                 db.commit()
                 db.refresh(user)
-            else:
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="ユーザー名またはパスワードが間違っています",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-        else:
-            # 既存ユーザーの場合はパスワードを検証
-            if not pwd_context.verify(form_data.password, user.hashed_password):
-                raise HTTPException(
-                    status_code=status.HTTP_401_UNAUTHORIZED,
-                    detail="ユーザー名またはパスワードが間違っています",
-                    headers={"WWW-Authenticate": "Bearer"},
-                )
-
-        # JWTトークンを生成
-        access_token = create_access_token(data={"sub": user.username})
-        return {
-            "status": "success",
-            "data": {
-                "access_token": access_token,
-                "token_type": "bearer",
-                "user": {
-                    "id": user.id,
-                    "username": user.username,
-                    "email": user.email,
-                    "is_superuser": user.is_superuser,
-                    "is_active": user.is_active
+            
+            # JWTトークンを生成
+            access_token = create_access_token(data={"sub": user.discord_id})
+            
+            # デバッグ用の出力
+            print("Login successful, returning token")
+            
+            return {
+                "status": "success",
+                "data": {
+                    "access_token": access_token,
+                    "token_type": "bearer",
+                    "user": {
+                        "id": user.id,
+                        "username": user.username,
+                        "is_admin": user.is_admin
+                    }
                 }
             }
-        }
+        
+        # デバッグ用の出力
+        print("Invalid credentials")
+        
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="ユーザー名またはパスワードが間違っています",
+            headers={"WWW-Authenticate": "Bearer"},
+        )
+        
     except Exception as e:
-        print(f"Login error: {str(e)}")  # デバッグ用
+        print(f"Login error: {str(e)}")
         raise HTTPException(
             status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
             detail=str(e)
