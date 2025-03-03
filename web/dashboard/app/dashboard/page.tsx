@@ -1,102 +1,176 @@
 'use client'
 
+import { useEffect, useState } from 'react'
+import { useRouter } from 'next/navigation'
 import {
   Box,
-  SimpleGrid,
+  Container,
+  Heading,
+  Text,
+  VStack,
+  HStack,
   Stat,
   StatLabel,
   StatNumber,
   StatHelpText,
+  SimpleGrid,
   Card,
+  CardHeader,
   CardBody,
-  Heading,
+  Button,
+  useToast,
 } from '@chakra-ui/react'
-import { Line } from 'react-chartjs-2'
-import {
-  Chart as ChartJS,
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend,
-} from 'chart.js'
 
-ChartJS.register(
-  CategoryScale,
-  LinearScale,
-  PointElement,
-  LineElement,
-  Title,
-  Tooltip,
-  Legend
-)
+export default function Dashboard() {
+  const [user, setUser] = useState<any>(null)
+  const [isLoading, setIsLoading] = useState(true)
+  const router = useRouter()
+  const toast = useToast()
 
-const options = {
-  responsive: true,
-  plugins: {
-    legend: {
-      position: 'top' as const,
-    },
-    title: {
-      display: true,
-      text: 'Bot Usage Statistics',
-    },
-  },
-}
-
-const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July']
-const data = {
-  labels,
-  datasets: [
-    {
-      label: 'Commands Used',
-      data: [65, 59, 80, 81, 56, 55, 40],
-      borderColor: 'rgb(75, 192, 192)',
-      backgroundColor: 'rgba(75, 192, 192, 0.5)',
-    },
-  ],
-}
-
-export default function DashboardPage() {
+  useEffect(() => {
+    const checkAuth = async () => {
+      try {
+        const token = localStorage.getItem('token')
+        
+        if (!token) {
+          router.push('/auth/login')
+          return
+        }
+        
+        const response = await fetch('/api/auth/session', {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        })
+        
+        if (!response.ok) {
+          throw new Error('認証に失敗しました')
+        }
+        
+        const data = await response.json()
+        
+        if (data.status === 'success' && data.data?.user) {
+          setUser(data.data.user)
+        } else {
+          throw new Error('ユーザー情報の取得に失敗しました')
+        }
+      } catch (error) {
+        console.error('認証エラー:', error)
+        localStorage.removeItem('token')
+        toast({
+          title: '認証エラー',
+          description: '再度ログインしてください',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        })
+        router.push('/auth/login')
+      } finally {
+        setIsLoading(false)
+      }
+    }
+    
+    checkAuth()
+  }, [router, toast])
+  
+  if (isLoading) {
+    return (
+      <Container maxW="container.xl" py={10}>
+        <Text>読み込み中...</Text>
+      </Container>
+    )
+  }
+  
   return (
-    <Box>
-      <Heading mb={6}>Overview</Heading>
-      <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6} mb={8}>
-        <Card>
-          <CardBody>
-            <Stat>
-              <StatLabel>Total Servers</StatLabel>
-              <StatNumber>100</StatNumber>
-              <StatHelpText>Active Discord Servers</StatHelpText>
-            </Stat>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            <Stat>
-              <StatLabel>Total Users</StatLabel>
-              <StatNumber>5,000</StatNumber>
-              <StatHelpText>Across all servers</StatHelpText>
-            </Stat>
-          </CardBody>
-        </Card>
-        <Card>
-          <CardBody>
-            <Stat>
-              <StatLabel>Commands Used</StatLabel>
-              <StatNumber>25,000</StatNumber>
-              <StatHelpText>Last 30 days</StatHelpText>
-            </Stat>
-          </CardBody>
-        </Card>
-      </SimpleGrid>
-      <Card>
-        <CardBody>
-          <Line options={options} data={data} />
-        </CardBody>
-      </Card>
-    </Box>
+    <Container maxW="container.xl" py={10}>
+      <VStack spacing={8} align="stretch">
+        <HStack justify="space-between">
+          <Box>
+            <Heading size="lg">ダッシュボード</Heading>
+            <Text>ようこそ、{user?.username || 'ユーザー'}さん</Text>
+          </Box>
+          <Button
+            onClick={() => {
+              localStorage.removeItem('token')
+              router.push('/auth/login')
+            }}
+          >
+            ログアウト
+          </Button>
+        </HStack>
+        
+        <SimpleGrid columns={{ base: 1, md: 3 }} spacing={6}>
+          <Card>
+            <CardHeader>
+              <Heading size="md">サーバー数</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stat>
+                <StatNumber>0</StatNumber>
+                <StatHelpText>接続済みサーバー</StatHelpText>
+              </Stat>
+            </CardBody>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <Heading size="md">ユーザー数</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stat>
+                <StatNumber>0</StatNumber>
+                <StatHelpText>総ユーザー数</StatHelpText>
+              </Stat>
+            </CardBody>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <Heading size="md">コマンド実行数</Heading>
+            </CardHeader>
+            <CardBody>
+              <Stat>
+                <StatNumber>0</StatNumber>
+                <StatHelpText>過去24時間</StatHelpText>
+              </Stat>
+            </CardBody>
+          </Card>
+        </SimpleGrid>
+        
+        <SimpleGrid columns={{ base: 1, md: 2 }} spacing={6}>
+          <Card>
+            <CardHeader>
+              <Heading size="md">最近のアクティビティ</Heading>
+            </CardHeader>
+            <CardBody>
+              <Text>データがありません</Text>
+            </CardBody>
+          </Card>
+          
+          <Card>
+            <CardHeader>
+              <Heading size="md">システム状態</Heading>
+            </CardHeader>
+            <CardBody>
+              <VStack align="stretch">
+                <HStack justify="space-between">
+                  <Text>API サーバー</Text>
+                  <Text color="green.500">オンライン</Text>
+                </HStack>
+                <HStack justify="space-between">
+                  <Text>Bot</Text>
+                  <Text color="green.500">オンライン</Text>
+                </HStack>
+                <HStack justify="space-between">
+                  <Text>データベース</Text>
+                  <Text color="green.500">オンライン</Text>
+                </HStack>
+              </VStack>
+            </CardBody>
+          </Card>
+        </SimpleGrid>
+      </VStack>
+    </Container>
   )
 } 

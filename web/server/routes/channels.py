@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from web.server.middleware.auth_middleware import get_current_user
+from web.server.routes.auth import get_current_user
 
 router = APIRouter(prefix="/channels", tags=["channels"])
 
@@ -10,7 +10,7 @@ async def get_channels(current_user: dict = Depends(get_current_user)):
         "data": {
             "channels": [
                 {
-                    "id": "123456789",
+                    "id": "1",
                     "name": "general",
                     "type": "text",
                     "position": 0

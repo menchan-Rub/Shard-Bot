@@ -11,6 +11,8 @@ import {
   VStack,
   Text,
   useToast,
+  Alert,
+  AlertIcon,
 } from '@chakra-ui/react'
 import { useRouter } from 'next/navigation'
 
@@ -18,54 +20,81 @@ export default function Login() {
   const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [isLoading, setIsLoading] = useState(false)
+  const [error, setError] = useState('')
   const router = useRouter()
   const toast = useToast()
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsLoading(true)
+    setError('')
 
     try {
-      console.log('Attempting login...')
+      console.log('ログイン試行中...')
+      console.log('リクエスト先URL:', '/api/auth/login')
       
-      const formData = new FormData()
+      // Next.jsのAPIルートを使用
+      const formData = new URLSearchParams()
       formData.append('username', username)
       formData.append('password', password)
-      formData.append('grant_type', 'password')
+      
+      console.log('送信データ:', {
+        username,
+        password: '***'
+      })
       
       const response = await fetch('/api/auth/login', {
         method: 'POST',
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+          'Accept': 'application/json',
+        },
         body: formData,
       })
 
-      console.log('Response status:', response.status)
+      console.log('レスポンスステータス:', response.status)
       
-      if (!response.ok) {
-        const errorText = await response.text()
-        console.error('Error response:', errorText)
-        throw new Error(errorText)
+      // レスポンスのテキストを取得
+      const responseText = await response.text()
+      console.log('レスポンス本文:', responseText)
+      
+      // JSONとして解析
+      let data
+      try {
+        data = JSON.parse(responseText)
+        console.log('ログインレスポンス:', data)
+      } catch (e) {
+        console.error('JSONパースエラー:', e)
+        throw new Error('レスポンスの解析に失敗しました')
       }
 
-      const data = await response.json()
-      console.log('Login response:', data)
-
-      if (data.status === 'success' && data.data.access_token) {
-        localStorage.setItem('token', data.data.access_token)
+      if (response.ok && data.access_token) {
+        // トークンを保存
+        localStorage.setItem('token', data.access_token)
+        // ユーザー情報を保存
+        localStorage.setItem('user', JSON.stringify(data.user))
+        
         toast({
           title: 'ログイン成功',
           status: 'success',
           duration: 3000,
           isClosable: true,
         })
+        
         router.push('/dashboard')
+      } else if (response.status === 401) {
+        throw new Error('ユーザー名またはパスワードが間違っています')
+      } else if (data.detail === 'Not Found') {
+        throw new Error('APIエンドポイントが見つかりません')
       } else {
-        throw new Error('無効なレスポンス形式です')
+        throw new Error(data.detail || 'ログインに失敗しました')
       }
     } catch (error) {
-      console.error('Login error:', error)
+      console.error('ログインエラー:', error)
+      setError(error instanceof Error ? error.message : 'ログインに失敗しました')
       toast({
         title: 'ログイン失敗',
-        description: error instanceof Error ? error.message : 'ユーザー名またはパスワードが間違っています',
+        description: error instanceof Error ? error.message : 'ログインに失敗しました',
         status: 'error',
         duration: 3000,
         isClosable: true,
@@ -81,6 +110,14 @@ export default function Login() {
         <Text fontSize="2xl" fontWeight="bold">
           管理者ログイン
         </Text>
+        
+        {error && (
+          <Alert status="error">
+            <AlertIcon />
+            {error}
+          </Alert>
+        )}
+        
         <Box w="100%" p={8} borderWidth={1} borderRadius="lg">
           <form onSubmit={handleLogin}>
             <VStack spacing={4}>
@@ -115,7 +152,7 @@ export default function Login() {
           </form>
         </Box>
         <Text fontSize="sm" color="gray.500">
-          API URL: {process.env.NEXT_PUBLIC_API_URL}
+          API URL: /api/auth/login → http://localhost:8000/auth/login
         </Text>
       </VStack>
     </Container>

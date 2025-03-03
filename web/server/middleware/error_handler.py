@@ -8,12 +8,16 @@ async def handle_errors(request: Request, call_next):
     except Exception as e:
         error_response = {
             "status": "error",
-            "message": str(e),
-            "code": getattr(e, "code", status.HTTP_500_INTERNAL_SERVER_ERROR)
+            "detail": str(e),
         }
         
+        # ステータスコードの設定
+        status_code = getattr(e, "status_code", status.HTTP_500_INTERNAL_SERVER_ERROR)
+        if not isinstance(status_code, int):
+            status_code = status.HTTP_500_INTERNAL_SERVER_ERROR
+        
         return JSONResponse(
-            status_code=error_response["code"],
+            status_code=status_code,
             content=error_response
         )
 
@@ -21,10 +25,10 @@ class APIError(Exception):
     def __init__(
         self,
         message: str,
-        code: int = status.HTTP_500_INTERNAL_SERVER_ERROR,
+        status_code: int = status.HTTP_500_INTERNAL_SERVER_ERROR,
         data: Union[Dict[str, Any], None] = None
     ):
         self.message = message
-        self.code = code
+        self.status_code = status_code
         self.data = data
         super().__init__(message) 

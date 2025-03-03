@@ -8,13 +8,13 @@ from datetime import datetime, timedelta
 import os
 import httpx
 from passlib.context import CryptContext
+import bcrypt
 
 from web.server.database.database import get_db
 from web.server.models.user import User
 from web.server.config import settings
 from web.server.middleware.auth_middleware import (
     oauth,
-    get_current_user,
     create_access_token,
     verify_access_token,
 )
@@ -25,13 +25,81 @@ router = APIRouter(
     tags=["auth"],
 )
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+# パスワードハッシュ化のための設定
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
-# JWTの設定
-SECRET_KEY = os.getenv("JWT_SECRET_KEY")
-ALGORITHM = "HS256"
-ACCESS_TOKEN_EXPIRE_MINUTES = 30
+# OAuth2のスキーマ設定
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="auth/login")
+
+async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
+    try:
+        payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
+        user_id = payload.get("user_id")
+        
+        if user_id is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="認証トークンが無効です"
+            )
+
+        user = db.query(User).filter(User.id == user_id).first()
+        
+        if user is None:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="ユーザーが見つかりません"
+            )
+
+        return user
+
+    except JWTError as e:
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="認証トークンが無効です"
+        )
+    except Exception as e:
+        raise HTTPException(
+            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
+            detail="サーバーエラーが発生しました"
+        )
+
+def create_access_token(data: dict):
+    to_encode = data.copy()
+    expire = datetime.utcnow() + timedelta(minutes=settings.ACCESS_TOKEN_EXPIRE_MINUTES)
+    to_encode.update({"exp": expire})
+    encoded_jwt = jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.ALGORITHM)
+    return encoded_jwt
+
+def verify_password(plain_password: str, hashed_password: str):
+    return bcrypt.checkpw(plain_password.encode(), hashed_password.encode())
+
+def get_password_hash(password: str):
+    return bcrypt.hashpw(password.encode(), bcrypt.gensalt()).decode()
+
+@router.get("/session")
+async def get_session(current_user: User = Depends(get_current_user)):
+    """現在のセッション情報を取得"""
+    return {
+        "status": "success",
+        "data": {
+            "user": {
+                "id": current_user.id,
+                "username": current_user.username,
+                "is_admin": current_user.is_admin
+            }
+        }
+    }
+
+@router.get("/session-status")
+async def get_session_status():
+    """セッションステータスを取得（認証なし）"""
+    return {
+        "status": "success",
+        "data": {
+            "authenticated": False,
+            "message": "認証されていません"
+        }
+    }
 
 @router.post("/discord/url")
 async def get_discord_oauth_url():
@@ -96,94 +164,40 @@ async def discord_callback(code: str, db: Session = Depends(get_db)):
         )
 
 @router.post("/login")
-async def login(form_data: OAuth2PasswordRequestForm = Depends(), db: Session = Depends(get_db)):
-    """ユーザー名とパスワードでログイン"""
+async def login(
+    username: str = Form(...),
+    password: str = Form(...),
+    db: Session = Depends(get_db)
+):
+    """ユーザーログイン"""
     try:
-        print(f"Login attempt for username: {form_data.username}")
+        user = db.query(User).filter(User.username == username).first()
+        if not user:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="ユーザー名またはパスワードが間違っています"
+            )
         
-        # デバッグ用の出力
-        print("Request received:", {
-            "username": form_data.username,
-            "password": "***"
-        })
+        if not verify_password(password, user.password):
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="ユーザー名またはパスワードが間違っています"
+            )
         
-        # 管理者アカウントのチェック
-        if form_data.username == "admin" and form_data.password == "admin":
-            user = db.query(User).filter(User.username == "admin").first()
-            
-            if not user:
-                user = User(
-                    username="admin",
-                    discord_id="admin",
-                    is_admin=True
-                )
-                db.add(user)
-                db.commit()
-                db.refresh(user)
-            
-            # JWTトークンを生成
-            access_token = create_access_token(data={"sub": user.discord_id})
-            
-            # デバッグ用の出力
-            print("Login successful, returning token")
-            
-            return {
-                "status": "success",
-                "data": {
-                    "access_token": access_token,
-                    "token_type": "bearer",
-                    "user": {
-                        "id": user.id,
-                        "username": user.username,
-                        "is_admin": user.is_admin
-                    }
-                }
-            }
-        
-        # デバッグ用の出力
-        print("Invalid credentials")
-        
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail="ユーザー名またはパスワードが間違っています",
-            headers={"WWW-Authenticate": "Bearer"},
+        # アクセストークンの生成
+        access_token = create_access_token(
+            data={"user_id": user.id}  # usernameではなくidを使用
         )
+        
+        return {
+            "access_token": access_token,
+            "token_type": "bearer",
+            "user": {
+                "id": user.id,
+                "username": user.username,
+                "is_admin": user.is_admin
+            }
+        }
         
     except Exception as e:
-        print(f"Login error: {str(e)}")
-        raise HTTPException(
-            status_code=status.HTTP_500_INTERNAL_SERVER_ERROR,
-            detail=str(e)
-        )
-
-def create_access_token(data: dict, expires_delta: Optional[timedelta] = None):
-    """JWTトークンを生成"""
-    to_encode = data.copy()
-    if expires_delta:
-        expire = datetime.utcnow() + expires_delta
-    else:
-        expire = datetime.utcnow() + timedelta(minutes=ACCESS_TOKEN_EXPIRE_MINUTES)
-    to_encode.update({"exp": expire})
-    encoded_jwt = jwt.encode(to_encode, SECRET_KEY, algorithm=ALGORITHM)
-    return encoded_jwt
-
-async def get_current_user(token: str = Depends(oauth2_scheme), db: Session = Depends(get_db)):
-    """現在のユーザーを取得"""
-    credentials_exception = HTTPException(
-        status_code=status.HTTP_401_UNAUTHORIZED,
-        detail="認証に失敗しました",
-        headers={"WWW-Authenticate": "Bearer"},
-    )
-    try:
-        payload = jwt.decode(token, SECRET_KEY, algorithms=[ALGORITHM])
-        discord_id: str = payload.get("sub")
-        if discord_id is None:
-            raise credentials_exception
-        token_data = TokenData(discord_id=discord_id)
-    except JWTError:
-        raise credentials_exception
-        
-    user = db.query(User).filter(User.discord_id == token_data.discord_id).first()
-    if user is None:
-        raise credentials_exception
-    return user 
+        raise 

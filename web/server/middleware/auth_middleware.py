@@ -6,7 +6,6 @@ from typing import Optional
 import aiohttp
 
 from web.server.config import settings
-from web.server.middleware.error_handler import APIError
 
 security = HTTPBearer()
 
@@ -27,9 +26,9 @@ async def oauth(code: str) -> dict:
         }
         async with session.post(DISCORD_TOKEN_URL, data=data) as response:
             if response.status != 200:
-                raise APIError(
-                    message="Failed to get Discord access token",
-                    code=status.HTTP_401_UNAUTHORIZED
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Failed to get Discord access token"
                 )
             token_data = await response.json()
 
@@ -37,9 +36,9 @@ async def oauth(code: str) -> dict:
         headers = {'Authorization': f"Bearer {token_data['access_token']}"}
         async with session.get(DISCORD_USER_URL, headers=headers) as response:
             if response.status != 200:
-                raise APIError(
-                    message="Failed to get Discord user info",
-                    code=status.HTTP_401_UNAUTHORIZED
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Failed to get Discord user info"
                 )
             user_data = await response.json()
 
@@ -56,9 +55,9 @@ async def verify_access_token(token: str) -> dict:
         headers = {'Authorization': f"Bearer {token}"}
         async with session.get(DISCORD_USER_URL, headers=headers) as response:
             if response.status != 200:
-                raise APIError(
-                    message="Invalid Discord access token",
-                    code=status.HTTP_401_UNAUTHORIZED
+                raise HTTPException(
+                    status_code=status.HTTP_401_UNAUTHORIZED,
+                    detail="Invalid Discord access token"
                 )
             user_data = await response.json()
             return user_data
@@ -78,12 +77,7 @@ async def verify_token(token: str) -> dict:
         payload = jwt.decode(token, settings.SECRET_KEY, algorithms=[settings.ALGORITHM])
         return payload
     except JWTError:
-        raise APIError(
-            message="Could not validate credentials",
-            code=status.HTTP_401_UNAUTHORIZED
-        )
-
-async def get_current_user(request: Request, credentials: HTTPAuthorizationCredentials = security) -> dict:
-    token = credentials.credentials
-    payload = await verify_token(token)
-    return payload 
+        raise HTTPException(
+            status_code=status.HTTP_401_UNAUTHORIZED,
+            detail="Could not validate credentials"
+        ) 

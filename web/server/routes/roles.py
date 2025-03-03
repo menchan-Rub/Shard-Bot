@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from web.server.middleware.auth_middleware import get_current_user
+from web.server.routes.auth import get_current_user
 
 router = APIRouter(prefix="/roles", tags=["roles"])
 
@@ -10,10 +10,9 @@ async def get_roles(current_user: dict = Depends(get_current_user)):
         "data": {
             "roles": [
                 {
-                    "id": "123456789",
+                    "id": "1",
                     "name": "Admin",
-                    "color": "#FF0000",
-                    "permissions": ["ADMINISTRATOR"]
+                    "permissions": ["read", "write", "delete"]
                 }
             ]
         }

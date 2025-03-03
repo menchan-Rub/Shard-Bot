@@ -1,5 +1,5 @@
 from fastapi import APIRouter, Depends
-from web.server.middleware.auth_middleware import get_current_user
+from web.server.routes.auth import get_current_user
 
 router = APIRouter(prefix="/logs", tags=["logs"])
 
