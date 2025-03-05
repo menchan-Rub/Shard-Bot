@@ -1,3 +1,4 @@
+import os
 import sys
 from pathlib import Path
 
@@ -8,9 +9,10 @@ sys.path.append(str(project_root))
 import bcrypt
 from sqlalchemy.orm import Session
 
-from web.server.database.database import engine, Base, get_db
+from web.server.database.database import engine, Base, get_db, init_db
 from web.server.models.user import User
 from web.server.models.settings import Settings
+from web.server.models import *
 
 def init_db():
     print("データベースを初期化しています...")
@@ -50,5 +52,11 @@ def init_db():
     finally:
         db.close()
 
+def main():
+    """データベースを初期化し、必要なテーブルを作成します"""
+    print("データベースを初期化しています...")
+    init_db()
+    print("データベースの初期化が完了しました。")
+
 if __name__ == "__main__":
-    init_db() 
+    main() 

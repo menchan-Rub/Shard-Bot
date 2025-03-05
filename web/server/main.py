@@ -17,6 +17,8 @@ from web.server.routes.logs import router as logs_router
 from web.server.routes.users import router as users_router
 from web.server.routes.roles import router as roles_router
 from web.server.routes.channels import router as channels_router
+from web.server.routes.analytics import router as analytics_router
+from web.server.routes.guilds import router as guilds_router
 from web.server.middleware.error_handler import handle_errors
 from web.server.config import settings
 
@@ -29,7 +31,7 @@ app = FastAPI(
 # CORS設定
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080"],
+    allow_origins=["http://localhost:8080", "http://localhost:3000"],
     allow_credentials=True,
     allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
     allow_headers=["*"],
@@ -62,6 +64,8 @@ app.include_router(logs_router)
 app.include_router(users_router)
 app.include_router(roles_router)
 app.include_router(channels_router)
+app.include_router(analytics_router)
+app.include_router(guilds_router)
 
 @app.get("/")
 async def root():

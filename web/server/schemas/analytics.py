@@ -6,7 +6,9 @@ class StatsOverview(BaseModel):
     total_servers: int
     total_users: int
     total_commands: int
-    active_users: int
+    commands_today: int
+    new_users_today: int
+    active_servers: int
 
     class Config:
         from_attributes = True
@@ -16,10 +18,9 @@ class TimeSeriesData(BaseModel):
     value: int
 
 class AnalyticsData(BaseModel):
-    command_usage: List[TimeSeriesData]
-    user_growth: List[TimeSeriesData]
-    server_growth: List[TimeSeriesData]
-    popular_commands: Dict[str, int]
+    date: str
+    commands: int
+    users: int
 
     class Config:
         from_attributes = True 

@@ -24,7 +24,15 @@ export default function DashboardLayout({
         
         if (!token) {
           console.error('認証トークンがありません')
-          throw new Error('認証トークンがありません')
+          toast({
+            title: '認証エラー',
+            description: 'ログインが必要です',
+            status: 'error',
+            duration: 5000,
+            isClosable: true,
+          })
+          router.push('/auth/login')
+          return
         }
 
         // セッションの検証
@@ -32,57 +40,42 @@ export default function DashboardLayout({
         const response = await fetch('/api/auth/session', {
           headers: {
             'Authorization': `Bearer ${token}`,
+            'Accept': 'application/json',
           },
         })
         
         console.log('レスポンスステータス:', response.status)
-        const responseText = await response.text()
-        console.log('レスポンス本文:', responseText)
-
-        let data
-        try {
-          data = JSON.parse(responseText)
-          console.log('パース済みレスポンス:', data)
-        } catch (e) {
-          console.error('JSONパースエラー:', e)
-          throw new Error('レスポンスの解析に失敗しました')
-        }
-
+        
         if (!response.ok) {
-          console.error('セッション検証エラー:', data)
-          throw new Error(data.detail || 'セッションが無効です')
+          throw new Error('セッションが無効です')
         }
+
+        const data = await response.json()
+        console.log('パース済みレスポンス:', data)
 
         if (data.status !== 'success' || !data.data?.user) {
-          console.error('ユーザー情報が取得できません:', data)
-          throw new Error('ユーザー情報が取得できません')
+          throw new Error('セッション検証に失敗しました')
         }
 
-        console.log('セッション検証成功:', data.data.user)
+        console.log('セッション検証成功:', data.data?.user)
         console.log('=== セッション検証完了 ===')
         setIsLoading(false)
       } catch (error) {
         console.error('認証エラー詳細:', error)
-        if (error instanceof Error) {
-          console.error('エラーメッセージ:', error.message)
-          console.error('エラースタック:', error.stack)
-        }
+        
+        // トークンを削除
+        localStorage.removeItem('token')
+        localStorage.removeItem('user')
         
         // エラーメッセージを表示
         toast({
           title: '認証エラー',
-          description: error instanceof Error ? error.message : '認証に失敗しました',
+          description: error instanceof Error ? error.message : '認証に失敗しました。再度ログインしてください。',
           status: 'error',
           duration: 5000,
           isClosable: true,
         })
-
-        // 3秒待ってからリダイレクト
-        console.log('3秒後にログインページにリダイレクトします...')
-        await new Promise(resolve => setTimeout(resolve, 3000))
         
-        localStorage.removeItem('token')
-        localStorage.removeItem('user')
         router.push('/auth/login')
       }
     }
