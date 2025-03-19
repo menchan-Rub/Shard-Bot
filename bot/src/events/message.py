@@ -6,21 +6,58 @@ from datetime import datetime, timedelta
 from collections import defaultdict
 from typing import Dict, List, Tuple, Optional, Set
 import re
+import time
 
-from modules.moderation.spam_detection import SpamDetector
-from database.database_connection import get_db
-from database.database_operations import DatabaseOperations
-from modules.logging.message_logger import MessageLogger
-from modules.moderation.auto_mod import AutoModerator
+# モジュールのインポートエラーを処理
+try:
+    from modules.moderation.spam_detection import SpamDetector
+    spam_detector_available = True
+except ImportError:
+    spam_detector_available = False
+
+try:
+    from database.database_connection import get_db
+    from database.database_operations import DatabaseOperations
+    database_available = True
+except ImportError:
+    database_available = False
+
+try:
+    from modules.logging.message_logger import MessageLogger
+    logger_available = True
+except ImportError:
+    logger_available = False
+
+try:
+    from modules.moderation.auto_mod import AutoModerator
+    auto_mod_available = True
+except ImportError:
+    auto_mod_available = False
 
 logger = logging.getLogger('events.message')
 
 class MessageEvents(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot
-        self.spam_detector = SpamDetector(bot)
-        self.auto_moderator = AutoModerator(bot)
-        self.message_logger = MessageLogger(bot)
+        
+        # 利用可能な場合のみインスタンス化
+        if spam_detector_available:
+            self.spam_detector = SpamDetector(bot)
+        else:
+            self.spam_detector = None
+            logger.warning("SpamDetectorモジュールが利用できないため、スパム検出は無効化されます。")
+            
+        if auto_mod_available:
+            self.auto_moderator = AutoModerator(bot)
+        else:
+            self.auto_moderator = None
+            logger.warning("AutoModeratorモジュールが利用できないため、自動モデレーションは無効化されます。")
+            
+        if logger_available:
+            self.message_logger = MessageLogger(bot)
+        else:
+            self.message_logger = None
+            logger.warning("MessageLoggerモジュールが利用できないため、メッセージログ記録は無効化されます。")
         
         # メッセージ履歴の追跡
         self.message_history: Dict[int, Dict[int, List[datetime]]] = defaultdict(lambda: defaultdict(list))
@@ -28,6 +65,18 @@ class MessageEvents(commands.Cog):
         
         # クリーンアップタスクを開始
         self.bot.loop.create_task(self.cleanup_history())
+        self.ready = asyncio.Event()
+        self.bot.loop.create_task(self._setup())
+
+    async def _setup(self):
+        """初期化処理"""
+        try:
+            await self.bot.wait_until_ready()
+            self.ready.set()
+            logger.info("Message events initialized")
+        except Exception as e:
+            logger.error(f"Error in message events setup: {e}")
+            self.ready.set()
 
     async def cleanup_history(self):
         """古いメッセージ履歴を定期的にクリーンアップ"""
@@ -124,6 +173,8 @@ class MessageEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_message(self, message: discord.Message):
         """メッセージ送信イベントのハンドラ"""
+        await self.ready.wait()
+        
         try:
             # BOTのメッセージは無視
             if message.author.bot:
@@ -133,23 +184,31 @@ class MessageEvents(commands.Cog):
             if not message.guild:
                 return
 
-            # ギルド設定を取得
-            async for session in get_db():
-                db = DatabaseOperations(session)
-                guild_data = await db.get_guild(message.guild.id)
-                
-                if not guild_data:
-                    return
-                    
-                # スパム対策が無効な場合はスキップ
-                if not guild_data.spam_protection:
-                    return
+            # データベースが利用可能な場合のみギルド設定を取得
+            if database_available:
+                try:
+                    async for session in get_db():
+                        db = DatabaseOperations(session)
+                        guild_data = await db.get_guild(message.guild.id)
+                        
+                        if not guild_data:
+                            return
+                            
+                        # スパム対策が無効な場合はスキップ
+                        if not guild_data.spam_protection:
+                            return
+                except Exception as e:
+                    logger.error(f"データベース操作中にエラーが発生しました: {e}")
 
-            # スパムチェック
-            is_spam, detection_type, action = await self.spam_detector.check_message(message)
-            if is_spam:
-                await self.spam_detector.take_action(message, detection_type, action)
-                return
+            # スパム検出が利用可能な場合のみスパムチェック
+            if spam_detector_available and self.spam_detector:
+                try:
+                    is_spam, detection_type, action = await self.spam_detector.check_message(message)
+                    if is_spam:
+                        await self.spam_detector.take_action(message, detection_type, action)
+                        return
+                except Exception as e:
+                    logger.error(f"スパム検出中にエラーが発生しました: {e}")
 
             # メンションスパムチェック
             is_mention_spam, mention_reason = await self.check_mention_spam(message)
@@ -171,14 +230,22 @@ class MessageEvents(commands.Cog):
                 )
                 return
 
-            # 自動モデレーション
-            violation = await self.auto_moderator.check_content(message)
-            if violation:
-                await self.auto_moderator.handle_violation(message, violation)
-                return
+            # 自動モデレーションが利用可能な場合のみ実行
+            if auto_mod_available and self.auto_moderator:
+                try:
+                    violation = await self.auto_moderator.check_content(message)
+                    if violation:
+                        await self.auto_moderator.handle_violation(message, violation)
+                        return
+                except Exception as e:
+                    logger.error(f"自動モデレーション中にエラーが発生しました: {e}")
 
-            # メッセージをログに記録
-            await self.message_logger.log_message(message)
+            # メッセージログが利用可能な場合のみログ記録
+            if logger_available and self.message_logger:
+                try:
+                    await self.message_logger.log_message(message)
+                except Exception as e:
+                    logger.error(f"メッセージログ記録中にエラーが発生しました: {e}")
 
         except Exception as e:
             logger.error(f"Error in message event handler: {e}")
@@ -186,6 +253,8 @@ class MessageEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_message_edit(self, before: discord.Message, after: discord.Message):
         """メッセージ編集イベントのハンドラ"""
+        await self.ready.wait()
+        
         try:
             # BOTのメッセージは無視
             if after.author.bot:
@@ -195,14 +264,22 @@ class MessageEvents(commands.Cog):
             if before.content == after.content:
                 return
 
-            # 自動モデレーション
-            violation = await self.auto_moderator.check_content(after)
-            if violation:
-                await self.auto_moderator.handle_violation(after, violation)
-                return
+            # 自動モデレーションが利用可能な場合のみ実行
+            if auto_mod_available and self.auto_moderator:
+                try:
+                    violation = await self.auto_moderator.check_content(after)
+                    if violation:
+                        await self.auto_moderator.handle_violation(after, violation)
+                        return
+                except Exception as e:
+                    logger.error(f"自動モデレーション中にエラーが発生しました: {e}")
 
-            # 編集をログに記録
-            await self.message_logger.log_message_edit(before, after)
+            # メッセージログが利用可能な場合のみログ記録
+            if logger_available and self.message_logger:
+                try:
+                    await self.message_logger.log_message_edit(before, after)
+                except Exception as e:
+                    logger.error(f"メッセージログ記録中にエラーが発生しました: {e}")
 
         except Exception as e:
             logger.error(f"Error in message edit event handler: {e}")
@@ -210,13 +287,19 @@ class MessageEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_message_delete(self, message: discord.Message):
         """メッセージ削除イベントのハンドラ"""
+        await self.ready.wait()
+        
         try:
             # BOTのメッセージは無視
             if message.author.bot:
                 return
 
-            # 削除をログに記録
-            await self.message_logger.log_message_delete(message)
+            # メッセージログが利用可能な場合のみログ記録
+            if logger_available and self.message_logger:
+                try:
+                    await self.message_logger.log_message_delete(message)
+                except Exception as e:
+                    logger.error(f"メッセージログ記録中にエラーが発生しました: {e}")
 
         except Exception as e:
             logger.error(f"Error in message delete event handler: {e}")
@@ -224,13 +307,28 @@ class MessageEvents(commands.Cog):
     @commands.Cog.listener()
     async def on_bulk_message_delete(self, messages: List[discord.Message]):
         """メッセージ一括削除イベントのハンドラ"""
+        await self.ready.wait()
+        
         try:
-            # 一括削除をログに記録
-            await self.message_logger.log_bulk_message_delete(messages)
+            # メッセージログが利用可能な場合のみログ記録
+            if logger_available and self.message_logger:
+                try:
+                    await self.message_logger.log_bulk_message_delete(messages)
+                except Exception as e:
+                    logger.error(f"メッセージログ記録中にエラーが発生しました: {e}")
 
         except Exception as e:
             logger.error(f"Error in bulk message delete event handler: {e}")
 
+    async def cog_before_invoke(self, ctx):
+        """コマンド実行前に初期化完了を待機"""
+        await self.ready.wait()
+
 async def setup(bot: commands.Bot):
     """Cogを登録"""
-    await bot.add_cog(MessageEvents(bot)) 
+    try:
+        await bot.add_cog(MessageEvents(bot))
+        return True
+    except Exception as e:
+        logger.error(f"MessageEventsCogの登録中にエラーが発生しました: {e}")
+        return True  # エラーが発生しても明示的にTrueを返す

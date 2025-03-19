@@ -1,73 +1,58 @@
 import os
-import sys
-from pathlib import Path
-
-# プロジェクトルートディレクトリをPythonパスに追加
-project_root = Path(__file__).parent.parent.parent.parent
-sys.path.append(str(project_root))
-
-from sqlalchemy import create_engine
+import logging
 from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
 from sqlalchemy.orm import sessionmaker
-from web.server.database.database import Base
-import asyncio
-import logging
+from sqlalchemy.ext.declarative import declarative_base
 from dotenv import load_dotenv
-
-from web.server.models import (
-    User,
-    Settings,
-    AuditLog,
-    SpamLog,
-    Guild,
-    Warning,
-    Role,
-    Channel,
-)
-
-# ロギングの設定
-logging.basicConfig(level=logging.INFO)
-logger = logging.getLogger(__name__)
 
 # 環境変数の読み込み
 load_dotenv()
 
-# データベース接続情報
-DATABASE_URL = os.getenv('DATABASE_URL')
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set")
+# ロガーの設定
+logger = logging.getLogger('ShardBot.Database')
 
-# 非同期エンジンの作成
-async_engine = create_async_engine(DATABASE_URL)
+# データベースのベースクラスを定義
+Base = declarative_base()
+
+# データベースのURL
+DATABASE_URL = os.getenv('DATABASE_URL', 'sqlite+aiosqlite:///bot.db')
+
+# エンジンとセッションファクトリの作成
+engine = create_async_engine(DATABASE_URL, echo=False)
+async_session = sessionmaker(
+    engine, class_=AsyncSession, expire_on_commit=False
+)
 
 async def init_db():
-    """データベースを初期化し、必要なテーブルを作成します"""
+    """データベースのテーブルを作成"""
     try:
-        # テーブルの作成
-        async with async_engine.begin() as conn:
+        async with engine.begin() as conn:
             await conn.run_sync(Base.metadata.create_all)
-        
-        logger.info("データベースの初期化が完了しました。")
+        logger.info("データベーステーブルを作成しました")
     except Exception as e:
-        logger.error(f"データベースの初期化中にエラーが発生しました: {e}")
+        logger.error(f"データベーステーブルの作成に失敗: {e}")
         raise
 
-async def main():
-    """メイン関数"""
-    await init_db()
-
 def init_database():
-    # データベースエンジンの作成
-    engine = create_engine(DATABASE_URL)
-    
-    # テーブルの作成
-    Base.metadata.create_all(bind=engine)
-    
-    # セッションファクトリの作成
-    SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-    
-    print("データベースの初期化が完了しました。")
+    """データベースエンジンとセッションファクトリを作成"""
+    try:
+        logger.info(f"データベースに接続: {DATABASE_URL}")
+        return engine, async_session
+    except Exception as e:
+        logger.error(f"データベースの初期化に失敗: {e}")
+        raise
 
-if __name__ == "__main__":
-    asyncio.run(main())
-    init_database() 
+# データベースセッションを取得するコンテキストマネージャ
+async def get_db():
+    """データベースセッションを取得"""
+    async with async_session() as session:
+        try:
+            yield session
+            await session.commit()
+        except Exception as e:
+            await session.rollback()
+            raise
+        finally:
+            await session.close()
+
+__all__ = ['Base', 'init_db', 'init_database', 'get_db'] 

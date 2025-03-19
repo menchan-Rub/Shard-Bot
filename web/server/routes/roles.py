@@ -3,11 +3,11 @@ from sqlalchemy.orm import Session
 from typing import List, Optional
 import aiohttp
 
-from ..database import get_db
-from ..models import User
-from ..schemas.roles import RoleResponse, RoleList
-from .auth import get_current_user
-from ..config import settings
+from database import get_db
+from models import User
+from schemas.roles import RoleResponse, RoleList
+from routes.auth import get_current_user
+from config import settings
 
 router = APIRouter(prefix="/roles", tags=["roles"])
 

@@ -5,7 +5,7 @@ from datetime import datetime, timedelta
 from typing import Optional
 import aiohttp
 
-from web.server.config import settings
+from config import settings
 
 security = HTTPBearer()
 

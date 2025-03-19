@@ -2,7 +2,7 @@ from sqlalchemy import Column, BigInteger, String, DateTime, ForeignKey
 from sqlalchemy.sql import func
 from sqlalchemy.orm import relationship
 
-from web.server.database.database import Base
+from database.database import Base
 
 class Warning(Base):
     __tablename__ = "warnings"

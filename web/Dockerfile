@@ -3,12 +3,16 @@ FROM node:18-alpine as builder
 
 WORKDIR /app
 
-# 依存関係のインストール
-COPY client/package*.json ./
-RUN npm install
+# パッケージ設定ファイルをコピー
+COPY dashboard/package*.json ./
 
-# ソースコードのコピーとビルド
-COPY client/ .
+# 依存関係のインストール
+RUN npm ci
+
+# ソースコードのコピー
+COPY dashboard/ ./
+
+# Next.jsアプリをビルド
 RUN npm run build
 
 # 実行ステージ
@@ -16,11 +20,12 @@ FROM node:18-alpine
 
 WORKDIR /app
 
-# serveパッケージをグローバルにインストール
-RUN npm install -g serve
-
-# ビルドしたファイルをコピー
-COPY --from=builder /app/build ./build
+# ビルド済みのアプリケーションをコピー
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/next.config.js ./
 
 # 実行ユーザーを作成
 RUN adduser -D appuser
@@ -32,5 +37,5 @@ ENV PORT=3000
 
 EXPOSE 3000
 
-# serveを使用して静的ファイルを配信
-CMD ["serve", "-s", "build", "-l", "3000"] 
+# Next.jsを本番モードで実行
+CMD ["npm", "run", "start"] 

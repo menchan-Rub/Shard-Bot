@@ -15,6 +15,7 @@ import signal
 import traceback
 from concurrent.futures import ThreadPoolExecutor
 from discord import app_commands
+import shutil
 
 # ロギングの設定
 logging.basicConfig(
@@ -71,11 +72,42 @@ class ShardBot(commands.Bot):
         self._presence_task = None  # Rich Presence更新タスク用
         
     async def setup_hook(self) -> None:
-        """ボットの初期設定を行います"""
+        """Botの初期設定処理"""
+        self.logger.info("Setup hookを実行中...")
         try:
+            # roles.ymlが既に存在しているか確認
+            roles_yml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'roles.yml')
+            if not os.path.exists(roles_yml_path):
+                # プロジェクトルートの roles.yml をコピー
+                root_roles_yml = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'roles.yml')
+                if os.path.exists(root_roles_yml):
+                    shutil.copy2(root_roles_yml, roles_yml_path)
+                    self.logger.info(f"roles.yml をコピーしました: {roles_yml_path}")
+                else:
+                    self.logger.warning(f"ソース roles.yml が見つかりません: {root_roles_yml}")
+            
+            # categories.ymlが既に存在しているか確認
+            categories_yml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '..', 'categories.yml')
+            if not os.path.exists(categories_yml_path):
+                # プロジェクトルートの categories.yml をコピー
+                root_categories_yml = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../..', 'categories.yml')
+                if os.path.exists(root_categories_yml):
+                    shutil.copy2(root_categories_yml, categories_yml_path)
+                    self.logger.info(f"categories.yml をコピーしました: {categories_yml_path}")
+                else:
+                    self.logger.warning(f"ソース categories.yml が見つかりません: {root_categories_yml}")
+            
+            # Cogをロード
+            await self.load_cogs()
+            
             # エラーロガーの初期化
             from modules.logging.error_logger import ErrorLogger
             self.error_logger = ErrorLogger(self)
+            
+            # モデレーションマネージャーの初期化
+            from modules.moderation import ModerationManager
+            self.moderation = ModerationManager(self)
+            self.logger.info("Moderation manager initialized")
             
             # コマンドの読み込み
             await self.load_extensions()
@@ -170,10 +202,25 @@ class ShardBot(commands.Bot):
         self._exit.set()
         
     async def load_extensions(self):
-        """全ての拡張機能を読み込みます"""
+        """全ての拡張機能を読み込みます。一部が失敗しても他の拡張機能を読み込みます。"""
         # 現在のファイルのディレクトリを取得
         current_dir = os.path.dirname(os.path.abspath(__file__))
-        extension_dirs = ['commands.moderation', 'commands.admin', 'commands.utility', 'events']
+        # 優先度順にディレクトリを並べる（adminとutilityは先に、問題のあるeventsは後に）
+        extension_dirs = ['commands.admin', 'commands.utility', 'commands.moderation', 'events']
+        
+        # 少なくとも1つのコマンドが読み込まれたかどうかを追跡
+        loaded_count = 0
+        failed_extensions = set()
+        
+        # データベースの初期化を最初に行う
+        try:
+            from database import init_database
+            if init_database():
+                self.logger.info("データベースの初期化が完了しました")
+            else:
+                self.logger.warning("データベースの初期化に問題が発生しました")
+        except Exception as e:
+            self.logger.error(f"データベース初期化中にエラーが発生しました: {e}")
         
         for ext_dir in extension_dirs:
             try:
@@ -183,17 +230,52 @@ class ShardBot(commands.Bot):
                     self.logger.warning(f"Directory not found: {dir_path}")
                     continue
                 
-                for file in os.listdir(dir_path):
-                    if file.endswith('.py') and not file.startswith('__'):
-                        extension = f"{ext_dir}.{file[:-3]}"
-                        try:
-                            await self.load_extension(extension)
-                            self.logger.info(f'Loaded extension: {extension}')
-                        except Exception as e:
-                            self.logger.error(f'Failed to load extension {extension}: {e}')
-                            self.logger.error(f'Error details: {traceback.format_exc()}')
+                # 問題が出やすいファイルを特別に並べ替え
+                files = os.listdir(dir_path)
+                python_files = [f for f in files if f.endswith('.py') and not f.startswith('__')]
+                
+                # 優先度の低いファイルを後に回す
+                priority_order = {"message.py": 10, "moderation_events.py": 11}
+                sorted_files = sorted(
+                    python_files, 
+                    key=lambda x: priority_order.get(x, 0)
+                )
+                
+                for file in sorted_files:
+                    extension = f"{ext_dir}.{file[:-3]}"
+                    
+                    # 失敗したExtensionは再読み込みしない
+                    if extension in failed_extensions:
+                        continue
+                        
+                    try:
+                        await self.load_extension(extension)
+                        self.logger.info(f'Loaded extension: {extension}')
+                        loaded_count += 1
+                    except Exception as e:
+                        failed_extensions.add(extension)
+                        self.logger.error(f'Failed to load extension {extension}: {e}')
+                        
+                        # 重要なコマンドのエラーには詳細ログを出力
+                        if 'commands.admin' in extension or 'commands.utility' in extension:
+                            self.logger.error(f'Error details for important extension: {traceback.format_exc()}')
+                        else:
+                            # デバッグレベルでエラー詳細をログ
+                            self.logger.debug(f'Error details: {traceback.format_exc()}')
             except Exception as e:
                 self.logger.error(f'Failed to load directory {ext_dir}: {e}')
+        
+        self.logger.info(f'Successfully loaded {loaded_count} extensions ({len(failed_extensions)} failed)')
+        
+        # 少なくとも setup コマンドが確実に使えるようにする
+        if loaded_count == 0:
+            self.logger.warning("No extensions loaded, trying to load only admin.setup...")
+            try:
+                await self.load_extension('commands.admin.setup')
+                self.logger.info('Successfully loaded admin.setup as fallback')
+            except Exception as e:
+                self.logger.critical(f'Failed to load admin.setup: {e}')
+                self.logger.critical('Bot may not have any commands available!')
 
     async def on_ready(self):
         """ボットが準備完了したときに呼ばれます"""

@@ -1,35 +1,44 @@
 FROM python:3.11-slim
 
-WORKDIR /app/web/server
+WORKDIR /app
 
-# 必要なパッケージをインストール（ビルド時のみ必要なパッケージは別レイヤーで）
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# 非rootユーザーを作成
+RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
+
+# 必要なパッケージをインストール
+RUN apt-get update && apt-get install -y \
     gcc \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    postgresql-client \
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # 依存関係をコピーしてインストール
 COPY requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
-    && rm -rf ~/.cache/pip/*
+RUN pip install --no-cache-dir -r requirements.txt
 
 # ソースコードをコピー
-COPY . /app/web/server/
+COPY . .
 
 # 環境変数を設定
-ENV PYTHONPATH=/app/web/server \
-    PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
+ENV POSTGRES_HOST=db
+ENV POSTGRES_PORT=5432
+ENV POSTGRES_USER=postgres
+ENV POSTGRES_PASSWORD=iromochi218
+ENV POSTGRES_DB=shardbot
+ENV DATABASE_URL=postgresql://postgres:iromochi218@db:5432/shardbot
 
-# 不要なファイルを削除
-RUN find . -type d -name "__pycache__" -exec rm -r {} + \
-    && find . -type f -name "*.pyc" -delete
+# 所有者を変更して、非rootユーザーに権限を付与
+RUN chown -R appuser:appuser /app
 
-# 実行ユーザーを作成
-RUN adduser --disabled-password --gecos "" appuser
+# 非rootユーザーに切り替え
 USER appuser
+
+# ヘルスチェックを設定
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
 
 EXPOSE 8000
 
-CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000", "--workers", "4"] 
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"] 

@@ -4,8 +4,8 @@ from sqlalchemy.orm import sessionmaker
 from sqlalchemy.exc import SQLAlchemyError
 import logging
 
-# 相対インポートに変更
-from ..config import settings
+# 相対インポートを絶対インポートに変更
+from config import settings
 
 # ロギングの設定
 logging.basicConfig(level=logging.INFO)
@@ -17,7 +17,7 @@ metadata = MetaData()
 try:
     # データベースエンジンの作成
     engine = create_engine(
-        settings.DATABASE_URL,
+        settings.DATABASE_URL.replace("postgresql+asyncpg://", "postgresql://"),
         pool_pre_ping=True,
         pool_size=5,
         max_overflow=10

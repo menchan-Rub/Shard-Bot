@@ -2,6 +2,12 @@ categories:
   information: # ━━━━━━━━━━[ 📢 情報カテゴリ ]━━━━━━━━━━
     name: "┃📢┃情報"
     channels:
+      - rules:
+          name: "📜｜サーバールール"
+          description: "【必須】サーバー利用規約とガイドライン"
+          permissions:
+            - send_messages: pr_manager
+            - view_channel: everyone
       - announcements:
           name: "┃📣┃お知らせ"
           description: "【公式】サーバー全体へのお知らせ"
@@ -11,6 +17,12 @@ categories:
       - updates:
           name: "🔄｜更新情報"
           description: "【更新】アプリ・サーバーの更新情報"
+          permissions:
+            - send_messages: pr_manager
+            - view_channel: verified_user
+      - news:
+          name: "📰｜関連ニュース"
+          description: "【外部情報】関連サービス・業界ニュース"
           permissions:
             - send_messages: pr_manager
             - view_channel: verified_user
@@ -26,6 +38,13 @@ categories:
           permissions:
             - send_messages: support_team
             - view_channel: verified_user
+      - status:
+          name: "📊｜ステータス"
+          description: "【稼働状況】サービス稼働ステータス"
+          permissions:
+            - send_messages: administrator
+            - view_channel: verified_user
+
   communication: # ━━━━━━━━━━[ 💭 交流カテゴリ ]━━━━━━━━━━
     name: "┃💭┃交流"
     channels:
@@ -47,9 +66,33 @@ categories:
           permissions:
             - send_messages: verified_user
             - view_channel: verified_user
+      - off_topic:
+          name: "💬｜雑談広場"
+          description: "【自由討論】なんでも話せる場所"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - media:
+          name: "🎨｜メディア共有"
+          description: "【創作】画像・動画・音楽の共有"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
       - games:
           name: "🎮｜ゲーム"
           description: "【ゲーム】ゲーム関連の話題"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - commands:
+          name: "🤖｜ボットコマンド"
+          description: "【Bot操作】コマンド実行専用"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - counting:
+          name: "🔢｜カウントゲーム"
+          description: "【ゲーム】みんなで数字を数えよう"
           permissions:
             - send_messages: verified_user
             - view_channel: verified_user
@@ -60,12 +103,33 @@ categories:
           permissions:
             - connect: verified_user
             - speak: verified_user
+      - gaming_voice:
+          name: "🎮｜ゲームVC"
+          type: voice
+          description: "【ゲーム用VC】ゲーム中の通話"
+          permissions:
+            - connect: verified_user
+            - speak: verified_user
+      - meeting_room:
+          name: "👥｜ミーティングルーム"
+          type: voice
+          description: "【会議用VC】グループ通話"
+          permissions:
+            - connect: verified_user
+            - speak: verified_user
+
   support: # ━━━━━━━━━━[ 🆘 サポートカテゴリ ]━━━━━━━━━━
     name: "┃🆘┃サポート"
     channels:
       - support:
           name: "┃💁┃サポート窓口"
           description: "【窓口】質問・問い合わせ受付"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - ticket_create:
+          name: "🎫｜チケット作成"
+          description: "【サポート開始】新しいチケットを作成"
           permissions:
             - send_messages: verified_user
             - view_channel: verified_user
@@ -81,6 +145,31 @@ categories:
           permissions:
             - send_messages: verified_user
             - view_channel: verified_user
+      - knowledge_base:
+          name: "📚｜ナレッジベース"
+          description: "【情報集】解決済み問題のデータベース"
+          permissions:
+            - send_messages: support_team
+            - view_channel: verified_user
+      - resolved_issues:
+          name: "✅｜解決済み問題"
+          description: "【アーカイブ】過去の解決済みチケット"
+          permissions:
+            - send_messages: support_team
+            - view_channel: verified_user
+      - report:
+          name: "🚨｜通報窓口"
+          description: "【違反報告】ルール違反を通報"
+          permissions:
+            - send_messages: verified_user
+            - view_channel: verified_user
+      - guidelines:
+          name: "📘｜ガイドライン"
+          description: "【行動指針】コミュニティガイドライン"
+          permissions:
+            - send_messages: pr_manager
+            - view_channel: everyone
+
   management: # ━━━━━━━━━━[ ⚙️ 管理カテゴリ ]━━━━━━━━━━
     name: "┃⚙️┃管理"
     channels:
@@ -94,6 +183,16 @@ categories:
           description: "【モデレーター限定】運営用チャンネル"
           permissions:
             - view_channel: moderator
+      - audit_log:
+          name: "📜｜監査ログ"
+          description: "【記録】サーバー操作の監査ログ"
+          permissions:
+            - view_channel: administrator
+      - config_management:
+          name: "⚙️｜設定管理"
+          description: "【設定】サーバー設定変更用"
+          permissions:
+            - view_channel: administrator
       - event_planning:
           name: "📅｜イベント企画"
           description: "【イベント】企画・運営用チャンネル"
@@ -112,4 +211,23 @@ categories:
           permissions:
             - view_channel: support_team
             - send_messages: support_team
-    # ... (提供された残りのカテゴリとチャンネル設定) 
+      - backup:
+          name: "💾｜バックアップ"
+          description: "【データ管理】サーバーデータバックアップ"
+          permissions:
+            - view_channel: administrator
+      - security:
+          name: "🔒｜セキュリティ"
+          description: "【セキュリティ】セキュリティ関連事項"
+          permissions:
+            - view_channel: administrator
+      - suggestion_review:
+          name: "📋｜要望審査"
+          description: "【審査】ユーザー要望の審査用"
+          permissions:
+            - view_channel: pr_manager
+      - shard_bot:
+          name: "🤖｜シャードボット"
+          description: "【Bot管理】専用ボット設定"
+          permissions:
+            - view_channel: pr_manager

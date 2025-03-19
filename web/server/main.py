@@ -10,49 +10,76 @@ from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 import uvicorn
 
-from web.server.database.database import get_db
-from web.server.routes.auth import router as auth_router
-from web.server.routes.settings import router as settings_router
-from web.server.routes.logs import router as logs_router
-from web.server.routes.users import router as users_router
-from web.server.routes.roles import router as roles_router
-from web.server.routes.channels import router as channels_router
-from web.server.routes.analytics import router as analytics_router
-from web.server.routes.guilds import router as guilds_router
-from web.server.middleware.error_handler import handle_errors
-from web.server.config import settings
+from database.database import get_db, init_db
+from routes.auth import router as auth_router
+from routes.settings import router as settings_router
+from routes.logs import router as logs_router
+from routes.users import router as users_router
+from routes.roles import router as roles_router
+from routes.channels import router as channels_router
+from routes.analytics import router as analytics_router
+from routes.guilds import router as guilds_router
+from middleware.error_handler import handle_errors
+from middleware.rate_limiter import RateLimiter
+from middleware.security_headers import SecurityHeadersMiddleware
+from config import settings
 
 app = FastAPI(
     title=settings.APP_NAME,
     version=settings.VERSION,
-    debug=True
+    debug=settings.DEBUG
 )
+
+# データベースの初期化
+@app.on_event("startup")
+async def startup_event():
+    print("Initializing database...")
+    try:
+        init_db()
+        print("Database initialized successfully")
+    except Exception as e:
+        print(f"Error initializing database: {e}")
+        raise
+
+# セキュリティヘッダーの適用
+app.add_middleware(SecurityHeadersMiddleware)
+
+# レート制限の適用
+app.add_middleware(RateLimiter)
 
 # CORS設定
+allowed_origins = os.getenv("ALLOWED_ORIGINS", "http://localhost:3000").split(",")
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:8080", "http://localhost:3000"],
+    allow_origins=allowed_origins,
     allow_credentials=True,
-    allow_methods=["GET", "POST", "PUT", "DELETE", "OPTIONS", "HEAD"],
+    allow_methods=["*"],
     allow_headers=["*"],
-    expose_headers=["*"],
-    max_age=3600,
 )
 
-# デバッグ用のミドルウェア
-@app.middleware("http")
-async def debug_middleware(request, call_next):
-    print(f"\n--- Incoming request ---")
-    print(f"Method: {request.method}")
-    print(f"URL: {request.url}")
-    print(f"Headers: {request.headers}")
-    
-    response = await call_next(request)
-    
-    print(f"\n--- Outgoing response ---")
-    print(f"Status: {response.status_code}")
-    print(f"Headers: {response.headers}")
-    return response
+# デバッグ用のミドルウェア（開発環境のみ）
+if settings.DEBUG:
+    @app.middleware("http")
+    async def debug_middleware(request, call_next):
+        print(f"\n--- Incoming request ---")
+        print(f"Method: {request.method}")
+        print(f"URL: {request.url}")
+        print(f"Headers: {request.headers}")
+        
+        try:
+            response = await call_next(request)
+            
+            print(f"\n--- Outgoing response ---")
+            print(f"Status: {response.status_code}")
+            print(f"Headers: {response.headers}")
+            return response
+        except Exception as e:
+            print(f"\n--- Exception occurred ---")
+            print(f"Error: {str(e)}")
+            print(f"Type: {type(e).__name__}")
+            import traceback
+            print(f"Traceback: {traceback.format_exc()}")
+            raise
 
 # エラーハンドラーの設定
 app.middleware("http")(handle_errors)

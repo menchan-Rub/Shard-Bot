@@ -2,34 +2,36 @@ FROM python:3.11-slim
 
 WORKDIR /app
 
-# 必要なパッケージをインストール（ビルド時のみ必要なパッケージは別レイヤーで）
-RUN apt-get update && \
-    apt-get install -y --no-install-recommends \
+# 非rootユーザーを作成
+RUN groupadd -r appuser && useradd -r -g appuser -d /app appuser
+
+# 必要なパッケージをインストール
+RUN apt-get update && apt-get install -y \
     gcc \
     postgresql-client \
-    && rm -rf /var/lib/apt/lists/* \
-    && apt-get clean
+    --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/*
 
 # 依存関係をコピーしてインストール
 COPY src/requirements.txt .
-RUN pip install --no-cache-dir -r requirements.txt \
-    && rm -rf ~/.cache/pip/*
+RUN pip install --no-cache-dir -r requirements.txt
 
 # ソースコードをコピー
 COPY src/ .
 
 # 環境変数を設定
-ENV PYTHONPATH=/app \
-    PYTHONUNBUFFERED=1 \
-    PYTHONDONTWRITEBYTECODE=1
+ENV PYTHONPATH=/app
+ENV PYTHONUNBUFFERED=1
 
-# 不要なファイルを削除
-RUN find . -type d -name "__pycache__" -exec rm -r {} + \
-    && find . -type f -name "*.pyc" -delete
+# 所有者を変更して、非rootユーザーに権限を付与
+RUN chown -R appuser:appuser /app
 
-# 実行ユーザーを作成
-RUN adduser --disabled-password --gecos "" appuser
+# 非rootユーザーに切り替え
 USER appuser
+
+# ヘルスチェックを設定
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8000/health || exit 1
 
 # コンテナ起動時のコマンドを設定
 CMD ["python", "main.py"] 

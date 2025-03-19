@@ -1,7 +1,7 @@
 from sqlalchemy import Column, BigInteger, String, Integer, ForeignKey, Boolean
 from sqlalchemy.orm import relationship
 
-from web.server.database.database import Base
+from database.database import Base
 
 class Channel(Base):
     __tablename__ = "channels"

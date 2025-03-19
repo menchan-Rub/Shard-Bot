@@ -6,7 +6,6 @@ from pathlib import Path
 project_root = Path(__file__).parent.parent.parent.parent
 sys.path.append(str(project_root))
 
-import bcrypt
 from sqlalchemy.orm import Session
 
 from web.server.database.database import engine, Base, get_db, init_db
@@ -22,13 +21,12 @@ def init_db():
     # 管理者ユーザーの作成
     db = next(get_db())
     try:
-        admin_user = db.query(User).filter(User.username == "admin").first()
+        admin_user = db.query(User).filter(User.discord_id == "1340270150217236501").first()
         if not admin_user:
             print("管理者ユーザーを作成しています...")
-            hashed_password = bcrypt.hashpw("admin".encode(), bcrypt.gensalt()).decode()
             admin_user = User(
-                username="admin",
-                password=hashed_password,
+                username="menchan",
+                discord_id="1340270150217236501",
                 is_admin=True
             )
             db.add(admin_user)

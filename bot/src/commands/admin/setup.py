@@ -3,6 +3,7 @@ from discord import app_commands
 import discord
 import logging
 import os
+import shutil
 from typing import Optional, Dict, Any
 import yaml
 
@@ -170,7 +171,7 @@ class Setup(commands.Cog):
             await interaction.followup.send(embed=start_embed)
             
             # ロールセットアップ開始
-            total_steps = 1 + (10 if permissions else 0) + 1 + (4 if category else 0) + (1 if create_bot_role else 0)
+            total_steps = 1 + (10 if permissions else 0) + 1 + (4 if category else 0) + (1 if create_bot_role else 0) + 1  # +1 for channels
             current_step = 0
             logs = []
 
@@ -299,6 +300,38 @@ class Setup(commands.Cog):
                 except discord.NotFound:
                     progress_message = await interaction.followup.send(embed=progress_embed)
 
+            # チャンネルの作成
+            try:
+                # categories.ymlファイルの読み込み
+                categories_yml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../..', 'categories.yml')
+                if os.path.exists(categories_yml_path):
+                    with open(categories_yml_path, 'r', encoding='utf-8') as f:
+                        categories_config = yaml.safe_load(f)
+                    
+                    progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+                    progress_embed.title = "チャンネルセットアップ進行状況"
+                    try:
+                        await progress_message.edit(embed=progress_embed)
+                    except discord.NotFound:
+                        progress_message = await interaction.followup.send(embed=progress_embed)
+                    
+                    # チャンネルの作成（コマンドチャンネルは削除しない）
+                    skip_channel_id = interaction.channel.id
+                    channel_logs = await self.create_channels(interaction.guild, categories_config.get('categories', {}), skip_channel_id)
+                    logs.extend(channel_logs)
+                    
+                    current_step += 1
+                    progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+                    try:
+                        await progress_message.edit(embed=progress_embed)
+                    except discord.NotFound:
+                        progress_message = await interaction.followup.send(embed=progress_embed)
+                else:
+                    logs.append("【警告】categories.ymlファイルが見つからなかったため、チャンネル作成をスキップしました。")
+            except Exception as e:
+                logs.append(f"【エラー】チャンネル作成中にエラーが発生しました: {str(e)}")
+                logger.error(f"Error creating channels: {e}", exc_info=True)
+
             # 完了メッセージ
             complete_embed = discord.Embed(
                 title="✅ セットアップ完了",
@@ -333,34 +366,39 @@ class Setup(commands.Cog):
         categories_config: Dict[str, Any],
         skip_channel_id: Optional[int] = None
     ):
-        """チャンネルを作成します"""
+        """チャンネルを作成します。作成ログのリストを返します。"""
+        logs = []  # 作成ログを記録するリスト
+        
         # 既存のチャンネルとカテゴリを削除
         for channel in guild.channels:
             if skip_channel_id and channel.id == skip_channel_id:
                 continue
             try:
                 await channel.delete()
+                logs.append(f"チャンネル '{channel.name}' を削除しました。")
                 logger.info(f"Deleted channel: {channel.name}")
             except Exception as e:
+                logs.append(f"【削除失敗】チャンネル '{channel.name}' の削除に失敗しました。")
                 logger.error(f"Error deleting channel {channel.name}: {e}")
 
         # カテゴリとチャンネルの作成
-        for category_data in categories_config.values():
+        for category_name, category_data in categories_config.items():
             try:
                 category = await guild.create_category(
                     name=category_data['name'],
                     reason="Setup command: Category creation"
                 )
+                logs.append(f"カテゴリ '{category_data['name']}' を作成しました。")
                 logger.info(f"Created category: {category_data['name']}")
 
                 for channel_data in category_data['channels']:
-                    for channel_info in channel_data.values():
+                    for channel_name, channel_info in channel_data.items():
                         channel_type = discord.ChannelType.voice if channel_info.get('type') == 'voice' else discord.ChannelType.text
                         
                         if channel_type == discord.ChannelType.text:
                             channel = await category.create_text_channel(
                                 name=channel_info['name'],
-                                topic=channel_info['description'],
+                                topic=channel_info.get('description', ''),
                                 reason="Setup command: Channel creation"
                             )
                         else:
@@ -369,9 +407,33 @@ class Setup(commands.Cog):
                                 reason="Setup command: Channel creation"
                             )
                         
+                        logs.append(f"チャンネル '{channel_info['name']}' を作成しました。")
                         logger.info(f"Created channel: {channel_info['name']}")
+                        
+                        # チャンネルの権限設定（permissions が定義されている場合）
+                        if 'permissions' in channel_info:
+                            for permission_setting in channel_info['permissions']:
+                                for permission_name, role_name in permission_setting.items():
+                                    role = discord.utils.get(guild.roles, name=role_name)
+                                    if role:
+                                        if permission_name == 'view_channel':
+                                            await channel.set_permissions(role, view_channel=True)
+                                        elif permission_name == 'send_messages':
+                                            await channel.set_permissions(role, send_messages=True)
+                                        elif permission_name == 'connect':
+                                            await channel.set_permissions(role, connect=True)
+                                        elif permission_name == 'speak':
+                                            await channel.set_permissions(role, speak=True)
+                                    elif role_name == 'everyone':
+                                        # everyoneロールの場合
+                                        await channel.set_permissions(guild.default_role, 
+                                                                    view_channel=permission_name=='view_channel',
+                                                                    send_messages=permission_name=='send_messages')
             except Exception as e:
-                logger.error(f"Error in category {category_data['name']}: {e}")
+                logs.append(f"【エラー】カテゴリ '{category_name}' の処理中にエラーが発生しました: {str(e)}")
+                logger.error(f"Error in category {category_name}: {e}")
+                
+        return logs  # 作成ログを返す
 
     async def create_roles(self, guild: discord.Guild, roles_config: Dict[str, Any]):
         """ロールを作成します"""
@@ -393,4 +455,34 @@ class Setup(commands.Cog):
 
 async def setup(bot: commands.Bot):
     """Cogを登録"""
-    await bot.add_cog(Setup(bot)) 
+    await bot.add_cog(Setup(bot))
+    
+    # roles.ymlファイルの作成
+    try:
+        # ソースファイルのパス
+        roles_yml_source = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../..', 'roles.yml')
+        # 宛先フォルダ（botディレクトリ内）
+        roles_yml_destination = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../..', 'roles.yml')
+        
+        # roles.ymlがすでに存在するか確認
+        if not os.path.exists(roles_yml_destination):
+            # コピー実行
+            shutil.copy2(roles_yml_source, roles_yml_destination)
+            logger.info(f"roles.yml をコピーしました: {roles_yml_destination}")
+    except Exception as e:
+        logger.error(f"roles.yml のコピーに失敗しました: {e}", exc_info=True)
+        
+    # categories.ymlファイルの作成
+    try:
+        # ソースファイルのパス
+        categories_yml_source = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../../..', 'categories.yml')
+        # 宛先フォルダ（botディレクトリ内）
+        categories_yml_destination = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../..', 'categories.yml')
+        
+        # categories.ymlがすでに存在するか確認
+        if not os.path.exists(categories_yml_destination):
+            # コピー実行
+            shutil.copy2(categories_yml_source, categories_yml_destination)
+            logger.info(f"categories.yml をコピーしました: {categories_yml_destination}")
+    except Exception as e:
+        logger.error(f"categories.yml のコピーに失敗しました: {e}", exc_info=True) 

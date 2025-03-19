@@ -2,6 +2,6 @@
 ShardBot - Database Module
 """
 
-from .init_db import init_database
+from .init_db import Base, init_db, init_database, get_db
 
-__all__ = ['init_database']
+__all__ = ['Base', 'init_db', 'init_database', 'get_db']

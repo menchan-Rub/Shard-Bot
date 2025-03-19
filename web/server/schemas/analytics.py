@@ -23,4 +23,33 @@ class AnalyticsData(BaseModel):
     users: int
 
     class Config:
+        from_attributes = True
+
+class CommandStat(BaseModel):
+    name: str
+    count: int
+
+class DailyActivity(BaseModel):
+    date: str
+    messages: int
+    users: int
+
+class GuildInfo(BaseModel):
+    id: str
+    name: str
+    icon: str | None
+    member_count: int
+    owner_id: str
+
+class GuildStatistics(BaseModel):
+    message_count: int
+    active_users: int
+    top_commands: List[CommandStat]
+    daily_activity: List[DailyActivity]
+
+class GuildStats(BaseModel):
+    guild_info: GuildInfo
+    stats: GuildStatistics
+
+    class Config:
         from_attributes = True 

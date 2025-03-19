@@ -2,16 +2,20 @@
 ShardBot Dashboard API - Schemas
 """
 
-from .auth import Token, TokenData, UserAuth, UserCreate, UserResponse
-from .analytics import StatsOverview, AnalyticsData, TimeSeriesData
+from .analytics import StatsOverview, AnalyticsData, GuildStats
+from .auth import Token, TokenData, UserResponse
+from .roles import RoleResponse, RoleList
+from .guilds import GuildResponse, GuildList
 
 __all__ = [
     'Token',
     'TokenData',
-    'UserAuth',
-    'UserCreate',
     'UserResponse',
     'StatsOverview',
     'AnalyticsData',
-    'TimeSeriesData',
+    'GuildStats',
+    'RoleResponse',
+    'RoleList',
+    'GuildResponse',
+    'GuildList',
 ] 
