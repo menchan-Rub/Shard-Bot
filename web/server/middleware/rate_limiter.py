@@ -9,11 +9,11 @@ class RateLimiter(BaseHTTPMiddleware):
     def __init__(self, app, requests_per_minute: int = 60):
         super().__init__(app)
         # 基本レート制限
-        self.requests_per_minute = int(os.getenv("RATE_LIMIT_REQUESTS", str(requests_per_minute)))
+        self.requests_per_minute = int(os.getenv("RATE_LIMIT_REQUESTS", "300"))
         # 分析用の高いレート制限
-        self.analytics_requests_per_minute = int(os.getenv("ANALYTICS_RATE_LIMIT", "200"))
+        self.analytics_requests_per_minute = int(os.getenv("ANALYTICS_RATE_LIMIT", "500"))
         # 認証済みユーザー用の制限
-        self.auth_requests_per_minute = int(os.getenv("AUTH_RATE_LIMIT", "120"))
+        self.auth_requests_per_minute = int(os.getenv("AUTH_RATE_LIMIT", "400"))
         self.window = 60  # 1分間のウィンドウ
         # {ip: {"default": (request_count, window_start), "analytics": (request_count, window_start)}}
         self.clients: Dict[str, Dict[str, Tuple[int, float]]] = {}

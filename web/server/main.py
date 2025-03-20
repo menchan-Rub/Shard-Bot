@@ -5,6 +5,9 @@ from pathlib import Path
 # プロジェクトルートディレクトリをPythonパスに追加
 project_root = Path(__file__).parent.parent.parent
 sys.path.append(str(project_root))
+# サーバーディレクトリをPythonパスに追加
+server_dir = Path(__file__).parent
+sys.path.append(str(server_dir))
 
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware

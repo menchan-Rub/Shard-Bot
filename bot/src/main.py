@@ -97,9 +97,6 @@ class ShardBot(commands.Bot):
                 else:
                     self.logger.warning(f"ソース categories.yml が見つかりません: {root_categories_yml}")
             
-            # Cogをロード
-            await self.load_cogs()
-            
             # エラーロガーの初期化
             from modules.logging.error_logger import ErrorLogger
             self.error_logger = ErrorLogger(self)

@@ -131,7 +131,9 @@ class Setup(commands.Cog):
         password="セットアップ用のパスワードを入力してください",
         permissions="権限ロール作成を有効にします（デフォルトTrue）",
         category="カテゴリロール作成を有効にします（デフォルトTrue）",
-        create_bot_role="BOTロール作成を有効にします（デフォルトTrue）"
+        create_bot_role="BOTロール作成を有効にします（デフォルトTrue）",
+        roles_only="ロールのみをセットアップします（デフォルトFalse）",
+        use_role_yml="roles.ymlファイルに定義されたロールを使用します（デフォルトTrue）"
     )
     @app_commands.guild_only()
     async def setup(
@@ -140,7 +142,9 @@ class Setup(commands.Cog):
         password: str,
         permissions: bool = True,
         category: bool = True,
-        create_bot_role: bool = True
+        create_bot_role: bool = True,
+        roles_only: bool = False,
+        use_role_yml: bool = True
     ):
         # 管理者権限チェック
         if not interaction.user.guild_permissions.administrator:
@@ -165,13 +169,25 @@ class Setup(commands.Cog):
             await interaction.response.defer()
             start_embed = discord.Embed(
                 title="🚀 セットアップ開始",
-                description="サーバーのセットアップを開始します...",
+                description=f"サーバーのセットアップを開始します...\n{'ロールのみ' if roles_only else '完全'}セットアップを実行します。",
                 color=0x00ff00
             )
             await interaction.followup.send(embed=start_embed)
             
             # ロールセットアップ開始
-            total_steps = 1 + (10 if permissions else 0) + 1 + (4 if category else 0) + (1 if create_bot_role else 0) + 1  # +1 for channels
+            total_steps = 1  # 既存ロール削除
+            if permissions:
+                total_steps += 10  # 権限ロール
+            total_steps += 1  # everyoneロール更新
+            if use_role_yml:
+                total_steps += 1  # roles.ymlからのロード
+            if category and not roles_only:
+                total_steps += 4  # カテゴリロール
+            if create_bot_role and not roles_only:
+                total_steps += 1  # BOTロール
+            if not roles_only:
+                total_steps += 1  # チャンネル作成
+            
             current_step = 0
             logs = []
 
@@ -248,15 +264,99 @@ class Setup(commands.Cog):
                 logs.append("everyoneロールの権限を更新しました。")
             except Exception as e:
                 logs.append("【更新失敗】everyoneロールの権限更新に失敗しました。")
+            
             current_step += 1
             progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
             try:
                 await progress_message.edit(embed=progress_embed)
             except discord.NotFound:
                 progress_message = await interaction.followup.send(embed=progress_embed)
+            
+            # roles.ymlからロールを作成
+            if use_role_yml:
+                try:
+                    # roles.ymlファイルのパスを取得
+                    roles_file_path = os.path.join(os.getcwd(), "roles.yml")
+                    if not os.path.exists(roles_file_path):
+                        roles_file_path = os.path.join(os.path.dirname(os.path.dirname(os.path.dirname(os.path.dirname(__file__)))), "roles.yml")
+                    
+                    if os.path.exists(roles_file_path):
+                        with open(roles_file_path, 'r', encoding='utf-8') as file:
+                            roles_config = yaml.safe_load(file)
+                        
+                        if roles_config and 'roles' in roles_config:
+                            # すべてのカテゴリのロールを作成
+                            for category_name, roles in roles_config['roles'].items():
+                                for role_id, role_info in roles.items():
+                                    try:
+                                        # パーミッションの設定
+                                        perms = discord.Permissions()
+                                        if 'permissions' in role_info:
+                                            if role_info['permissions'] == 'all':
+                                                perms = discord.Permissions.all()
+                                            else:
+                                                for perm in role_info['permissions']:
+                                                    setattr(perms, perm, True)
+                                        
+                                        # 色の設定
+                                        color = discord.Colour.default()
+                                        if 'color' in role_info:
+                                            color_str = role_info['color']
+                                            if color_str.startswith('#'):
+                                                color = discord.Colour.from_rgb(
+                                                    int(color_str[1:3], 16),
+                                                    int(color_str[3:5], 16),
+                                                    int(color_str[5:7], 16)
+                                                )
+                                        
+                                        # ロール作成
+                                        await interaction.guild.create_role(
+                                            name=role_info['name'],
+                                            permissions=perms,
+                                            color=color,
+                                            hoist=role_info.get('hoist', False),
+                                            mentionable=role_info.get('mentionable', True),
+                                            reason=f"Setup command: {category_name} role creation from roles.yml"
+                                        )
+                                        logs.append(f"ロール '{role_info['name']}' を作成しました。")
+                                    except Exception as e:
+                                        logs.append(f"【作成失敗】ロール '{role_info.get('name', role_id)}' の作成に失敗しました: {str(e)}")
+                            
+                            logs.append("roles.ymlからロールを作成しました。")
+                        else:
+                            logs.append("【警告】roles.ymlファイルに有効なロール設定が見つかりませんでした。")
+                    else:
+                        logs.append("【警告】roles.ymlファイルが見つかりませんでした。")
+                except Exception as e:
+                    logs.append(f"【エラー】roles.ymlからのロール作成中にエラーが発生しました: {str(e)}")
+                
+                current_step += 1
+                progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+                try:
+                    await progress_message.edit(embed=progress_embed)
+                except discord.NotFound:
+                    progress_message = await interaction.followup.send(embed=progress_embed)
+
+            # ロールのみのセットアップならここで終了
+            if roles_only:
+                # 完了メッセージ
+                complete_embed = discord.Embed(
+                    title="✅ セットアップ完了",
+                    description="ロールのセットアップが完了しました。",
+                    color=0x00ff00
+                )
+                log_text = "\n".join(logs)
+                if len(log_text) > 1000:
+                    log_text = log_text[:997] + "..."
+                complete_embed.add_field(name="セットアップログ", value=log_text)
+                await interaction.followup.send(embed=complete_embed)
+                
+                # セットアップ状態をクリア
+                self.setup_in_progress.pop(interaction.guild_id, None)
+                return
 
             # カテゴリロールの作成
-            if category:
+            if category and not roles_only:
                 category_roles = [
                     "-----役職ロール-----",
                     "-----権限ロール-----",
@@ -282,17 +382,28 @@ class Setup(commands.Cog):
                         progress_message = await interaction.followup.send(embed=progress_embed)
 
             # BOTロールの作成
-            if create_bot_role:
+            if create_bot_role and not roles_only:
                 try:
-                    await interaction.guild.create_role(
+                    bot_role = await interaction.guild.create_role(
                         name="BOT",
-                        permissions=discord.Permissions.none(),
-                        color=discord.Colour.default(),
+                        permissions=discord.Permissions(view_channel=True),
+                        color=discord.Colour.from_rgb(255, 0, 0),  # 赤色
+                        hoist=True,
+                        mentionable=False,
                         reason="Setup command: BOT role creation"
                     )
                     logs.append("BOTロールを作成しました。")
+                    
+                    # BOTにロールを付与
+                    for member in interaction.guild.members:
+                        if member.bot:
+                            try:
+                                await member.add_roles(bot_role, reason="Setup command: Assigning BOT role")
+                            except Exception as e:
+                                logs.append(f"【付与失敗】BOT '{member.display_name}' へのロール付与に失敗しました。")
                 except Exception as e:
                     logs.append("【作成失敗】BOTロールの作成に失敗しました。")
+                
                 current_step += 1
                 progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
                 try:
@@ -301,60 +412,58 @@ class Setup(commands.Cog):
                     progress_message = await interaction.followup.send(embed=progress_embed)
 
             # チャンネルの作成
-            try:
-                # categories.ymlファイルの読み込み
-                categories_yml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../..', 'categories.yml')
-                if os.path.exists(categories_yml_path):
-                    with open(categories_yml_path, 'r', encoding='utf-8') as f:
-                        categories_config = yaml.safe_load(f)
-                    
-                    progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-                    progress_embed.title = "チャンネルセットアップ進行状況"
-                    try:
-                        await progress_message.edit(embed=progress_embed)
-                    except discord.NotFound:
-                        progress_message = await interaction.followup.send(embed=progress_embed)
-                    
-                    # チャンネルの作成（コマンドチャンネルは削除しない）
-                    skip_channel_id = interaction.channel.id
-                    channel_logs = await self.create_channels(interaction.guild, categories_config.get('categories', {}), skip_channel_id)
-                    logs.extend(channel_logs)
-                    
-                    current_step += 1
-                    progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
-                    try:
-                        await progress_message.edit(embed=progress_embed)
-                    except discord.NotFound:
-                        progress_message = await interaction.followup.send(embed=progress_embed)
-                else:
-                    logs.append("【警告】categories.ymlファイルが見つからなかったため、チャンネル作成をスキップしました。")
-            except Exception as e:
-                logs.append(f"【エラー】チャンネル作成中にエラーが発生しました: {str(e)}")
-                logger.error(f"Error creating channels: {e}", exc_info=True)
+            if not roles_only:
+                try:
+                    # categories.ymlファイルの読み込み
+                    categories_yml_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), '../../..', 'categories.yml')
+                    if os.path.exists(categories_yml_path):
+                        with open(categories_yml_path, 'r', encoding='utf-8') as f:
+                            categories_config = yaml.safe_load(f)
+                        
+                        progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+                        progress_embed.title = "チャンネルセットアップ進行状況"
+                        try:
+                            await progress_message.edit(embed=progress_embed)
+                        except discord.NotFound:
+                            progress_message = await interaction.followup.send(embed=progress_embed)
+                        
+                        # チャンネルの作成（コマンドチャンネルは削除しない）
+                        skip_channel_id = interaction.channel.id
+                        channel_logs = await self.create_channels(interaction.guild, categories_config.get('categories', {}), skip_channel_id)
+                        logs.extend(channel_logs)
+                        
+                        current_step += 1
+                        progress_embed.description = self.bot.build_progress_bar(current_step, total_steps)
+                        try:
+                            await progress_message.edit(embed=progress_embed)
+                        except discord.NotFound:
+                            progress_message = await interaction.followup.send(embed=progress_embed)
+                    else:
+                        logs.append("【警告】categories.ymlファイルが見つからなかったため、チャンネル作成をスキップしました。")
+                except Exception as e:
+                    logs.append(f"【エラー】チャンネル作成中にエラーが発生しました: {str(e)}")
+                    logger.error(f"Error creating channels: {e}", exc_info=True)
 
             # 完了メッセージ
             complete_embed = discord.Embed(
                 title="✅ セットアップ完了",
-                description="\n".join(logs),
+                description=f"{'ロールのみの' if roles_only else 'サーバーの'}セットアップが完了しました。",
                 color=0x00ff00
             )
-            try:
-                await interaction.followup.send(embed=complete_embed)
-            except Exception as e:
-                self.bot.logger.error(f"Failed to send completion message: {e}")
+            log_text = "\n".join(logs)
+            if len(log_text) > 1000:
+                log_text = log_text[:997] + "..."
+            complete_embed.add_field(name="セットアップログ", value=log_text)
+            await interaction.followup.send(embed=complete_embed)
 
         except Exception as e:
             error_embed = discord.Embed(
-                title="⚠️ エラー発生",
-                description=f"セットアップ中にエラーが発生しました:\n```py\n{str(e)}\n```",
+                title="❌ セットアップエラー",
+                description=f"セットアップ中にエラーが発生しました: {str(e)}",
                 color=0xff0000
             )
-            try:
-                await interaction.followup.send(embed=error_embed)
-            except Exception:
-                pass
-            self.bot.logger.error(f"Setup error: {e}", exc_info=True)
-            
+            await interaction.followup.send(embed=error_embed)
+            logging.error(f"Setup error in guild {interaction.guild_id}: {str(e)}")
         finally:
             # セットアップ完了を記録
             if interaction.guild_id in self.setup_in_progress:
