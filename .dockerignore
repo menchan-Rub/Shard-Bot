@@ -1,0 +1,38 @@
+# ビルド、バージョン管理関連のファイル
+.git
+.github
+.gitignore
+.vscode
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+.env
+*.so
+.tox/
+.coverage
+htmlcov/
+.pytest_cache/
+.hypothesis/
+
+# ローカル開発環境関連
+.idea/
+*.sublime-*
+.DS_Store
+
+# データとログを除外
+logs/
+*.log
+data/
+postgres_data/
+redis_data/
+
+# その他
+.dockerignore
+docker-compose*.yml
+Dockerfile
+README.md
+LICENSE 

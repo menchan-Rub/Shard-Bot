@@ -1,0 +1,65 @@
+version: '3.8'
+
+services:
+  bot:
+    build:
+      context: ../../
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ../../.env.test
+    depends_on:
+      - postgres-test
+      - redis-test
+    networks:
+      - test_network
+    volumes:
+      - ../../logs:/app/logs
+    ports:
+      - "8000:8000"
+
+  postgres-test:
+    image: postgres:14-alpine
+    container_name: postgres-test
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${DB_USER:-postgres}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-postgres}
+      POSTGRES_DB: ${DB_NAME:-shardbot_test}
+    volumes:
+      - postgres_test_data:/var/lib/postgresql/data
+    networks:
+      - test_network
+    ports:
+      - "5433:5432"
+
+  redis-test:
+    image: redis:7-alpine
+    container_name: redis-test
+    restart: unless-stopped
+    networks:
+      - test_network
+    ports:
+      - "6380:6379"
+
+  web-test:
+    build:
+      context: ../../web/server
+      dockerfile: Dockerfile
+    restart: unless-stopped
+    env_file: ../../.env.test
+    depends_on:
+      - postgres-test
+      - redis-test
+    ports:
+      - "8081:8080"
+    networks:
+      - test_network
+    volumes:
+      - ../../logs:/app/logs
+
+volumes:
+  postgres_test_data:
+
+networks:
+  test_network:
+    driver: bridge 
